@@ -1,0 +1,7 @@
+@media screen and (max-width:768px){
+    .navbar-nav {
+        display: inline-flex;
+        justify-content: flex-start;
+        /* background-color: aqua;sss */
+    }
+}

@@ -1,0 +1,11 @@
+@media screen and (max-width:768px){
+    .navbar-nav.d-flex.align-items-center.justify-content-start{
+        display: inline-flex;
+        /* background-color: aqua;sss */
+    }
+    .nav-item {
+        border: 1px solid white;
+        margin: 4px 0px;
+        margin-left: 0px;
+    }
+}

@@ -1,0 +1,29 @@
+@media screen and (min-width:567px) {
+    .img-gambar{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .gambar{
+        width:25%;
+    }
+    .container-empty{
+        height: 200px;
+    }
+}
+/* @media screen and (max-width:767px) and (min-width:568px){ */
+
+/* } */
+@media screen and (max-width:768px){
+    .img-gambar{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .gambar{
+        width:50%;
+    }
+    .container-empty{
+        height: 600px;
+    }
+}

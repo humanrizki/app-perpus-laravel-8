@@ -1,0 +1,10 @@
+@media screen and (min-width:768px) {
+    .gambar{
+        width:25%;
+    }
+}
+@media screen and (max-width:768px){
+    .gambar{
+        width:50%;
+    }
+}

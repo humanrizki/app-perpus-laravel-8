@@ -1,0 +1,12 @@
+@media screen and (max-width:768px){
+    .navbar-nav {
+        display: block;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* background-color: aqua;sss */
+    }
+    .nav-item {
+        border: 1px solid white;
+        margin: 4px 0px;
+    }
+}
