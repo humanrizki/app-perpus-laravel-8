@@ -1,0 +1,30 @@
+@extends('layouts.capp')
+@section('content')
+    <div class="container my-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Judul</td>
+                    <td>Durasi Pinjam</td>
+                    <td>Denda</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($loans as $loan)
+                    
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loan->bucket->detail->title }}</td>
+                        <td>{{ \Carbon\Carbon::parse(\Carbon\Carbon::now())->locale('id_ID')->diffForHumans($loan->return_date,[
+                            'parts'=>3,
+                            'join'=>', ',
+                            'syntax'=>\Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW
+                        ]) }}</td>
+                        <td>Rp.{{ number_format($loan->forfeit) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection

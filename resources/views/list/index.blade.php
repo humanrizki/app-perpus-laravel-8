@@ -1,13 +1,14 @@
 @extends('layouts.capp')
 @section('content')
+{{-- @dd($lists) --}}
 <div class="container my-3">
 <div class="row">
-    @foreach ($lists as $list)
+    @foreach ($books as $key => $book)
     <div class="col-md-4 mt-3">
         <div class="card shadow" style="width: 100%;">
             <div class="card-body">
-                <img src="/img/{{ $list->detail_book->image }}" alt="" style="width: 100%;">
-                <p class="card-text"><a href="/lists/{{ $list->detail_book->slug }}">{{ $list->detail_book->title }}</p></a>
+                <img src="img/{{ $book->detail_book->image }}" alt="" style="width: 100%;">
+                <a href="/lists/{{ $book->detail_book->slug }}"><p>{{ $book->detail_book->title }}</p></a>
             </div>
         </div>
     </div>

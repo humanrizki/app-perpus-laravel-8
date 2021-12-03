@@ -86,21 +86,6 @@ class DatabaseSeeder extends Seeder
             'admin_id'=>1
         ]);
         DetailBook::create([
-            'title'=>'That time I Got Reincarnated as a Slime Volume 3',
-            'image'=>'tenshura3.jpg',
-            'slug'=>'that-time-i-got-reincarnated-as-a-slime-volume-3',
-            'local_publisher'=>'Elex Media Komputindo',
-            'original_publisher'=>'Shōsetsuka ni Narō',
-            'creator'=>'Fuze',
-            'illustrator'=>'Mitz Vah',
-            'pages'=>295,
-            'edition'=> \Carbon\Carbon::createFromDate(2019,1,20)->toDateTimeString(),
-            'category_id'=>1,
-            'collection_book_id'=>1,
-            'bookcase_id'=>1,
-            'admin_id'=>1
-        ]);
-        DetailBook::create([
             'title'=>'Overlord Volume 1',
             'image'=>'overlord1.png',
             'slug'=>'overlord-volume-1',
@@ -157,6 +142,10 @@ class DatabaseSeeder extends Seeder
             'bookcase_id'=>1,
             'detail_book_id'=>2
         ]);
+        // Book::create([
+        //     'bookcase_id'=>1,
+        //     'detail_book_id'=>3
+        // ]);
         Book::create([
             'bookcase_id'=>1,
             'detail_book_id'=>3
@@ -168,10 +157,6 @@ class DatabaseSeeder extends Seeder
         Book::create([
             'bookcase_id'=>1,
             'detail_book_id'=>5
-        ]);
-        Book::create([
-            'bookcase_id'=>1,
-            'detail_book_id'=>6
         ]);
     }
 }
