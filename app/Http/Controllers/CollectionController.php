@@ -24,7 +24,7 @@ class CollectionController extends Controller
     public function show(CollectionBook $collection){
         return view('collection.show',[
             'title'=>'collection page of name',
-            'item'=> $collection
+            'collection'=> $collection
         ]);
     }
 }

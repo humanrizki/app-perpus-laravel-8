@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class UserLoginController extends Controller
+{
+    //
+    /**
+     * Class constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+}

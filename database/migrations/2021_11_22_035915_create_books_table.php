@@ -15,8 +15,32 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bookcase_id');
-            $table->foreignId('detail_book_id');
+            $table->string('title');
+            $table->string('image');
+            $table->string('slug');
+            $table->string('local_publisher');
+            $table->string('original_publisher');
+            $table->string('creator');
+            $table->string('illustrator');
+            $table->integer('pages');
+            $table->date('edition');
+            $table->integer('stock');
+            $table->foreignId('category_id')
+                    ->nullable()
+                    ->cascadeOnUpdate()
+                    ->nullOnDelete();
+            $table->foreignId('collection_book_id')
+                    ->nullable()
+                    ->cascadeOnUpdate()
+                    ->nullOnDelete();
+            $table->foreignId('admin_id')
+                    ->nullable()
+                    ->cascadeOnUpdate()
+                    ->nullOnDelete();
+            $table->foreignId('bookcase_id')
+                    ->nullable()
+                    ->cascadeOnUpdate()
+                    ->nullOnDelete();
             $table->timestamps();
         });
     }

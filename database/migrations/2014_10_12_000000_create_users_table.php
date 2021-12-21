@@ -17,12 +17,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->integer('nisn',false,true)->nullable()->default(null);
             $table->string('email')->unique();
-            $table->string('nisn')->nullable()->unique();
-            $table->boolean('is_member')->default(0);
-            $table->enum('gender',['Male','Female'])->nullable();
+            $table->enum('gender',['male','female'])->nullable();
             $table->char('phone',15)->nullable();
-            $table->string('department')->nullable();
+            $table->foreignId('detail_class_department_id')
+            ->nullable()
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

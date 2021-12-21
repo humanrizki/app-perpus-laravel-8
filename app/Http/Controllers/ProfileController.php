@@ -32,18 +32,15 @@ class ProfileController extends Controller
     }
     
     public function update(User $user,Request $request){
-        if($user->is_member == 0){
+        if(is_null($user->nisn)){
             $data_validated = $request->validate([
                 'nisn'=>'required|max:10|unique:users',
                 'gender'=>'required',
-                'phone'=>'required|string|max:14',
-                'department'=>'required|string|max:50'
+                'phone'=>'required|regex:/(08)[0-9]{2}-[0-9]{4}-[0-9]{4,5}/',
             ]);
             $user->nisn = $data_validated['nisn'];
             $user->gender = $data_validated['gender'];
             $user->phone = $data_validated['phone'];
-            $user->department = $data_validated['department'];
-            $user->is_member = 1;
             $user->save();
         } else {
             $data_validated = $request->validate([

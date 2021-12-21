@@ -2,8 +2,8 @@
 @section('content')
     <div class="container my-3">
         <div class="row">
-            @foreach ($item->detail_book as $detail)
-            <div class="col-md-4 mt-3">
+            @foreach ($collection->books as $detail)
+            <div class="col-sm-6 col-md-4 mt-3">
                 <div class="card shadow" style="width: 100%;">
                     <div class="card-body">
                         <img src="/img/{{ $detail->image }}" alt="" style="width: 100%;">

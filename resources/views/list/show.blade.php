@@ -2,6 +2,12 @@
 @section('content')
     <div class="container my-3">
         <div class="row">
+            @if (session()->has('addToBucket'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('addToBucket') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="col-md-4">
                 <div class="card shadow" style="width: 100%;">
                     <div class="card-body">
@@ -38,6 +44,10 @@
                                 <td>{{ $detail->pages }}</td>
                             </tr>
                             <tr>
+                                <td>Stok</td>
+                                <td>{{ ($detail->stock == 0) ? 'kosong' : $detail->stock }}</td>
+                            </tr>
+                            <tr>
                                 <td>Edisi</td>
                                 <td>{{ \Carbon\Carbon::parse($detail->edition)->format('d F Y') }}</td>
                             </tr>
@@ -54,16 +64,18 @@
                                 <td>{{ $detail->bookcase->location_bookcase }}</td>
                             </tr>
                         </table>
-                        @if (auth()->user()->is_member == 1)
+                        @if (!is_null(auth()->user()->nisn))
                             @if(!is_null($loan))
                                 <p>Buku sudah dipinjam!</p>
                             @elseif(!is_null($bucket))
                                 <p>Buku sudah ada di sessi</p>
+                            @elseif($detail->stock == 0)
+                                <p class="text-primary">Stok tidak tersedia, sedang banyak yang meminjam!</p>
                             @else
                                     <form action="" method="POST">
                                         @csrf
-                                        <input type="hidden" name="detail_id" value="{{ $detail->id }}">
-                                        <button class="btn btn-info text-white">Pinjam</button>
+                                        <input type="hidden" name="book_id" value="{{ $detail->id }}">
+                                        <button class="btn btn-info text-white" type="submit">Pinjam</button>
                                     </form>
                             @endif
                         @else

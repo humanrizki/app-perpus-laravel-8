@@ -12,8 +12,8 @@ class Bucket extends Model
     public function user(){
         return $this->belongsTo(Member::class);
     }
-    public function detail(){
-        return $this->belongsTo(DetailBook::class);
+    public function book(){
+        return $this->belongsTo(Book::class);
     }
     
 }

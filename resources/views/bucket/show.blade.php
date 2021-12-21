@@ -24,30 +24,32 @@
                                 <input type="text" class="form-control bg-white" value="{{ substr(auth()->user()->phone,0,4) }}*******" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label for="">Department</label>
-                                <input type="text" class="form-control bg-white" value="{{ auth()->user()->department }}" disabled>
+                                <label for="">Class & Department</label>
+                                <input type="text" class="form-control bg-white" disabled value="{{ auth()->user()->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->name) }}"> 
                             </div>
                         </div>
                         <h5 class="mt-3">Detail Book!</h5>
                         <hr>
                         <div class="row mt-2">
                             <div class="col-md-12 mb-2">
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->title }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->title }}" disabled>
                             </div>
                             <div class="col-md-6">
-                                <img src="/img/{{ $bucket->detail->image }}" alt="" style="width: 100%;">
+                                <img src="/img/{{ $bucket->book->image }}" alt="" style="width: 100%;">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Creator</label>
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->creator }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->creator }}" disabled>
                                 <label for="">Penerbit Lokal</label>
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->local_publisher }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->local_publisher }}" disabled>
                                 <label for="">Penerbit</label>
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->original_publisher }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->original_publisher }}" disabled>
                                 <label for="">Kode rak</label>
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->bookcase->name }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->bookcase->name }}" disabled>
                                 <label for="">Nomor Rak</label>
-                                <input type="text" class="form-control bg-white" value="{{ $bucket->detail->bookcase->location_bookcase }}" disabled>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->bookcase->location_bookcase }}" disabled>
+                                <label for="">Stok</label>
+                                <input type="text" class="form-control bg-white" value="{{ $bucket->book->stock }}" disabled>
                             </div>
                         </div>
                     </div>

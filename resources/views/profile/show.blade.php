@@ -7,48 +7,52 @@
                 <form action="/profile/{{ $user->username }}/edit" method="POST">
                     @csrf
                     <h1 class="h3 mb-3 fw-normal">
-                        @if ($user->is_member == 0)
+                        @if (is_null($user->nisn))
                         Upgrade to member!
                         @else 
                         Edit data!
                         @endif 
                     </h1>
-                    @if ($user->is_member == 0)
+                    @if (is_null($user->nisn))
                         <div class="form-floating">
-                            <input type="text" class="form-control  @error('nisn') 'is-invalid' @enderror" id="floatingInput"  name="nisn">
+                            <input type="text" class="form-control  @error('nisn') is-invalid @enderror" id="floatingInput"  name="nisn">
                             <label for="floatingInput">Nisn</label>
                             @error('nisn')
-                            <div class="valid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="Male">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
                             <label class="form-check-label"  for="flexRadioDefault1">
                                 Male
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="Female" checked>
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Female
                             </label>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control @error('phone') 'is-invalid' @enderror" id="floatingInput"  name="phone">
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="floatingInput"  name="phone" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4,5}">
                             <label for="floatingInput">Number phone</label>
+                            
                             @error('phone')
-                            <div class="valid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
+                            </div>
+                            @else
+                            <div class="form-text">
+                                <p>note. 0878-****-*****</p>
                             </div>
                             @enderror
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control @error('department') 'is-invalid' @enderror" id="floatingInput"  name="department" >
-                            <label for="floatingInput">Department</label>
+                            
                             @error('department')
-                            <div class="valid-feedback">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
@@ -58,7 +62,7 @@
                         <input type="text" class="form-control  @error('name') 'is-invalid' @enderror" id="floatingInput"  name="name">
                         <label for="floatingInput">Name</label>
                         @error('name')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
@@ -67,7 +71,7 @@
                         <input type="text" class="form-control  @error('username') 'is-invalid' @enderror" id="floatingInput"  name="username">
                         <label for="floatingInput">Username</label>
                         @error('username')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
@@ -76,7 +80,7 @@
                         <input type="email" class="form-control  @error('email') 'is-invalid' @enderror" id="floatingInput"  name="email">
                         <label for="floatingInput">Email</label>
                         @error('email')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
@@ -85,7 +89,7 @@
                         <input type="password" class="form-control  @error('password') 'is-invalid' @enderror" id="floatingInput"  name="password">
                         <label for="floatingInput">Password</label>
                         @error('password')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
@@ -94,7 +98,7 @@
                         <input type="text" class="form-control  @error('nisn') 'is-invalid' @enderror" id="floatingInput"  name="nisn">
                         <label for="floatingInput">Nisn</label>
                         @error('nisn')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
@@ -115,16 +119,14 @@
                         <input type="text" class="form-control @error('phone') 'is-invalid' @enderror" id="floatingInput"  name="phone">
                         <label for="floatingInput">Number phone</label>
                         @error('phone')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control @error('department') 'is-invalid' @enderror" id="floatingInput"  name="department" >
-                        <label for="floatingInput">Department</label>
                         @error('department')
-                        <div class="valid-feedback">
+                        <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror

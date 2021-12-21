@@ -26,9 +26,9 @@ class ListsController extends Controller
             'books'=>$books
         ]);
     }
-    public function show(DetailBook $list){
+    public function show(Book $list){
         $bucket = Bucket::where([
-            ['detail_id','=',$list->id],
+            ['book_id','=',$list->id],
             ['user_id','=',auth()->user()->id]
         ])->first();
         $loan = (is_null($bucket)) ? null : LoanReport::where([
@@ -41,15 +41,15 @@ class ListsController extends Controller
             'loan'=>$loan
         ]);
     }
-    public function store(Request $request, DetailBook $list){
+    public function store(Request $request, Book $list){
         $bucket = Bucket::create([
-            'detail_id'=>$list->id,
+            'book_id'=>$list->id,
             'user_id'=>auth()->user()->id
         ]);
         $bucket->update([
             'slug' => md5($bucket->id)
         ]);
         $bucket->save();
-        return redirect("/lists/$list->slug");
+        return redirect("/lists/$list->slug")->with('addToBucket','Buku sudah berhasil dimasukkan kedalam keranjang!');
     }
 }

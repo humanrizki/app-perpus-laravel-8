@@ -7,8 +7,8 @@
     <div class="col-md-4 mt-3">
         <div class="card shadow" style="width: 100%;">
             <div class="card-body">
-                <img src="img/{{ $book->detail_book->image }}" alt="" style="width: 100%;">
-                <a href="/lists/{{ $book->detail_book->slug }}"><p>{{ $book->detail_book->title }}</p></a>
+                <img src="img/{{ $book->image }}" alt="" style="width: 100%;">
+                <a href="/lists/{{ $book->slug }}"><p>{{ $book->title }}</p></a>
             </div>
         </div>
     </div>

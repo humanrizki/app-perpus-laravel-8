@@ -9,7 +9,7 @@ class CollectionBook extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function detail_book(){
-        return $this->hasMany(DetailBook::class);
+    public function books(){
+        return $this->hasMany(Book::class);
     }
 }

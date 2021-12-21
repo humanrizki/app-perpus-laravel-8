@@ -18,8 +18,8 @@ class CreateBucketsTable extends Migration
             $table->string('slug')->nullable();
             $table->boolean('is_loan')->default(false);
             $table->boolean('is_return')->default(false);
-            $table->foreignId('user_id');
-            $table->foreignId('detail_id');
+            $table->foreignId('user_id')->default(null);
+            $table->foreignId('book_id')->default(null);
             $table->timestamps();
         });
     }

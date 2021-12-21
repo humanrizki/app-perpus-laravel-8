@@ -1,6 +1,16 @@
 @extends('layouts.capp')
 @section('content')
+    <div class="container mt-3 mb-2">
+        @if (session()->has('successRegister'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('successRegister') }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        
+    </div>
     <div class="container p-3 my-3 d-flex flex-wrap">
+        
         <div class="profile-img m-4" style="
             display:flex;
             position: relative;
@@ -20,15 +30,16 @@
         </div>
         <div class="profile-info ms-5 mt-3" >
             <h1 class="position-relative">{{ $user->name }} 
-                @if ($user->is_member == 0)
-                <span class="badge bg-secondary p-2 fs-6 position-absolute top-0 start-100 ms-1"><a class="text-white text-decoration-none" href="/profile/{{ $user->username }}/edit">
-                    Upgrade to Member
-                </a></span>
+                @if (is_null($user->nisn))
+                    <p class="fs-5 p-3 m-0 text-danger" style="width: max-content;
+                    background-color: rgba(252,255,99,0.5);"><a href="/profile/{{ $user->username }}/edit" class="text-decoration-none text-dark rounded">Upgrade to member</a></p>
                 @else 
-                <span class="badge bg-warning fs-4"><a href="/profile/{{ $user->username }}/edit" class="text-white"><i class="fas fa-edit"></i></a></span>
+                <p class="fs-5 p-3 m-0 text-danger" style="width: max-content;
+                    background-color: rgba(252,255,99,0.5);"><a href="/profile/{{ $user->username }}/edit" class="text-decoration-none text-dark rounded">Edit your profile</a></p>
                 @endif
             </h1>
-            <p class="fs-3 p-0" style="margin-top: -10px">{{ $user->username }}</p>
+            <p class="fs-3 p-0 m-0" style="margin-top: -10px !important;">{{ '@'.$user->username }}</p>
+            <p class="fs-5 p-0 m-0">{{$user->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->name) }}</p>
         </div>
     </div>
     
