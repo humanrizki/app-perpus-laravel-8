@@ -35,7 +35,7 @@
                                 <input type="text" class="form-control bg-white" value="{{ $bucket->book->title }}" disabled>
                             </div>
                             <div class="col-md-6">
-                                <img src="/img/{{ $bucket->book->image }}" alt="" style="width: 100%;">
+                                <img src="/storage/{{ $bucket->book->image }}" alt="" style="width: 100%;">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Creator</label>

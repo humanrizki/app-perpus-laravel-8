@@ -84,9 +84,13 @@ class DashboardBooks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
         //
+        return view('admin.book.show',[
+            'title'=>'detail book',
+            'book'=>$book
+        ]);
     }
 
     /**
@@ -95,9 +99,16 @@ class DashboardBooks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
         //
+        return view('admin.book.edit',[
+            'title'=>'edit book',
+            'book'=>$book,
+            'categories'=>Category::all(),
+            'collections'=>CollectionBook::all(),
+            'bookcases'=>Bookcase::all()
+        ]);
     }
 
     /**
@@ -107,9 +118,34 @@ class DashboardBooks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Book $book)
     {
         //
+        $rules = [
+            'title'=>'required|string|min:4|max:100',
+            'creator'=>'required|string|max:100',
+            'illustrator'=>'required|string|max:100',
+            'local_publisher'=>'required|string|max:100',
+            'original_publisher'=>'required|string|max:100',
+            'pages'=>'required|integer',
+            'stock'=>'required|integer',
+            'edition'=>'required|date_format:Y-m-d',
+            'image'=>'image|file|max:5120',
+            'category_id'=>'required',
+            'collection_book_id'=>'required',
+            'bookcase_id'=>'required'
+        ];
+        if($request['slug'] != $book->slug){
+            $rules['slug'] = ['slug'=>'required|string|min:4|max:100|unique:books'];
+        }
+        $validatedData = Validator::make($request->all(),$rules)->validate();
+        if($request->file('image')){
+            $validatedData['image'] = request()->file('image')->store('book-image');
+        }else {
+            $validatedData['image'] = $book->image;
+        }
+        $book->update($validatedData);
+        return redirect('/dashboard/books')->with('successEditBook','Data Buku berhasil dirubah!');
     }
 
     /**
@@ -118,10 +154,6 @@ class DashboardBooks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
     public function checkSlug(Request $request){
         $slug = SlugService::createSlug(Book::class, 'slug', $request->title);
         return response()->json(['slug'=>$slug]);

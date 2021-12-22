@@ -7,7 +7,7 @@
     <div class="col-md-4 mt-3">
         <div class="card shadow" style="width: 100%;">
             <div class="card-body">
-                <img src="img/{{ $book->image }}" alt="" style="width: 100%;">
+                <img src="/storage/{{ $book->image }}" alt="" style="width: 100%;">
                 <a href="/lists/{{ $book->slug }}"><p>{{ $book->title }}</p></a>
             </div>
         </div>

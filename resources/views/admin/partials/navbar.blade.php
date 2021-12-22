@@ -22,6 +22,21 @@
             <i class="fas fa-book"></i>
             <span>Books</span></a>
     </li>
+    <li class="nav-item {{ request()->is('dashboard/categories*') ? 'active' : ''; }}"> 
+        <a class="nav-link" href="/dashboard/categories">
+            <i class="fas fa-book"></i>
+            <span>Categories</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('dashboard/collections*') ? 'active' : ''; }}"> 
+        <a class="nav-link" href="/dashboard/collections">
+            <i class="bi bi-collection-fill"></i>
+            <span>Collections</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('dashboard/bookcases*') ? 'active' : ''; }}"> 
+        <a class="nav-link" href="/dashboard/bookcases">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Bookcase</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

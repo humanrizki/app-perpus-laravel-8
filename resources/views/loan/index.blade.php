@@ -39,7 +39,7 @@
                     
                     <tr>
                         <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                        <td style="vertical-align: middle;" class="w-25"><img src="/img/{{ $loan->bucket->book->image }}" alt="" class="img-thumbnail w-100"></td>
+                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->bucket->book->image }}" alt="" class="img-thumbnail w-100"></td>
                         <td style="vertical-align: middle;">{{ $loan->bucket->book->title }}</td>
                         <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($loan->return_date)->locale('id_ID')->diffForHumans(\Carbon\Carbon::now('Asia/Jakarta'),[
                             'parts'=>3,

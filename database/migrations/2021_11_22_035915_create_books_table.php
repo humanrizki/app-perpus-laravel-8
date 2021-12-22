@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('image');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('local_publisher');
             $table->string('original_publisher');
             $table->string('creator');

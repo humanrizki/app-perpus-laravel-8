@@ -17,9 +17,9 @@ class BookTable extends LivewireDatatable
     public function builder()
 {
     return Book::query()
-    ->leftJoin('categories as category','books.category_id','category.id')
-    ->leftJoin('collection_books as collection','books.collection_book_id','collection.id')
-    ->leftJoin('bookcases as bookcase','books.bookcase_id','bookcase.id');
+    ->leftJoin('categories','books.category_id','categories.id')
+    ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
+    ->leftJoin('bookcases','books.bookcase_id','bookcases.id');
 }
     public function columns()
     {
@@ -35,31 +35,32 @@ class BookTable extends LivewireDatatable
                 ->label('Title')
                 ->searchable(),
 
-            Column::name('category.name')
+            Column::name('categories.name')
                 ->label('Category')
-                ->filterable($this->categories),
+                ->searchable(),
 
-            Column::name('collection.name')
+            Column::name('collection_books.name')
                 ->label('Collection')
-                ->filterable(),
+                ->searchable(),
 
-            Column::name('bookcase.name')
+            Column::name('bookcases.name')
                 ->label('Bookcase')
-                ->filterable($this->bookcases),
+                ->searchable(),
 
-            Column::callback(['slug'], function ($slug) {
+            Column::callback(['slug','id'], function ($slug, $id) {
                 return "
                 <div>
-                <a href='/dashboard/books/".$slug."/edit' class='m-2'><i class='bi bi-pen-fill text-warning'></i></a>
-                <a href='/dashboard/books/".$slug."' class='m-2'><i class='bi bi-eye-fill text-primary'></i></a>
+                <a href='/dashboard/books/".$slug."/edit' class='m-2 d-inline'><i class='bi bi-pen-fill text-warning'></i></a>
+                <a href='/dashboard/books/".$slug."' class='m-2 d-inline'><i class='bi bi-eye-fill text-primary'></i></a>
                 </div>
                 ";
             })
-            ->defaultSort('asc'),
-
+            ->label('Action'),
 
             Column::delete()
-                ->alignRight(),
+            ->label('Delete'),
+
+
         ];
     }
     public function getCategoriesProperty(){

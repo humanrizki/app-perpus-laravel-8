@@ -11,7 +11,7 @@
             <div class="col-md-4">
                 <div class="card shadow" style="width: 100%;">
                     <div class="card-body">
-                        <img src="/img/{{ $detail->image }}" alt="" style="width: 100%;">
+                        <img src="/storage/{{ $detail->image }}" alt="" style="width: 100%;">
                     </div>
                 </div>
             </div>

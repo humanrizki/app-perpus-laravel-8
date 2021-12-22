@@ -81,8 +81,8 @@
                                 <label for="department">Department</label>
                                 <select class="form-select @error('department') is-invalid @enderror" id="department"  name="department">
                                     <option selected disabled value="">Pilih...</option>
-                                    @foreach ($departments as $d)
-                                        <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->department }}</option>
                                     @endforeach
                                 </select>
                                 @error('department')

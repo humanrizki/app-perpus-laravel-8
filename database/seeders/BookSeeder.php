@@ -17,7 +17,7 @@ class BookSeeder extends Seeder
         //
         Book::create([
             'title'=>'That time I Got Reincarnated as a Slime Volume 1',
-            'image'=>'tenshura1.jpg',
+            'image'=>'book-image/tenshura1.jpg',
             'slug'=>'that-time-i-got-reincarnated-as-a-slime-volume-1',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Shōsetsuka ni Narō',
@@ -33,7 +33,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'That time I Got Reincarnated as a Slime Volume 2',
-            'image'=>'tenshura2.jpg',
+            'image'=>'book-image/tenshura2.jpg',
             'slug'=>'that-time-i-got-reincarnated-as-a-slime-volume-2',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Shōsetsuka ni Narō',
@@ -49,7 +49,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Overlord Volume 1',
-            'image'=>'overlord1.png',
+            'image'=>'book-image/overlord1.png',
             'slug'=>'overlord-volume-1',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Yen Press',
@@ -65,7 +65,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Overlord Volume 2',
-            'image'=>'overlord2.png',
+            'image'=>'book-image/overlord2.png',
             'slug'=>'overlord-volume-2',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Yen Press',
@@ -81,7 +81,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Overlord Volume 3',
-            'image'=>'overlord3.png',
+            'image'=>'book-image/overlord3.png',
             'slug'=>'overlord-volume-3',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Yen Press',
@@ -97,7 +97,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Mushoku Tensei: Jobless Reincarnation Volume 1',
-            'image'=>'mushokutensei1.jpg',
+            'image'=>'book-image/mushokutensei1.jpg',
             'slug'=>'mushoku-tensei-jobless-reincarnation-volume-1',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Media Factory',
@@ -113,7 +113,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Mushoku Tensei: Jobless Reincarnation Volume 2',
-            'image'=>'mushokutensei2.jpg',
+            'image'=>'book-image/mushokutensei2.jpg',
             'slug'=>'mushoku-tensei-jobless-reincarnation-volume-2',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Media Factory',
@@ -129,7 +129,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'Mushoku Tensei: Jobless Reincarnation Volume 3',
-            'image'=>'mushokutensei3.jpg',
+            'image'=>'book-image/mushokutensei3.jpg',
             'slug'=>'mushoku-tensei-jobless-reincarnation-volume-3',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'Media Factory',
@@ -145,7 +145,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'The Misfit of Demon King Academy Volume 1',
-            'image'=>'anos1.jpg',
+            'image'=>'book-image/anos1.jpg',
             'slug'=>'the-misfit-of-demon-king-academy-volume-1',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'ASCII Media Works',
@@ -161,7 +161,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title'=>'The Misfit of Demon King Academy Volume 2',
-            'image'=>'anos2.jpg',
+            'image'=>'book-image/anos2.jpg',
             'slug'=>'the-misfit-of-demon-king-academy-volume-2',
             'local_publisher'=>'Elex Media Komputindo',
             'original_publisher'=>'ASCII Media Works',

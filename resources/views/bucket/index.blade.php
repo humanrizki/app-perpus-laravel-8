@@ -28,7 +28,7 @@
         @foreach ($detail_book as $bucket)
         <tr>
             <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-            <td style="vertical-align: middle;" class="w-25"><img src="img/{{ $bucket->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
+            <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $bucket->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
             <td style="vertical-align: middle;">{{ $bucket->book->title }}</td>
             <td style="vertical-align: middle;">{{ $bucket->book->admin->name }}</td>
             <td style="vertical-align: middle;">
