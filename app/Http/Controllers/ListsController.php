@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Bucket;
 use App\Models\DetailBook;
 use App\Models\LoanReport;
+use Faker\Provider\Uuid;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -47,7 +48,7 @@ class ListsController extends Controller
             'user_id'=>auth()->user()->id
         ]);
         $bucket->update([
-            'slug' => md5($bucket->id)
+            'slug' => Uuid::uuid()
         ]);
         $bucket->save();
         return redirect("/lists/$list->slug")->with('addToBucket','Buku sudah berhasil dimasukkan kedalam keranjang!');

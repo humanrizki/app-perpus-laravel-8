@@ -1,3 +1,4 @@
+{{-- @dd($user) --}}
 @extends('layouts.capp')
 @section('content')
     <div class="container mt-3 mb-2">
@@ -39,7 +40,7 @@
                 @endif
             </h1>
             <p class="fs-3 p-0 m-0" style="margin-top: -10px !important;">{{ '@'.$user->username }}</p>
-            <p class="fs-5 p-0 m-0">{{$user->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->name) }}</p>
+            <p class="fs-5 p-0 m-0">{{$user->detail_class_department->class_user->class.' '.$user->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->department) }}</p>
         </div>
     </div>
     

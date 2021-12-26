@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Admin;
 use App\Models\Bookcase;
 use App\Models\Category;
-use App\Models\CollectionBook;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\CollectionBook;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardBooks extends Controller
 {
@@ -18,6 +21,7 @@ class DashboardBooks extends Controller
     public function __construct()
     {
         $this->middleware('adminguest:admin');
+
     }
     /**
      * Display a listing of the resource.
@@ -27,9 +31,9 @@ class DashboardBooks extends Controller
     public function index()
     {
         //
-        return view('admin.book.index',[
-            'title'=>'books'
-        ]);
+            return view('admin.book.index',[
+                'title'=>'books'
+            ]);
     }
 
     /**
@@ -37,15 +41,19 @@ class DashboardBooks extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Admin $admin)
     {
         //
-        return view('admin.book.create',[
-            'title'=>'Create new book!',
-            'categories'=>Category::all(),
-            'collections'=>CollectionBook::all(),
-            'bookcases'=>Bookcase::all()
-        ]);
+        if(auth('admin')->user()->hasRole('admin')){
+            return view('admin.book.create',[
+                'title'=>'Create new book!',
+                'categories'=>Category::all(),
+                'collections'=>CollectionBook::all(),
+                'bookcases'=>Bookcase::all()
+            ]);
+        } 
+        abort(403, 'THIS ACTION IS UNATHORIZED');
+        
     }
 
     /**
@@ -99,16 +107,19 @@ class DashboardBooks extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Book $book, Admin $admins)
     {
         //
-        return view('admin.book.edit',[
-            'title'=>'edit book',
-            'book'=>$book,
-            'categories'=>Category::all(),
-            'collections'=>CollectionBook::all(),
-            'bookcases'=>Bookcase::all()
-        ]);
+        if(auth('admin')->user()->hasRole('admin')){
+            return view('admin.book.edit',[
+                'title'=>'edit book',
+                'book'=>$book,
+                'categories'=>Category::all(),
+                'collections'=>CollectionBook::all(),
+                'bookcases'=>Bookcase::all()
+            ]);
+        }
+        abort(403, 'THIS ACTION IS UNAUTHORIZED');
     }
 
     /**

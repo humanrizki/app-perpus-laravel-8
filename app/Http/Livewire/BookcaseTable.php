@@ -10,7 +10,7 @@ class BookcaseTable extends LivewireDatatable
 {
     public $model = Bookcase::class;
     public $exportable = true;
-    public $hideable = 'select';
+    public $hideable = 'select'; 
     public function columns()
     {
         //

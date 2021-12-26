@@ -24,6 +24,8 @@
             </div>
         </div>
         @else 
+        <div class="tabledata" style="overflow-x: auto;">
+
         <table class="table">
             <thead>
                 <tr>
@@ -31,7 +33,9 @@
                     <td>Image</td>
                     <td>Judul</td>
                     <td>Durasi Pinjam</td>
+                    <td>Status</td>
                     <td>Denda</td>
+                    <td>Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -39,18 +43,28 @@
                     
                     <tr>
                         <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->bucket->book->image }}" alt="" class="img-thumbnail w-100"></td>
+                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->bucket->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
                         <td style="vertical-align: middle;">{{ $loan->bucket->book->title }}</td>
-                        <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($loan->return_date)->locale('id_ID')->diffForHumans(\Carbon\Carbon::now('Asia/Jakarta'),[
-                            'parts'=>3,
-                            'join'=>', ',
-                            'syntax'=>\Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW
+                        <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($loan->return_date)->locale('id_ID')->diffForHumans(\Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'),[
+                            'parts'=>4,
+                            'join'=>true,
+                            'short'=>true,
+                            'syntax'=>\Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW,
+                            'options'=>\Carbon\Carbon::JUST_NOW | \Carbon\Carbon::ONE_DAY_WORDS | \Carbon\Carbon::TWO_DAY_WORDS
                         ]) }}</td>
+                        <td style="vertical-align: middle;">{{ $loan->status }}</td>
                         <td style="vertical-align: middle;">Rp.{{ $loan->toKilo($loan->forfeit) }}</td>
+                        @if ($loan->status == 'request')
+                        <td style="vertical-align: middle;">
+                                <a href="/loan/{{ $loan->slug }}" class="btn btn-primary"><i class='bi bi-eye-fill text-white'></i></a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        </div>
+
         @endif
 
     </div>

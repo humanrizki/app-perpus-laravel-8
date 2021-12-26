@@ -3,13 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
-use App\Models\Category;
-use App\Models\Bookcase;
-use App\Models\CollectionBook;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
-class BookTable extends LivewireDatatable
+class BookTablePublic extends LivewireDatatable
 {
     public $model = Book::class;
     public $hideable = 'select';
@@ -19,9 +16,11 @@ class BookTable extends LivewireDatatable
         ->leftJoin('categories','books.category_id','categories.id')
         ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
         ->leftJoin('bookcases','books.bookcase_id','bookcases.id')
-        ->where('books.admin_id','=',auth('admin')->user()->id);
+        ->leftJoin('admins','books.admin_id','admins.id');
     }
-    public function columns(){
+    public function columns()
+    {
+        //
         return [
             NumberColumn::name('id')
                 ->label('ID')
@@ -46,29 +45,18 @@ class BookTable extends LivewireDatatable
                 ->label('Bookcase')
                 ->searchable(),
 
+            Column::name('admins.name')
+                ->label('Admin')
+                ->searchable(),
+
             Column::callback(['slug','id'], function ($slug, $id) {
                 return "
                 <div>
-                <a href='/dashboard/books/".$slug."/edit' class='m-2 d-inline'><i class='bi bi-pen-fill text-warning'></i></a>
                 <a href='/dashboard/books/".$slug."' class='m-2 d-inline'><i class='bi bi-eye-fill text-primary'></i></a>
                 </div>
                 ";
             })
-            ->label('Action'),
-
-            Column::delete()
-            ->label('Delete'),
-
-
+            ->label('Detail'),
         ];
-    }
-    public function getCategoriesProperty(){
-        return Category::all();
-    }
-    public function getCollectionBooksProperty(){
-        return CollectionBook::all();
-    }
-    public function getBookcasesProperty(){
-        return Bookcase::all();
     }
 }

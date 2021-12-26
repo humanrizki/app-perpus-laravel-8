@@ -17,8 +17,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+        @if(auth('admin')->user()->hasRole('admin'))
         <a href="/dashboard/books/create" class="btn btn-success my-4">Add new book!</a>
-        <livewire:book-table 
-        model="App\Models\Book" exclude="category_id, collection_book_id, bookcase_id"/>
+        <livewire:book-table/>
+        @else
+        <livewire:book-table-public/>
+        @endif
     </div>
 @endsection

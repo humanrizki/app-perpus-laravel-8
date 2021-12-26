@@ -43,6 +43,8 @@ Route::delete('/bucket/{bucket:id}',[BucketController::class,'destroy']);
 Route::get('/bucket/{bucket:slug}',[BucketController::class,'show']);
 Route::post('/bucket/{bucket:slug}',[BucketController::class,'store']);
 Route::get('/loan',[LoanController::class,'index'])->name('loan');
+Route::get('/loan/{loan:slug}',[LoanController::class,'show']);
+Route::put('/loan/{loan:slug}',[LoanController::class,'cancel']);
 Route::get('/login',[UserLoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login',[UserLoginController::class,'login']);
 Route::post('/logout',[UserLoginController::class,'logout']);
@@ -58,4 +60,4 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/bookcases', [DashboardBookcase::class, 'index']);
 });
 Route::get('/dashboard/books/checkSlug',[DashboardBooks::class,'checkSlug']);
-Route::resource('/dashboard/books',DashboardBooks::class);
+Route::resource('/dashboard/books',DashboardBooks::class)->middleware('adminguest:admin');

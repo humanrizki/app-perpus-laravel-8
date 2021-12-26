@@ -20,11 +20,6 @@ class CreateAdminsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('position');
-            $table->foreignId('rule_admin_id')
-            ->nullable()
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
-            
             $table->enum('gender',['Male','Female']);
             $table->char('phone',15);
             $table->text('address');

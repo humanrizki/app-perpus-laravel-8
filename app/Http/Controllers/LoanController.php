@@ -22,4 +22,23 @@ class LoanController extends Controller
                     auth()->user()->id)->latest()->get()
         ]);
     }
+    public function show(LoanReport $loan){
+        return view('loan.show',[
+            'title'=>'Loan page show',
+            'loan'=>$loan
+        ]);
+    }
+    public function cancel(LoanReport $loan){
+        $loan->bucket->update([
+            'is_loan'=>0
+        ]);
+        $loan->bucket->save();
+        $stock = $loan->bucket->book->stock + 1;
+        $loan->bucket->book->update([
+            'stock'=>$stock
+        ]);
+        $loan->bucket->book->save();
+        LoanReport::destroy($loan->id);
+        return redirect()->route('bucket')->with('deleteLoan','Berhasil menghapus permintaan peminjaman!');
+    }
 }

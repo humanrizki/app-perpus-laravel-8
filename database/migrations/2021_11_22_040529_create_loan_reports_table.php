@@ -15,9 +15,11 @@ class CreateLoanReportsTable extends Migration
     {
         Schema::create('loan_reports', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('loan_date')->nullable();
-            $table->timestamp('return_date')->nullable();
+            $table->date('loan_date')->nullable();
+            $table->date('return_date')->nullable();
             $table->integer('forfeit');
+            $table->string('slug');
+            $table->enum('status',['request','paid','borrow'])->default('request');
             $table->foreignId('bucket_id');
             $table->foreignId('user_id');
             $table->foreignId('admin_id');

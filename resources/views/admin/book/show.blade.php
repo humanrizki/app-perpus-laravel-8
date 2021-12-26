@@ -22,7 +22,10 @@
                     <p class="border p-2 rounded my-2">Original publisher : {{ $book->original_publisher }}</p>
                     <p class="border p-2 rounded my-2">Collection : {{ $book->collection_book->name }}</p>
                     <p class="border p-2 rounded my-2">Bookcase : {{ $book->bookcase->name }}</p>
-
+                    @if (auth('admin')->user()->hasAnyRole('headteacher','homeroom'))
+                        
+                    <p class="border p-2 rounded my-2">Admin : {{ $book->admin->name }}</p>
+                    @endif
                 </div>
             </div>
         </div>

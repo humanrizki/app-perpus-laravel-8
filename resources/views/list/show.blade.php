@@ -63,6 +63,10 @@
                                 <td>Lokasi rak</td>
                                 <td>{{ $detail->bookcase->location_bookcase }}</td>
                             </tr>
+                            <tr>
+                                <td>Admin</td>
+                                <td>{{ $detail->admin->name }}</td>
+                            </tr>
                         </table>
                         @if (!is_null(auth()->user()->nisn))
                             @if(!is_null($loan))
