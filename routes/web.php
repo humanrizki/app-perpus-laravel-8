@@ -13,6 +13,7 @@ use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\DashboardBooks;
 use App\Http\Controllers\DashboardCategory;
 use App\Http\Controllers\DashboardCollection;
+use App\Http\Livewire\Category;
 use Illuminate\Support\Facades\Route;
 
 /*

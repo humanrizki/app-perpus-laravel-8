@@ -11,12 +11,9 @@ class CategoryTable extends LivewireDatatable
     public $model = Category::class;
     public $exportable = true;
     public $hideable = 'select';
-    // public function builder(){
-    //     return Category::query()
-    //     ->leftJoin('categories','books.category_id','categories.id')
-    //     ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
-    //     ->leftJoin('bookcases','books.bookcase_id','bookcases.id');
-    // }
+    public function builder(){
+        return Category::query();
+    }
     public function columns(){
         //
         return [
@@ -31,8 +28,14 @@ class CategoryTable extends LivewireDatatable
             ->label('Name')
             ->searchable(),
 
+            Column::callback(['categories.id'],function($id){
+                return view('livewire.category.columnEdit',[
+                    'id'=>$id
+                ]);
+            })->label('Update'),
+
             Column::delete()
-            ->label('Action'),
+            ->label('Delete'),
         ];
         
     }
