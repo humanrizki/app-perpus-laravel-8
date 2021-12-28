@@ -1,5 +1,5 @@
 <button type="button" class="btn text-neutral-50 hover:text-neutral-50 bg-emerald-600 hover:bg-emerald-800 mt-3 mb-3 ml-3 drop-shadow-lg" data-toggle="modal" data-target="#exampleModal" wire:click="resetField()">
-	Add Category
+	Add Bookcase
 </button>
 
 <!-- Modal -->
@@ -20,14 +20,14 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <input type="text" class="form-control" id="category" placeholder="Enter Category" wire:model="category" name="title" >
-                        @error('category') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
+                        <label for="bookcase">Bookcase</label>
+                        <input type="text" class="form-control" id="bookcase" placeholder="Enter Category" wire:model="bookcase" name="bookcase" >
+                        @error('bookcase') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" class="form-control" id="slug" wire:model="slug" placeholder="Enter Slug" name="slug">
-                        @error('slug') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
+                        <label for="location">Location</label>
+                        <input type="number" class="form-control" id="location" wire:model="location_bookcase" placeholder="Enter location" name="location_bookcase">
+                        @error('location_bookcase') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
                     </div>
                 </form>
             </div>
@@ -42,17 +42,3 @@
         </div>
     </div>
 </div>
-<script>
-    const category = document.querySelector('#category');
-    const slug = document.querySelector('#slug');
-    category.addEventListener('change',function(){
-        fetch('/dashboard/books/checkSlug?title='+category.value)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            slug.value = data.slug;
-        })
-
-    });
-</script>

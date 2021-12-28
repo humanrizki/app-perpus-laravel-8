@@ -1,8 +1,8 @@
 <div>
     @if (auth('admin')->user()->hasRole('admin'))
-    @include('livewire.category.create')
+    @include('livewire.bookcase.create')
     @endif
-    <input type="text" wire:model="search" class="form-control w-60 d-inline translate-y-0.5 translate-x-2" placeholder="Cari Category...">
+    <input type="text" wire:model="search" class="form-control w-60 d-inline translate-y-0.5 translate-x-2" placeholder="Cari Bookcase...">
     <select name="" id="" wire:model="limitPerPage" class="form-control w-60 d-inline translate-y-0.5 translate-x-2">
         <option value="all" seleted>Pilih limit perhalaman</option>
         <option value="2" >2</option>
@@ -20,16 +20,19 @@
                             <tr>
                                 <th class="px-2 py-3 text-sm text-slate-800 border-r-2  border-t-2 border-b-2">No</th>
                                 <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-r-2  border-t-2 border-b-2">Name</th>
+                                <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-r-2  border-t-2 border-b-2">Location</th>
                                 @if (auth('admin')->user()->hasRole('admin'))
+                                    
                                 <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-t-2 border-b-2">Action</th>
                                 @endif
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            @foreach ($categories as $c)
+                            @foreach ($bookcases as $c)
                                 <tr class="whitespace-nowrap border-y-2 first:border-t-0 last:border-b-0 even:bg-slate-100">
                                     <td class="px-3 py-2 text-sm text-gray-500 "><p class="text-black">{{ $loop->iteration }}</p></td>
                                     <td class="px-3 py-2 text-sm text-gray-500 border-x-2 text-slate-700"><p class="text-black">{{ $c->name }}</p></td>
+                                    <td class="px-3 py-2 text-sm text-gray-500 border-x-2 text-slate-700"><p class="text-black">{{ $c->location_bookcase }}</p></td>
                                     @if (auth('admin')->user()->hasRole('admin'))
                                         <td class="px-3 py-2 text-sm text-gray-500  text-slate-700 flex flex-wrap">
                                             <button type="button" class="rounded text-neutral-50 hover:text-neutral-50  px-2 py-1 mx-1 my-1 hover:bg-slate-50" data-toggle="modal" data-target="#exampleModal" wire:click="edit({{ $c->id }})">
@@ -40,7 +43,6 @@
                                             </button>
                                         </td>
                                     @endif
-                
                                 </tr>
                             @endforeach
                         </tbody>
@@ -49,6 +51,5 @@
             </div>
         </div>
     </div>
-    
-   
+
 </div>

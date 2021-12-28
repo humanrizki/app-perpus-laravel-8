@@ -1,5 +1,5 @@
 <button type="button" class="btn text-neutral-50 hover:text-neutral-50 bg-emerald-600 hover:bg-emerald-800 mt-3 mb-3 ml-3 drop-shadow-lg" data-toggle="modal" data-target="#exampleModal" wire:click="resetField()">
-	Add Category
+	Add Collection
 </button>
 
 <!-- Modal -->
@@ -13,16 +13,16 @@
                 </button>
             </div>
            <div class="modal-body">
-                <form wire:submit.prevent="submit">
+                <form>
                     @if ($updateField)
                     <div class="form-group">
                         <input type="hidden" wire:model="ids">
                     </div>
                     @endif
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <input type="text" class="form-control" id="category" placeholder="Enter Category" wire:model="category" name="title" >
-                        @error('category') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
+                        <label for="collection">Collection</label>
+                        <input type="text" class="form-control" id="collection" placeholder="Enter Collection" wire:model="collection" name="title" >
+                        @error('collection') <span class="text-danger text-sm error">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
                         <label for="slug">Slug</label>
@@ -34,19 +34,19 @@
             <div class="modal-footer">
                 <button type="button" class="btn bg-slate-600 hover:bg-slate-800 text-neutral-50 hover:text-neutral-50 close-btn" data-dismiss="modal">Close</button>
                 @if($updateField)
-                <button type="button" wire:click="update()" class="btn text-neutral-50 hover:text-neutral-50 bg-cyan-500 hover:bg-cyan-800 close-modal">Save changes</button>
+                <button type="button" wire:click.prevent="update()" class="btn text-neutral-50 hover:text-neutral-50 bg-cyan-500 hover:bg-cyan-800 close-modal">Save changes</button>
                 @else 
-                <button type="submit" wire:click="store()" class="btn text-neutral-50 hover:text-neutral-50 bg-cyan-500 hover:bg-cyan-800 close-modal">Save changes</button>
+                <button type="button" wire:click.prevent="store()" class="btn text-neutral-50 hover:text-neutral-50 bg-cyan-500 hover:bg-cyan-800 close-modal">Save changes</button>
                 @endif
             </div>
         </div>
     </div>
 </div>
 <script>
-    const category = document.querySelector('#category');
+    const collection = document.querySelector('#collection');
     const slug = document.querySelector('#slug');
-    category.addEventListener('change',function(){
-        fetch('/dashboard/books/checkSlug?title='+category.value)
+    collection.addEventListener('change',function(){
+        fetch('/dashboard/books/checkSlug?title='+collection.value)
         .then(function(response){
             return response.json();
         })

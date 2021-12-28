@@ -4,6 +4,6 @@
 @endsection
 @section('content')
     <div class="container-fluid bg-white p-3">
-        <livewire:collection-book-table/>
+        <livewire:collection/>
     </div>
 @endsection

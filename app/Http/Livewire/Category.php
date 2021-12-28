@@ -10,23 +10,31 @@ use App\Models\Category as Categories;
 class Category extends Component
 {
     public $category;
-    public $categories;
     public $slug;
     public $updateField = false;
     public $ids;
+    public $title;
+    public $search;
+    public $limitPerPage;
+    protected $queryString = ['search'=>['except'=>'']];
     public function render()
     {
-        $this->categories = Categories::all();   
-        return view('livewire.category');
+        $categories = ($this->limitPerPage == 'all') ? Categories::latest()->get() : Categories::latest()->paginate($this->limitPerPage);  
+        if($this->search != null){
+            $categories = Categories::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+        }
+        return view('livewire.category', ['categories'=>$categories]);
     }
     public function resetField(){
         if($this->updateField){
             $this->updateField = false;
         }
+        $this->title = 'Store a Category!';
         $this->category = null;
         $this->slug = null;
     }
     public function store(){
+        $this->validate($this->rules());
         if($this->slug == null){
             $this->slug = SlugService::createSlug(Categories::class, 'slug', $this->category);
         }
@@ -38,21 +46,38 @@ class Category extends Component
     }
     public function edit($id){
         $this->updateField = true;
+        $this->title = 'Update a Category!';
         $categoryObject = Categories::find($id);
         $this->ids = $categoryObject->id;
         $this->category = $categoryObject->name;
         $this->slug = $categoryObject->slug;
     }
     public function update(){
-        $this->slug = SlugService::createSlug(Categories::class, 'slug', $this->category);
-        Categories::where('id',$this->ids)->update([
-            'name'=>$this->category,
-            'slug'=>$this->slug
-        ]);
-        return redirect('/dashboard/categories');
+        $categoryObject = Categories::find($this->ids);
+        if($categoryObject->slug != $this->slug){
+            $this->slug = SlugService::createSlug(Categories::class, 'slug', $this->category);
+            $this->validate($this->rules());
+            Categories::where('id',$this->ids)->update([
+                'name'=>$this->category,
+                'slug'=>$this->slug
+            ]);
+            return redirect('/dashboard/categories');
+        } else {
+            Categories::where('id',$this->ids)->update([
+                'name'=>$this->category,
+                'slug'=>$this->slug
+            ]);
+            return redirect('/dashboard/categories');
+        }
     }
     public function delete($id){
         Categories::destroy($id);
         return redirect('/dashboard/categories');
+    }
+    protected function rules(){
+        return [
+            'category'=>'required|max:40',
+            'slug'=>'required|unique:categories'
+        ];
     }
 }

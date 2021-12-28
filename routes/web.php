@@ -55,7 +55,7 @@ Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.lo
 Route::post('/admin/login',[AdminLoginController::class,'login']);
 Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
 Route::post('/admin/logout',[AdminLoginController::class,'logout'])->name('logout.admin');
-Route::group(['middleware'=>'adminguest:admin'],function(){
+Route::group(['middleware'=>'adminguest:admin','role:admin|headteacher|homeroom'],function(){
     Route::get('/dashboard/categories', [DashboardCategory::class, 'index']);
     Route::get('/dashboard/collections', [DashboardCollection::class, 'index']);
     Route::get('/dashboard/bookcases', [DashboardBookcase::class, 'index']);

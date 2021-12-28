@@ -1,8 +1,8 @@
 <div>
     @if (auth('admin')->user()->hasRole('admin'))
-    @include('livewire.category.create')
+    @include('livewire.collection.create')
     @endif
-    <input type="text" wire:model="search" class="form-control w-60 d-inline translate-y-0.5 translate-x-2" placeholder="Cari Category...">
+    <input type="text" wire:model="search" class="form-control w-60 d-inline translate-y-0.5 translate-x-2" placeholder="Cari Collection...">
     <select name="" id="" wire:model="limitPerPage" class="form-control w-60 d-inline translate-y-0.5 translate-x-2">
         <option value="all" seleted>Pilih limit perhalaman</option>
         <option value="2" >2</option>
@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            @foreach ($categories as $c)
+                            @foreach ($collections as $c)
                                 <tr class="whitespace-nowrap border-y-2 first:border-t-0 last:border-b-0 even:bg-slate-100">
                                     <td class="px-3 py-2 text-sm text-gray-500 "><p class="text-black">{{ $loop->iteration }}</p></td>
                                     <td class="px-3 py-2 text-sm text-gray-500 border-x-2 text-slate-700"><p class="text-black">{{ $c->name }}</p></td>
