@@ -49,8 +49,6 @@ class AdminSeeder extends Seeder
             'address'=>'Jl. belom diaspal'
         ]);
         $admin->assignRole('admin');
-        $roleAdd = Permission::findByName('add-book','admin');
-        $admin->givePermissionTo($roleAdd);
         $homeRoom->assignRole('homeroom');
         $headTeacher->assignRole('headteacher');
     }

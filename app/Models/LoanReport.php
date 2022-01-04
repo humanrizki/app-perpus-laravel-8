@@ -9,8 +9,8 @@ class LoanReport extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function bucket(){
-        return $this->belongsTo(Bucket::class);
+    public function book(){
+        return $this->belongsTo(Book::class);
     }
     public function admin(){
         return $this->belongsTo(Admin::class);
@@ -31,5 +31,9 @@ class LoanReport extends Model
             return $x_display;
         }
         return $num;
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

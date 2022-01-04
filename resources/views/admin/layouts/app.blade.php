@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>{{ $title }}</title>
 
     <!-- Custom fonts for this template-->
     <script src="https://kit.fontawesome.com/43727f9558.js" crossorigin="anonymous"></script>
@@ -109,8 +109,9 @@
 
     <!-- Page level custom scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-    <livewire:scripts />
 
+    <livewire:scripts />
+    @yield('script')
 </body>
 
 </html>

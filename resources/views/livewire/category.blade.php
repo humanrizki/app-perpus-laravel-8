@@ -29,7 +29,7 @@
                             @foreach ($categories as $c)
                                 <tr class="whitespace-nowrap border-y-2 first:border-t-0 last:border-b-0 even:bg-slate-100">
                                     <td class="px-3 py-2 text-sm text-gray-500 "><p class="text-black">{{ $loop->iteration }}</p></td>
-                                    <td class="px-3 py-2 text-sm text-gray-500 border-x-2 text-slate-700"><p class="text-black">{{ $c->name }}</p></td>
+                                    <td class="px-3 py-2 text-sm text-gray-500 border-x-2 text-slate-700 whitespace-normal"><p class="text-black">{{ $c->name }}</p></td>
                                     @if (auth('admin')->user()->hasRole('admin'))
                                         <td class="px-3 py-2 text-sm text-gray-500  text-slate-700 flex flex-wrap">
                                             <button type="button" class="rounded text-neutral-50 hover:text-neutral-50  px-2 py-1 mx-1 my-1 hover:bg-slate-50" data-toggle="modal" data-target="#exampleModal" wire:click="edit({{ $c->id }})">

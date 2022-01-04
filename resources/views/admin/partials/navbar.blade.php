@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -35,8 +35,26 @@
     <li class="nav-item {{ request()->is('dashboard/bookcases*') ? 'active' : ''; }}"> 
         <a class="nav-link" href="/dashboard/bookcases">
             <i class="bi bi-grid-1x2-fill"></i>
-            <span>Bookcase</span></a>
+            <span>Bookcases</span></a>
     </li>
+    @if (auth('admin')->user()->hasRole('admin'))
+        <li class="nav-item {{ request()->is('dashboard/loans*') ? 'active' : ''; }}"> 
+            <a class="nav-link" href="/dashboard/loans">
+                <i class="bi bi-card-heading"></i>
+                <span>Loans</span></a>
+        </li>
+        <li class="nav-item {{ request()->is('dashboard/transactions*') ? 'active' : ''; }}"> 
+            <a class="nav-link" href="/dashboard/transactions">
+                <i class="bi bi-card-checklist"></i>
+                <span>Transactions</span></a>
+        </li>
+    @endif
+    <li class="nav-item {{ request()->is('dashboard/agreements*') ? 'active' : ''; }}"> 
+        <a class="nav-link" href="/dashboard/agreements">
+            <i class="fas fa-handshake"></i>
+            <span>Agreement</span></a>
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">

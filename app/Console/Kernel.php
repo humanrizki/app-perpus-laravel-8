@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\LoanReport;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -26,7 +28,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            DB::table('loan_reports')->whereRaw('loan_date < now()')->update(['loan_date' => \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Jakarta'))]);
+            LoanReport::where('status','=','request')->whereRaw('now() > return_date')->update([
+                'status'=>'cancell'
+            ]);
+            LoanReport::where('status','=','pending')->whereRaw('now() > return_date')->update([
+                'status'=>'cancell'
+            ]);
+            Transaction::query()->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')->where('loan_reports.return_date','<',Carbon::now())->delete();
         })->everyMinute()->timezone('Asia/Jakarta');
     }
 

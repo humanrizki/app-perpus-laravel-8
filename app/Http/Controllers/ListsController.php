@@ -32,8 +32,8 @@ class ListsController extends Controller
             ['book_id','=',$list->id],
             ['user_id','=',auth()->user()->id]
         ])->first();
-        $loan = (is_null($bucket)) ? null : LoanReport::where([
-            ['bucket_id','=',$bucket->id],
+        $loan = LoanReport::where([
+            ['book_id','=',$list->id],
         ])->first(); 
         return view('list.show',[
             'title'=>'list of book',

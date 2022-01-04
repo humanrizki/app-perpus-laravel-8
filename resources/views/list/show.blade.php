@@ -70,7 +70,11 @@
                         </table>
                         @if (!is_null(auth()->user()->nisn))
                             @if(!is_null($loan))
-                                <p>Buku sudah dipinjam!</p>
+                                @if ($loan->status == 'pending' or $loan->status == 'request')
+                                    <p>Buku yang dipinjam berada dalam status request atau pending</p>
+                                @else 
+                                    <p>Buku yang dipinjam berada dalam status cancell, hapus data yang dibatalkan dan kembali meminjam!</p>
+                                @endif
                             @elseif(!is_null($bucket))
                                 <p>Buku sudah ada di sessi</p>
                             @elseif($detail->stock == 0)

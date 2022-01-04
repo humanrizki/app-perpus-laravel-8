@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBucketsTable extends Migration
+class CreateHomeroomMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateBucketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('buckets', function (Blueprint $table) {
+        Schema::create('homeroom_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->nullable();
-            $table->foreignId('user_id')->default(null);
-            $table->foreignId('book_id')->default(null);
+            $table->string('message');
+            $table->string('slug');
+            $table->enum('status',['agree','disagree','pending'])->default('pending');
+            $table->foreignId('loan_report_id');
+            $table->foreignId('admin_id');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateBucketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buckets');
+        Schema::dropIfExists('homeroom_messages');
     }
 }

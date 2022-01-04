@@ -22,6 +22,9 @@
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('loan*')) ? 'active fw-bold':'';}}" href="/loan">Loan</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('transaction*')) ? 'active fw-bold':'';}}" href="/transaction">Transaction</a>
+          </li>
         </ul>
         @auth
         <div class="dropdown">

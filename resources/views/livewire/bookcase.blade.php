@@ -22,7 +22,6 @@
                                 <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-r-2  border-t-2 border-b-2">Name</th>
                                 <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-r-2  border-t-2 border-b-2">Location</th>
                                 @if (auth('admin')->user()->hasRole('admin'))
-                                    
                                 <th class="px-2 py-3 text-sm text-slate-800 border-l-2 border-t-2 border-b-2">Action</th>
                                 @endif
                             </tr>

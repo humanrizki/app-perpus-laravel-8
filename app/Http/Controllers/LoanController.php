@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomeroomMessage;
 use App\Models\LoanReport;
 use Illuminate\Http\Request;
 
@@ -29,16 +30,28 @@ class LoanController extends Controller
         ]);
     }
     public function cancel(LoanReport $loan){
-        $loan->bucket->update([
-            'is_loan'=>0
-        ]);
-        $loan->bucket->save();
-        $stock = $loan->bucket->book->stock + 1;
-        $loan->bucket->book->update([
+        $stock = $loan->book->stock + 1;
+        $loan->book->update([
             'stock'=>$stock
         ]);
-        $loan->bucket->book->save();
+        if($loan->status == 'pending'){
+            HomeroomMessage::destroy(HomeroomMessage::where('loan_report_id','=',$loan->id)->first()->id);
+            $loan->update([
+                'status'=>'cancell',
+                'forfeit'=>0
+            ]);
+            return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman dan menghapus data untuk dapat persetujuan dari walas!');
+        } else {
+            $loan->update([
+                'status'=>'cancell',
+                'forfeit'=>0
+            ]);
+            return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+        }
+    }
+    public function delete(LoanReport $loan){
+        $title = $loan->book->title;
         LoanReport::destroy($loan->id);
-        return redirect()->route('bucket')->with('deleteLoan','Berhasil menghapus permintaan peminjaman!');
+        return redirect("/loan")->with('deleteLoan','Berhasil menghapus permintaan peminjaman untuk buku '.$title.'!');
     }
 }

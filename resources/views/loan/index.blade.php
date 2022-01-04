@@ -1,6 +1,16 @@
 @extends('layouts.capp')
 @section('content')
     <div class="container my-3">
+        @if (session()->has('deleteLoan'))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('deleteLoan') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if ($loans->count() == 0)
         <div class="alert border">
             <h3>Data masih kosong sahabat!</h3>
@@ -43,8 +53,8 @@
                     
                     <tr>
                         <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->bucket->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
-                        <td style="vertical-align: middle;">{{ $loan->bucket->book->title }}</td>
+                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
+                        <td style="vertical-align: middle;">{{ $loan->book->title }}</td>
                         <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($loan->return_date)->locale('id_ID')->diffForHumans(\Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'),[
                             'parts'=>4,
                             'join'=>true,
@@ -54,11 +64,9 @@
                         ]) }}</td>
                         <td style="vertical-align: middle;">{{ $loan->status }}</td>
                         <td style="vertical-align: middle;">Rp.{{ $loan->toKilo($loan->forfeit) }}</td>
-                        @if ($loan->status == 'request')
                         <td style="vertical-align: middle;">
                                 <a href="/loan/{{ $loan->slug }}" class="btn btn-primary"><i class='bi bi-eye-fill text-white'></i></a>
                             </td>
-                        @endif
                     </tr>
                 @endforeach
             </tbody>

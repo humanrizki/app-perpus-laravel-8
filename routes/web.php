@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\DashboardAgreement;
 use App\Http\Controllers\DashboardBookcase;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\LoanController;
@@ -13,7 +14,9 @@ use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\DashboardBooks;
 use App\Http\Controllers\DashboardCategory;
 use App\Http\Controllers\DashboardCollection;
-use App\Http\Livewire\Category;
+use App\Http\Controllers\DashboardLoans;
+use App\Http\Controllers\DashboardTransaction;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +49,9 @@ Route::post('/bucket/{bucket:slug}',[BucketController::class,'store']);
 Route::get('/loan',[LoanController::class,'index'])->name('loan');
 Route::get('/loan/{loan:slug}',[LoanController::class,'show']);
 Route::put('/loan/{loan:slug}',[LoanController::class,'cancel']);
+Route::delete('/loan/{loan:slug}',[LoanController::class,'delete']);
 Route::get('/login',[UserLoginController::class,'index'])->name('login')->middleware('guest');
+Route::get('/transaction',[TransactionController::class,'index'])->name('transaction');
 Route::post('/login',[UserLoginController::class,'login']);
 Route::post('/logout',[UserLoginController::class,'logout']);
 Route::get('/register',[UserRegisterController::class,'index'])->name('register');
@@ -55,10 +60,17 @@ Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.lo
 Route::post('/admin/login',[AdminLoginController::class,'login']);
 Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
 Route::post('/admin/logout',[AdminLoginController::class,'logout'])->name('logout.admin');
-Route::group(['middleware'=>'adminguest:admin','role:admin|headteacher|homeroom'],function(){
+Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/categories', [DashboardCategory::class, 'index']);
     Route::get('/dashboard/collections', [DashboardCollection::class, 'index']);
     Route::get('/dashboard/bookcases', [DashboardBookcase::class, 'index']);
+    Route::get('/dashboard/agreements',[DashboardAgreement::class,'index']);
+    Route::get('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'show']);
+    Route::post('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'store']);
 });
 Route::get('/dashboard/books/checkSlug',[DashboardBooks::class,'checkSlug']);
 Route::resource('/dashboard/books',DashboardBooks::class)->middleware('adminguest:admin');
+Route::get('/dashboard/loans',[DashboardLoans::class,'index'])->middleware('adminguest:admin');
+Route::get('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'show'])->middleware('adminguest:admin');
+Route::post('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'store'])->middleware('adminguest:admin');
+Route::get('/dashboard/transactions',[DashboardTransaction::class,'index'])->middleware('adminguest:admin');

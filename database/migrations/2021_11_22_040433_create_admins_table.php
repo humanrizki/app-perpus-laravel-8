@@ -21,7 +21,8 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->string('position');
             $table->enum('gender',['Male','Female']);
-            $table->char('phone',15);
+            $table->char('phone',25);
+            $table->foreignId('detail_class_department_id')->nullable();
             $table->text('address');
             $table->timestamps();
         });
