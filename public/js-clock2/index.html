@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Introduction</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+        <h2>Introduction</h2>
+
+        <div id="welcome">
+          <div>
+            <div class="digit bg"><span data-digit="h"></span></div>
+            <div class="digit bg"><span data-digit="i"></span></div>
+            <div class="digit bg"><span data-digit="s"></span></div>
+          </div>
+          <div>
+            <div class="digit sm"><span data-digit="d"></span>-<span data-digit="n"></span>-<span data-digit="y"></span></div>
+            <div class="digit sm"><span data-digit="w"></span>, <span data-digit="N"></span></div>
+            <div class="digit md"><span data-digit="m"></span></div>
+          </div>
+        </div>
+
+        <h3>What is W3FClockTimer?</h3>
+
+        <p>
+          W3Flints ClockTimer is a powerful, cross-browser and standalone clock engine written in pure Javascript. 
+          It allows you to implement a clock, a timer or a countdown widget in seconds, or create a sophisticated component extending the core library.
+        </p>
+
+        <h3>A basic implementation</h3>
+
+        <p>Create a new clock, using the flexible HTML renderer:</p>
+
+        <h4>HTML:</h4>
+
+        <p>Include the dependencies:</p>
+
+        <pre class="code" data-format="html">
+&lt;head&gt;
+  &lt;link rel="stylesheet" href="src/w3fclocktimer.css" /&gt;
+  &lt;script src="src/w3fclocktimer.js">&lt;/script&gt;
+&lt;/head&gt;
+        </pre>
+
+        <p>Create a placeholder inside the &lt;body&gt; block:</p>
+        <pre class="code" data-src="example-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <p>Create a new instance inside a &lt;script&gt; block:</p>
+        <pre class="code"  data-src="example-js" data-format="js"></pre>
+
+        <h4>Result:</h4>
+        <div id="example-html">
+          <div id="clock">
+            <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span>
+            <span data-digit="m"></span>
+            <span data-digit="H"></span> <span data-digit="a"></span>
+            <span data-digit="d"></span>-<span data-digit="n"></span>-<span data-digit="y"></span>
+            <span data-digit="w"></span>, <span data-digit="N"></span>
+          </div>
+        </div>
+
+
+        <hr />
+        <h3>Options</h3>
+
+        <p>This is the list of default options:</p>
+
+        <pre class="code" data-format="js">
+mytarget.W3FClockTimer({
+  //use it to localize your instances. See the <b>Languages</b> section
+  lang: 'default',
+
+  device: {
+    //use 'clock' or 'timer'
+    type: 'clock',
+    //set it to off if you want to enable it manually
+    ison: true, 
+    //the offset, in seconds
+    offset: 0
+  },
+
+  //the refresh speed, in milliseconds
+  step: 100, 
+
+  //see the <b>Renderers</b> section to get the full list
+  renderer: {
+    type: 'html',
+    settings: {}
+  },
+
+  //use it to handle some time-dependant events. See the <b>Milestones and bindings</b> section
+  milestones: {},
+
+  bind: {
+    //fired when the instance is initialized
+    init: function () {},
+    //fired when the core updates itself (based on <b>step</b> option)
+    tick: function (key, device) {},
+    //fired when the device is stopped
+    stop: function (device) {}, 
+    //fired when the instance in clicked
+    click: function (device) {}, 
+    //Timer only: fired when the difference between the deadline and the current time is zero
+    deadline: function (device) {}
+  }
+});</pre>
+
+        <p>Check out the <a href="devices_clock.html">devices</a> and <a href="renderers.html">renderers</a> pages to explore the full list of built-in features.</p>
+
+      </div>
+    </main>
+
+    <script id="welcome-js">
+      document.getElementById('welcome').W3FClockTimer({
+        step: 20
+      });
+    </script>
+    <script id="example-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+        //Create a new clock:
+        document.getElementById('clock').W3FClockTimer({});
+      });
+    </script>
+  </body>
+</html>

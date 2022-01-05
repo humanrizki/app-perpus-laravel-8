@@ -1,0 +1,51 @@
+.w3f-analog-face {
+  position: relative;
+  background: #fefefe url('../assets/analog-face-2.svg') no-repeat center;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+/* center circle */
+.w3f-analog-face:after {
+  background: #000; border-radius: 50%; content: ""; position: absolute;
+  left: 50%; top: 50%; transform: translate(-50%, -50%); width: 5%; height: 5%; z-index: 10;
+}
+.w3f-analog-face .hc, .w3f-analog-face .ic, .w3f-analog-face .sc {
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+}
+.w3f-analog-face .ic, .w3f-analog-face .sc {
+  /*transition: transform 0.3s cubic-bezier(.4,2.08,.55,0);*/
+}
+
+.w3f-analog-face .h {
+  background: #777; height: 20%; left: 48.75%; position: absolute; top: 30%;
+  transform-origin: 50% 100%; width: 2.5%;
+  border-radius: 100%/10%;
+}
+.w3f-analog-face .i {
+  background: #000; height: 40%; left: 49%; position: absolute; top: 10%;
+  transform-origin: 50% 100%; width: 2%;
+  border-radius: 150%/10%;
+}
+.w3f-analog-face .s {
+  background: #c22; height: 45%; left: 49.5%; position: absolute; top: 14%;
+  transform-origin: 50% 80%; width: 1%; z-index: 8;
+  border-radius: 200%/10%;
+}
+.w3f-analog-face .h,.w3f-analog-face .i,.w3f-analog-face .s{box-shadow: 2px 3px 4px #777;}
+
+
+.w3f-progressbar{position: relative; width: 100%; height: 30px; border-radius: 5px; background: #000; color: #fff;}
+
+.w3f-progressbar .progress{
+  width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+  background-size: 0.625rem 0.625rem;
+  animation: w3f-progressbar-stripes 1s linear infinite;
+  -webkit-transition: background 0.5;
+  transition: background 0.5s;
+}
+@-webkit-keyframes w3f-progressbar-stripes{from{background-position:0.625rem 0}to{background-position:0 0}}
+@keyframes w3f-progressbar-stripes{from{background-position:0.625rem 0}to{background-position:0 0}}
+

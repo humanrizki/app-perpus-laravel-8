@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Devices, timer</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Devices &gt; Timer</h2>
+
+        <p>
+          See also:
+          <a href="devices_clock.html">Clock</a>
+        </p>
+
+        <h3>A Pomodoro Timer:</h3>
+
+        <div id="pomodoro-messages">Let's heat a soup. </div>
+
+        <div id="pomodoro" class="mystyle">
+          <div class="mydate">
+            <span data-digit="h"></span> <small>hours</small> <span data-digit="i"></span> <small>minutes</small>
+          </div>
+          <div class="mytime">
+            <span data-digit="s"></span> <small>seconds</small>
+          </div>
+        </div>
+
+
+        <h3>A Chronometer:</h3>
+
+        <div id="chrono-messages">Awaiting to start...</div>
+
+        <div id="chrono" class="mystyle">
+          <div class="mydate">
+            <!-- in this case we'll use the raw values, appending the "_" character -->
+            <span data-digit="y_">.</span> years, <span data-digit="d_">.</span> days
+          </div>
+          <div class="mytime">
+            <span data-digit="h">.</span> <small>hr</small> <span data-digit="i">.</span> <small>min</small> <span data-digit="s">.</span> <small>sec</small>
+          </div>
+          <div class="myms">
+            <span data-digit="m">.</span> ms.
+          </div>
+
+          <button id="chrono-lap">LAP</button>
+          <button id="chrono-reset">Pause</button>
+        </div>
+      </div>
+    </main>
+
+
+    <script>
+      /*
+       * It's time to test a pomodoro timer. 
+       */
+      var pomodoro_msgs = document.getElementById('pomodoro-messages');
+
+      var pomodoro = document.getElementById('pomodoro').W3FClockTimer({
+        device: {
+          type: 'timer',
+          //This is a helper to create a timestamp with an offset in seconds.
+          //You can use a specific value written in ANSI format, e.g. '20190201 000000'
+          deadline: W3FCT.fn.dt.stampFromOffset(20)
+        },
+        step: 100,
+        //Milestones allow to fire an event only once, in a specific time.
+        milestones: {
+          //Milestone's value is device-dependant.
+          //In case of 'timer', the value is a time span
+          '00000000 000010': function (device, instant) {
+            pomodoro_msgs.innerHTML += 'The soup is ready. ';
+            pomodoro.classList.add("ok");
+          },
+          '00000000 000005': function (device, instant) {
+            pomodoro_msgs.innerHTML += 'The soup is burning!! ';
+            //if you don't want to assign an uoter var (e.g. "var pomodoro") you can access the target this way
+            device.core.renderer.target.classList.add("danger");
+          }
+        },
+        bind: {
+          //Stop the device once the deadline is reached
+          deadline: function (device) {
+            device.core.stop();
+            pomodoro_msgs.innerHTML += ' Pomodoro stopped.';
+            device.core.renderer.target.classList.add("dead");
+          }
+        }
+      });
+
+
+      /*
+       * And this is how you can implement a chronometer.
+       * We'll omit the full list settings but you can use all of them
+       */
+      var chrono_msgs = document.getElementById('chrono-messages');
+
+      var chrono = document.getElementById('chrono').W3FClockTimer({
+        //a timer
+        device: {
+          type: 'timer',
+          //you can initialize the device switched off...
+          ison: false
+        },
+        step: 10
+      });
+
+      //...and turn it on later
+      window.setTimeout(function () {
+        chrono.device.reset();
+        chrono.device.core.resume();
+        chrono_msgs.innerHTML += ' Timer initialized.';
+      }, 2000);
+
+      document.getElementById("chrono-lap").addEventListener("click", function () {
+        var d = chrono.device;
+
+        var i = d.getInstant();
+        chrono_msgs.innerHTML += '<span>LAP: ' + i.h + ':' + i.i + ':' + i.s + ' ' + i.m + ' </span>';
+
+      });
+      document.getElementById("chrono-reset").addEventListener("click", function () {
+        var d = chrono.device;
+        var btn = this;
+        if (d.core.isRunning()) {
+          d.core.stop();
+          btn.innerHTML = 'Restart';
+        } else {
+          d.reset();
+          d.core.resume();
+          btn.innerHTML = 'Pause';
+        }
+      });
+    </script>
+  </body>
+</html>

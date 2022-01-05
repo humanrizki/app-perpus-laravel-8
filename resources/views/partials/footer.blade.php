@@ -1,106 +1,126 @@
-<footer class="text-center text-lg-start bg-light text-muted">
-    <!-- Section: Social media -->
-    <section
-      class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-    >
-      <!-- Left -->
-      <div class="me-5 d-none d-lg-block">
-        <span>Get connected with us on social networks:</span>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.6/css/line.css">
+
+<footer class="bg-gray-800 pt-10 pt-10">
+  <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+    <!-- Col-1 -->
+    <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+      <!-- Col Title -->
+      <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+        Other site
       </div>
-      <!-- Left -->
-  
-      <!-- Right -->
-      <div>
-        <a href="https://facebook.com/smkcitranegaraofficial" class="me-4 text-reset">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        
-        <a href="https://sekolah.data.kemdikbud.go.id/index.php/chome/profil/a3b930a7-c409-426b-a5ab-7aaed2a25c9f" class="me-4 text-reset">
-          <i class="fab fa-google"></i>
-        </a>
-        <a href="https://instagram.com/smkcitranegaradepok/" class="me-4 text-reset">
-          <i class="fab fa-instagram"></i>
-        </a>
-        
-      </div>
-      <!-- Right -->
-    </section>
-    <!-- Section: Social media -->
-  
-    <!-- Section: Links  -->
-    <section class="">
-      <div class="container text-center text-md-start mt-5">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              <img src="img/logo.png" alt="" width="50"> Library Citra Negara
-            </h6>
-            <p>
-              Temukan berbagai buku untuk menambah ilmu kamu dan buku yang pelajaran
-              yang dapat dipinjam untuk bahan ajaran atau buku novel, cerpen, dll.
-            </p>
-          </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              Lang and Framework
-            </h6>
-            <p>
-              <a href="https://laravel.com" class="text-reset">Laravel</a>
-            </p>
-            <p>
-              <a href="https://getbootstrap.com" class="text-reset">bootstrap 5</a>
-            </p>
-            
-          </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-             links
-            </h6>
-            <p>
-              <a href="http://smkcitranegara.sch.id" class="text-reset">Elearning</a>
-            </p>
-            <p>
-              <a href="https://smkscitranegara.sch.id" class="text-reset">Official site</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              Contact
-            </h6>
-            <p><i class="fas fa-home me-3"></i> Jl. Raya Tanah Baru No.99 Kemiri Jaya , Beji , Depok 16421</p>
-                
-                        <p><i class="fas fa-envelope me-3"></i>info@smkscitranegara.sch.id</p>
-                    <p><i class="fas fa-envelope me-3"></i>
-                    smkcitranegara@ymail.com</p>
-            <p><i class="fas fa-phone me-3"></i> +62 812-1998-0313</p>
-          </div>
-          <!-- Grid column -->
-        </div>
-        <!-- Grid row -->
-      </div>
-    </section>
-    <!-- Section: Links  -->
-  
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-      © 2021 Copyright:
-      <a class="text-reset fw-bold" href="https://instagram.com/m.rizki_array">MUHAMMAD RIZKI</a>
+      <!-- Links -->
+      <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+        E-learning
+      </a>
+      <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+          Official site CN
+      </a>
     </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
+    <!-- Col-2 -->
+    <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+      <!-- Col Title -->
+        <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+          Framework, Library, Plugin, Depedency and etc.
+        </div>
+        <!-- Links -->
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Laravel
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Livewire
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Livewire datatable
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Tailwind
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Flowbite
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Alpine
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            W3Fclocktimer
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Bootstrap icon
+        </a>
+      </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Related pages
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Lists
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Collections
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Bucket
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Transaction
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Profile
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Login
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Register
+            </a>
+        </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Social Media
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Facebook
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Instagram
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                YouTube
+            </a>
+        </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="pt-2">
+        <div class="flex pb-5 px-3 m-auto pt-5 
+            border-t border-gray-500 text-gray-400 text-sm 
+            flex-col md:flex-row max-w-6xl">
+            <div class="mt-2">
+                © Copyright 2021-2022. All Rights Reserved.
+            </div>
+
+            <!-- Required Unicons (if you want) -->
+            <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-facebook-f"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-youtube"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

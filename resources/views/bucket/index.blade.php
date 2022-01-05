@@ -47,10 +47,10 @@
         @endforeach
         </tbody>
         @else
-        <div class="alert border">
+        <div class="w-4/5 mx-auto">
             <h3>Data masih kosong sahabat!</h3>
             <hr>
-            <div class="row">
+            <div class="">
                 <div class="col-md-4">
                     <img src="/img/clipboard1.png" alt="" style="width: 100%;">
                 </div>

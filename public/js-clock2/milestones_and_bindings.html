@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Milestones and bindings</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Milestones and bindings</h2>
+
+        <h3>Control as many time-based and status-based events as you need.</h3>
+
+        <p>
+          W3Flints Clock-Timer allows you to implement some cool features with a few lines of code, 
+          calling some critical bindings and checking the milestone queue, if provided.
+        </p>
+
+        <h3>Milestones</h3>
+
+        <p>
+          Use milestones when you need to hook any behavior using an approximate time. 
+          Because of the relation between the <span class="code">step</span> option and the accuracy level of any time object,
+          W3Flints Clock-Timer cannot guarantee the puntual execution of a milestone, but it provides a second-to-second check, ensuring the execution of the milestone callback.
+        </p>
+
+        <p>
+          The milestone queue is a key-value object, in which the <i>key</i> is a datetime in ANSI format, and the <i>value</i> is a function which receives the device and the instant as parameters.
+        </p>
+
+        <h4>Helpers:</h4>
+
+        <p>
+          W3Flints Clock-Timer provides some helpers to create timestamps. Those are very useful to create keys fro the milestone stack and deadlines for timers.
+        </p>
+        <ul>
+          <li><span class="code">W3FCT.fn.dt.stamp(date)</span>: creates an ANSI representation for a <i>Date</i> object.</li>
+          <li><span class="code">W3FCT.fn.dt.stampFromOffset(offset)</span>: creates a <i>Date</i> object given an offset in seconds and the current time.</li>
+          <li><span class="code">W3FCT.fn.dt.fromANSI(ansi_string)</span>: converts an ANSI representation into a <i>Date</i> object.</li>
+        </ul>
+
+
+        <h3>Bindings</h3>
+
+        <p>
+          Bindings are a core-level and more accurate method to check the current time and clock status.
+        </p>
+
+        <h3>A full example</h3>
+
+        <p>
+          Let's create a timer with some milestones and bindings:
+        </p>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="example-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="example-js" data-format="js"></pre>
+
+        <h4>Result:</h4>
+
+        <div id="example-html">
+          <div id="chrono-messages"></div>
+          <div id="chrono" class="mystyle">
+            <div class="myms">
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span>
+              .<span data-digit="m"></span>
+            </div>
+          </div>
+        </div>
+
+        <button id="chrono-start">Start</button>
+      </div>
+    </main>
+
+    <script id="example-js">
+      var offset = 20;
+      var chrono_msgs = document.getElementById('chrono-messages');
+      var chrono_toggle = document.getElementById("chrono-start");
+
+      var chrono = document.getElementById('chrono').W3FClockTimer({
+        //a timer
+        device: {
+          type: 'timer',
+          ison: false,
+          //we'll set up the deadline on start (see below)
+          // deadline: W3FCT.fn.dt.stampFromOffset(offset) 
+        },
+        step: 10,
+        milestones: {
+          '00000000 000005': function (key, device) {
+            chrono_msgs.innerHTML += ' Five seconds remaining.';
+          },
+          '00000000 000010': function (key, device) {
+            chrono_msgs.innerHTML += ' Ten seconds remaining.';
+          }
+        },
+        bind: {
+          //fired when the instance is initialized
+          init: function () {
+            chrono_msgs.innerHTML += ' Ready.';
+          },
+          //fired when the core updates itself (based on "step" option)
+          tick: function (key, device) {
+            var i = device.getInstant();
+            var color = 255 - (i.span * 0.001 / offset * 255);
+            chrono.style.backgroundColor = 'rgba(' + color + ',200,200)';
+          },
+          //fired when the device is stopped
+          stop: function (device) {
+            chrono_msgs.innerHTML += ' Stopped.';
+          },
+          //fired when the instance in clicked
+          click: function (device) {
+            var d = device;
+
+            var i = d.getInstant();
+            chrono_msgs.innerHTML += ' Clicked at ' + i.h + ':' + i.i + ':' + i.s + ' ' + i.m + '.';
+
+            if (d.core.isRunning()) {
+              d.core.stop();
+            } else {
+              d.core.resume();
+            }
+          },
+          //Timer only: fired when the difference between the deadline and the current time is zero
+          deadline: function (device) {
+            device.core.stop();
+            chrono_msgs.innerHTML += ' Deadline reached.';
+          }
+        }
+      });
+
+      //Start the timer
+      chrono_toggle.addEventListener("click", function () {
+        chrono.device.overrideDeadline(W3FCT.fn.dt.stampFromOffset(offset));//
+        chrono.device.core.resume();
+        chrono_msgs.innerHTML += ' Started.';
+      });
+
+    </script>
+  </body>
+</html>

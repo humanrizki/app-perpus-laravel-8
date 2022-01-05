@@ -9,26 +9,27 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/43727f9558.js" crossorigin="anonymous"></script>
-    <style>
+    {{-- <style>
       *,body{
         margin: 0px;
         padding: 0px;
       }
-    </style>
+    </style> --}}
     @if (request()->is('/'))
         <link rel="stylesheet" href="css/home.css">
     @endif
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="css/ul.css"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    @livewireStyles
+    <livewire:styles/>
+    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+    @yield('head')
   </head>
   <body>
     @include('partials.header')
     @yield('content')
     @include('partials.footer')
-    <!--   Core JS Files   -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    @livewireScripts
+    <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <livewire:scripts/>
   </body>
 </html>

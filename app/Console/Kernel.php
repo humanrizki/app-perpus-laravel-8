@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
 use App\Models\LoanReport;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class Kernel extends ConsoleKernel
             LoanReport::where('status','=','pending')->whereRaw('now() > return_date')->update([
                 'status'=>'cancell'
             ]);
-            Transaction::query()->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')->where('loan_reports.return_date','<',Carbon::now())->delete();
+            Transaction::leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')->where('loan_reports.return_date','<',Carbon::now())->delete();
         })->everyMinute()->timezone('Asia/Jakarta');
     }
 

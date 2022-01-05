@@ -16,17 +16,16 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+        
     <!-- Custom styles for this template-->
     
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet"
+    
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <livewire:styles />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
     @yield('head')
 </head>
 
@@ -109,7 +108,12 @@
 
     <!-- Page level custom scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-
+    <script src="/js-clock2/src/w3fclocktimer.js" type="text/javascript"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+        document.getElementById('clock').W3FClockTimer({});
+      });
+    </script>
     <livewire:scripts />
     @yield('script')
 </body>

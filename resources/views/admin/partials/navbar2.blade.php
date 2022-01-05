@@ -198,6 +198,15 @@
                 </a> --}}
             </div>
         </li>
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item d-inline-flex align-items-center">
+            {{-- <p class="clock" id="clock"></p> --}}
+            <div id="clock" style="vertical-align: middle;">
+                    <span data-digit="H"></span>:<span data-digit="i"></span>
+                
+                <span data-digit="a" style="text-transform: uppercase"></span>
+            </div>
+        </li>
 
     </ul>
 

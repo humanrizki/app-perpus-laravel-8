@@ -1,0 +1,7 @@
+Product name: Clock-Timer
+Version: 1.0.0.1
+Release date: 2019-02-02
+Author: Nicolas Castro
+Description: 
+ClockTimer is a powerful, cross-browser and standalone clock engine written in pure Javascript. 
+It allows you to implement a clock, a timer or a countdown widget in seconds, or create a sophisticated component extending the core library. 

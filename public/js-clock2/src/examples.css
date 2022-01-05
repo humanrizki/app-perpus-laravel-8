@@ -1,0 +1,39 @@
+/*
+* Examples
+* @
+*/
+
+#welcome{
+  background-color: #1fc8db; /* For browsers that do not support gradients */        
+  background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  color: #fff;
+  text-shadow: 2px 2px 3px #10a0b0;
+}
+#welcome .digit{display: inline-block; width: 32%; text-align: center; font-size: 7vw;}
+#welcome .digit.bg{font-size: 7vw;}
+#welcome .digit.md{font-size: 3vw;}
+#welcome .digit.sm{font-size: 1vw;}
+
+.mystyle{text-align: center; background-color: #f3f3f3; color: #474e58; padding: 10px;}
+.mystyle .mytime{font-size: 8vw;}
+.mystyle .myms{font-size: 2vw;}
+.mystyle .mydate, .myclock .mytime2{font-size: 3vw;}
+.mystyle .myweek{font-size: 1vw;}
+.mystyle small{font-size: 1.5vw;}
+.mystyle.ok{background-color: #c3f3c3;}
+.mystyle.danger{background-color: #f3c3c3;}
+.mystyle.dead{background-color: #a3a3a3;}
+
+.w3f-progressbar .mycaption{padding-top: 6px; text-align: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
+
+.w3f-polar-face .arc {animation: w3f-polar-doing 0.3s ease-out;}
+@-webkit-keyframes w3f-polar-doing{from{stroke-width:1}}
+@keyframes w3f-polar-doing{from{stroke-width:1}}
+
+.w3f-polar-face .n{stroke: #acc;}
+.w3f-polar-face .d{stroke: #abc;}
+.w3f-polar-face .H{stroke: #aba;}
+.w3f-polar-face .h{stroke: #aca;}
+.w3f-polar-face .i{stroke: #cba;}
+.w3f-polar-face .s{stroke: #caa;}
+.w3f-polar-face .m{stroke: #cab;}

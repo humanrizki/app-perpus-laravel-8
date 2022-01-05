@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Devices, clock</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Devices &gt; Clock</h2>
+
+        <p>
+          See also:
+          <a href="devices_timer.html">Timer</a>
+        </p>
+
+        <h3>A clock:</h3>
+
+        <div id="clock1-html">
+          <div id="clock-messages"></div>
+          <div class="myclock mystyle">
+            <div class="mytime">
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span>
+            </div>
+            <div class="myms">
+              <span data-digit="m"></span>
+            </div>
+            <div class="mytime2">
+              <span data-digit="H"></span> <span data-digit="a"></span>
+            </div>
+            <div class="mydate">
+              <span data-digit="d"></span>-<span data-digit="n"></span>-<span data-digit="y"></span>
+            </div>
+            <div class="myweek">
+              <span data-digit="w"></span>, <span data-digit="N"></span>
+            </div>
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="clock1-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="clock1-js" data-format="js"></pre>
+
+
+        <hr />
+        <h3>A clock with a lag of 3 hours:</h3>
+
+        <div id="clock2-html">
+          <div id="clock2" class="mystyle">
+            <div class="mytime">
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span>
+            </div>
+            <div class="mydate">
+              <span data-digit="d"></span>-<span data-digit="n"></span>-<span data-digit="y"></span>
+            </div>
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="clock2-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="clock2-js" data-format="js"></pre>
+
+      </div>
+
+    </main>
+
+
+    <script id="clock1-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        //we'll use a placeholder to show some messages
+        var clock_msgs = document.getElementById('clock-messages');
+
+        //get the target nodes
+        var clocks = document.getElementsByClassName('myclock');
+
+        //because selector is a class, you can get more than one target node
+        for (var i = 0; i < clocks.length; ++i) {
+          clocks[i].W3FClockTimer({
+            //how fast do you want to go?
+            step: 100,
+            renderer: {
+              //"html" is the basic renderer, 
+              //you can customize the location and style for every single element
+              type: 'html'
+            },
+            //bind some events
+            bind: {
+              init: function () {
+                clock_msgs.innerHTML += 'Clock initialized. Click it to test other events. ';
+              },
+              stop: function (device) {
+                clock_msgs.innerHTML += 'Oh no! something went wrong. ';
+                setTimeout(function () {
+                  device.core.resume();
+                  clock_msgs.innerHTML += 'Just kidding! Restarting...';
+                }, 2000);
+              },
+              click: function (device) {
+                if (device.core.running) {
+                  device.core.stop();
+                } else {
+                  device.core.resume();
+                }
+              }
+            }
+          });
+        }
+
+      });
+    </script>
+
+    <script id="clock2-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        //Now let's check a clock with a time offset. We will omit the default settings.
+        var clock2 = document.getElementById('clock2');
+        clock2.W3FClockTimer({
+          device: {
+            offset: -10800
+          }
+        });
+
+      });
+    </script>
+  </body>
+</html>

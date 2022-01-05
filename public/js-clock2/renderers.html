@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Renderers</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Renderers</h2>
+
+
+        <h3>HTML renderer</h3>
+        <p>Use pure HTML and CSS to draw your clock.</p>
+
+        <div id="html-html">
+          <div id="html" class="mystyle">
+            <div class="mytime">
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span>
+            </div>
+            <div class="myms">
+              <span data-digit="m"></span>
+            </div>
+            <div class="mytime2">
+              <span data-digit="H"></span> <span data-digit="a"></span>
+            </div>
+            <div class="mydate">
+              <span data-digit="d"></span>-<span data-digit="n"></span>-<span data-digit="y"></span>
+            </div>
+            <div class="myweek">
+              <span data-digit="w"></span>, <span data-digit="N"></span>
+            </div>
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="html-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="html-js" data-format="js"></pre>
+
+
+        <hr />
+        <h3>Progress bar renderer</h3>
+        <p>Only works with a timer device, with a milestone after the current moment. Customizable with CSS.</p>
+
+        <div id="progressbar-html">
+          <h4>"elapsed" mode:</h4>
+          <div id="progressbar" class="w3f-progressbar">
+            <!-- optional: display the digits -->
+            <div class="mycaption">
+              <span data-digit="y_"></span> years, <span data-digit="n_"></span> months, 
+              <span data-digit="d_"></span> days
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span> 
+              <span data-digit="m"></span>
+            </div>
+          </div>
+
+          <h4>"remaining" mode:</h4>
+          <div id="progressbar2" class="w3f-progressbar">
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="progressbar-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="progressbar-js" data-format="js"></pre>
+
+
+        <hr />
+        <h3>Analog renderer</h3>
+        <p>Displays a clock face with hours, minutes and senconds. Customizable with CSS.</p>
+
+        <div id="analog-html">
+          <div id="analog" style="width: 400px; height: 400px;">
+            <!-- optional: display the digits -->
+            <div style="text-align: center;">
+              <span data-digit="d_"></span>/<span data-digit="n_"></span>/<span data-digit="y_"></span>
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span> 
+              <span data-digit="m"></span>
+            </div>
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="analog-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="analog-js" data-format="js"></pre>
+
+        <h4>CSS:</h4>
+        <p>To customize the clock face, you can override it with CSS. Example:</p>
+        <pre class="code" data-format="css">
+.w3f-analog-face {
+  background-image: url('../assets/analog-face-2.svg');
+}</pre>
+
+        <hr />
+        <h3>Polar renderer</h3>
+        <p>Supports digits for months, days, hours, minutes, senconds, and milliseconds. Customizable with CSS.</p>
+
+        <div id="polar-html">
+          <div id="polar" style="width: 400px;">
+            <!-- optional: display the digits -->
+            <div style="text-align: center;">
+              <span data-digit="d_"></span>/<span data-digit="n_"></span>/<span data-digit="y_"></span>
+              <span data-digit="h"></span>:<span data-digit="i"></span>:<span data-digit="s"></span> 
+              <span data-digit="m"></span>
+            </div>
+          </div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="polar-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="polar-js" data-format="js"></pre>
+
+        <h4>CSS:</h4>
+        <p>To customize the polar clock components, you can override them with CSS. Example:</p>
+        <pre class="code" data-format="css">
+.w3f-polar-face{background-color: #000;}
+.w3f-polar-face .n{stroke: #acc;}
+.w3f-polar-face .d{stroke: #abc;}
+.w3f-polar-face .H{stroke: #aba;}
+.w3f-polar-face .h{stroke: #aca;}
+.w3f-polar-face .i{stroke: #cba;}
+.w3f-polar-face .s{stroke: #caa;}
+.w3f-polar-face .m{stroke: #cab;}</pre>
+
+        <hr />
+        <h3>Custom renderer</h3>
+        <p></p>
+        <div id="custom-html">
+          <div id="custom"></div>
+        </div>
+
+        <h4>HTML:</h4>
+        <pre class="code" data-src="custom-html" data-format="html"></pre>
+
+        <h4>Javascript:</h4>
+        <pre class="code" data-src="custom-js" data-format="js"></pre>
+      </div>
+    </main>
+
+
+    <script id="html-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        document.getElementById('html').W3FClockTimer({
+          step: 50,
+          renderer: {
+            type: 'html'
+          }
+        });
+
+      });
+    </script>
+
+    <script id="progressbar-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        var progressbar = document.getElementById('progressbar');
+        progressbar.W3FClockTimer({
+          step: 50,
+          device: {
+            type: 'timer',
+            deadline: W3FCT.fn.dt.stampFromOffset(10)
+          },
+          renderer: {
+            type: 'progressbar',
+            mode: 'elapsed'
+          },
+          bind: {
+            //We need the most accurate method to check if the deadline is reached
+            deadline: function (device) {
+              //progressbar.progress is a shorthand to alter its attributes
+              progressbar.progress.style.backgroundColor = '#a00';
+              device.core.stop();
+            }
+          }
+        });
+
+        var progressbar2 = document.getElementById('progressbar2');
+        progressbar2.W3FClockTimer({
+          step: 50,
+          device: {
+            type: 'timer',
+            deadline: W3FCT.fn.dt.stampFromOffset(10)
+          },
+          renderer: {
+            type: 'progressbar',
+            mode: 'remaining'
+          },
+          bind: {
+            deadline: function (device) {
+              progressbar.progress.style.backgroundColor = '#a00';
+              device.core.stop();
+            }
+          }
+        });
+
+      });
+    </script>
+
+    <script id="analog-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        document.getElementById('analog').W3FClockTimer({
+          step: 50,
+          renderer: {
+            type: 'analog'
+          }
+        });
+
+      });
+    </script>
+
+    <script id="polar-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        document.getElementById('polar').W3FClockTimer({
+          step: 10,
+          renderer: {
+            type: 'polar',
+            //defaults:
+            //size: 400, // the clock size, in pixels
+            //arcs: 'msiHhdn', //the digits that will be rendered as arcs
+            //stroke: 10, //the line width, in pixels
+            //spacing: 10,  //the line spacing, in pixels
+            //endings: 'butt', //line endings: butt, round or square
+            dashes: '' //draws arcs with a dahsed pattern (e.g.: '20,10,5,10')
+          }
+        });
+
+      });
+    </script>
+
+    <script id="custom-js">
+      document.addEventListener("DOMContentLoaded", function (event) { //you can omit this handler
+
+        //Extend the renderers repository with your custom renderer
+        W3FCT.renderers.myCustomRenderer = function (target, cfg) {
+          //a good practice to avoid context overlapping
+          var self = this;
+
+          //This is how you define the default parameters.
+          //From now on, you must use <i>settings</i> to get the renderer parameters
+          var settings = W3FCT.fn.obj.merge({height: 300, bars: 'msihdn'}, cfg.renderer);
+
+          self.bars = {};
+
+          self.init = function () {
+            //create a container for the clock
+            var clock = document.createElement('div');
+            clock.style.height = settings.height + 'px';
+
+            //insert some elements to display the values
+            var barsdef = settings.bars;
+            var bar_height = settings.height / barsdef.length;
+
+            for (var i = 0; i < barsdef.length; i++) {
+              var key = barsdef[i];
+              var b = document.createElement('div');
+
+              b.classList.add(key);//just a reference to the bar
+              b.style.height = bar_height + 'px';
+              b.style.marginTop = '2px';
+              b.style.backgroundColor = '#ccc';
+              b.style.width = '0%';
+              self.bars[key] = b;
+
+              var t = document.createElement('span');
+              t.setAttribute('data-digit', key);
+              t.style.marginLeft = '2px';
+              b.appendChild(t);
+
+              clock.appendChild(b);
+            }
+
+            target.prepend(clock);
+
+            //Get the digit placeholders
+            self.digits = W3FCT.fn.dom.getDigitPlaceholders(target);
+          };
+
+          self.render = function (values) {
+            W3FCT.fn.dom.setDigits(self.digits, values);
+
+            for (var k in self.bars) {
+              var width = widths[k](values);
+              self.bars[k].style.width = width + '%';
+            }
+          };
+
+          var widths = {
+            n: function (vs) {
+              return vs.n_ * 8.333;
+            },
+            d: function (vs) {
+              return vs.d_ * 3.225;
+            },
+            h: function (vs) {
+              return (vs.h_) * 1.666;
+            },
+            i: function (vs) {
+              return (vs.i_) * 1.666;
+            },
+            s: function (vs) {
+              return (vs.s_) * 1.666;
+            },
+            m: function (vs) {
+              return vs.m_ * 0.1;
+            }
+          };
+
+        };
+
+        //create the clock
+        document.getElementById('custom').W3FClockTimer({
+          step: 50,
+          renderer: {
+            type: 'myCustomRenderer',
+            height: 400
+          }
+        });
+
+      });
+    </script>
+  </body>
+</html>

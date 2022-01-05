@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Digits</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Digits</h2>
+
+        <h3>About digits</h3>
+
+        <p>
+          W3FClockTimer separates every instant in digits. This allows you to get or display every date component independently.
+        </p>
+        <p>
+          A formatted value is returned by default. Appending the underscore (_), yo'll get the numeric representation. <br />
+          For instance, when <span class="code">d</span> returns <span class="code">"13"</span>, <span class="code">d_</span> returns <span class="code">13</span>.
+        </p>
+
+        <table class="sheet">
+          <thead>
+            <tr>
+              <th>Digit</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>y, y_</td><td>Year</td></tr>
+            <tr><td>n, n_</td><td>Month number (1 to 12)</td></tr>
+            <tr><td>d, d_</td><td>Day number (1 to 28, 29, 30 or 31)</td></tr>
+            <tr><td>h, h_</td><td>Hour, in 24-hour format</td></tr>
+            <tr><td>H, H_</td><td>Hour, in 12-hour format</td></tr>
+            <tr><td>a</td><td>A.M. or P.M.</td></tr>
+            <tr><td>i, i_</td><td>Minutes (0 to 59)</td></tr>
+            <tr><td>s, s_</td><td>Seconds (0 to 59)</td></tr>
+            <tr><td>m, m_</td><td>Milliseconds (0 to 999)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

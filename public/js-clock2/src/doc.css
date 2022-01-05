@@ -1,0 +1,31 @@
+/*
+* Documentation
+*/
+
+body{font-family: 'Arial',sans-serif; background-color: #333; margin: 0;}
+h3{margin-top: 40px;}
+a{text-decoration: none;}
+a:hover{text-decoration: underline;}
+
+header,main,footer{margin: 0; padding: 0;}
+header {padding: 20px 10px; background: #333 url('../assets/icon.png') right top no-repeat; color: #fff;}
+header ul{padding: 0;}
+header ul li{display: inline-block; padding-right: 10px;}
+header a{font-weight: bold; color: #fcf0f0;}
+
+main{padding: 10px 10px 100px 10px; background-color: #fff;}
+.page{width: 970px; margin: 0 auto;}
+@media screen and (max-width: 980px) {
+  .page{width:100%;}
+}
+
+
+table.sheet{border-collapse: collapse;}
+table.sheet th,table.sheet td{text-align: left; border:1px solid #ccc;padding: 4px 6px;}
+table.compare{width: 100%;}
+table.compare td{padding: 20px; width: 50%; vertical-align: top;}
+
+.code{font-family: "Courier New", Courier, monospace; padding: 4px; color: #555; background-color: #f0f0f0;}
+.code.s, .code .s{color: #900;}
+.code.n, .code .n{color: #00a;}
+.code.c, .code .c{color: #888; font-style: italic;}

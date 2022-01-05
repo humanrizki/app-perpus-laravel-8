@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>W3Flints ClockTimer - Languages</title>
+    <link rel="stylesheet" href="src/w3fclocktimer.css" />
+    <link rel="stylesheet" href="src/doc.css" />
+    <link rel="stylesheet" href="src/examples.css" />
+    <script src="src/w3fclocktimer.js"></script>
+    <script src="src/doc.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page">
+        <h1>W3Flints Clock-Timer</h1>
+        <ul>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="devices_clock.html">Devices</a></li>
+          <li><a href="renderers.html">Renderers</a></li>
+          <li><a href="digits.html">Digits</a></li>
+          <li><a href="languages.html">Languages</a></li>
+          <li><a href="milestones_and_bindings.html">Milestones and bindings</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+
+        <h2>Languages</h2>
+
+        <h3>Create your own language</h3>
+
+        <p>
+          Creating a new language is very simple. This can be achieved adding a new entry to the <span class="code">W3FCT.lang</span> object.
+        </p>
+
+        <pre class="code" data-format="js">
+//add a new custom language
+W3FCT.lang.mySpanishLang = {
+  days: ['DOM', 'LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SÁB'],
+  months: ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SET', 'OCT', 'NOV', 'DIC'],
+  ampm: ['a.m.', 'p.m.']
+};
+
+//set your previously created custom language
+mytarget.W3FClockTimer({
+    lang: 'mySpanishLang',
+});</pre>
+      </div>
+    </main>
+  </body>
+</html>
