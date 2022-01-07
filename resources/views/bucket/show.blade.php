@@ -11,5 +11,5 @@
     
                 <livewire:user-bucket :bucket="$bucket"/>
             
-    
+                
 @endsection

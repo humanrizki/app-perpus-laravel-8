@@ -1,5 +1,5 @@
 <div>
-    {{-- In work, do what you enjoy. --}}
+    {{-- Do your work, then step back. --}}
     <div class="w-4/5 mx-auto my-3">
         <div class="action flex">
             <div class="relative text-gray-600 focus-within:text-gray-400">
@@ -37,16 +37,16 @@
                                     <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Name
                                     </th>
-                                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    {{-- <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Total Book
-                                    </th>
+                                    </th> --}}
                                     <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($collections as $item)
+                                @foreach ($buckets as $item)
     
                                 <!-- Product 1 -->
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -54,17 +54,21 @@
                                         {{ $loop->iteration }}
                                     </td>
                                     <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                        {{ $item->name }}
+                                        {{ $item->book->title }}
                                     </td>
-                                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{-- <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                         {{ $item->books->count() }}
-                                    </td>
+                                    </td> --}}
                                     <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400 ">
                                         <div class="row-action flex">
-
-                                        <a href="/collections/{{ $item->slug }}" class="text-gray-900 hover:text-white p-2 rounded hover:bg-blue-600 dark:text-blue-500 dark:hover:underline "><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></a>
-                                    </div>
-
+                                            <a href="/bucket/{{ $item->slug }}" class="text-gray-900 hover:text-white p-2 rounded hover:bg-blue-600 dark:text-blue-500 dark:hover:underline mr-5"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></a>
+                                            <a href="/bucket/{{ $item->id }}"></a>
+                                            <form action="/bucket/{{ $item->id }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="text-red-600 p-2 hover:text-white hover:bg-red-600 rounded"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg></button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -75,7 +79,7 @@
             </div>
         </div>
         @if ($paginate)
-            {{ $collections->links() }}
+            {{ $buckets->links() }}
         @endif
     </div>
 </div>

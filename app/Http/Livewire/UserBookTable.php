@@ -8,12 +8,22 @@ use Mediconesystems\LivewireDatatables\NumberColumn;
 class UserBookTable extends LivewireDatatable
 {
     public $model = Book::class;
+    public $ids;
     public function builder(){
-        return Book::query()
-        ->leftJoin('categories','books.category_id','categories.id')
-        ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
-        ->leftJoin('bookcases','books.bookcase_id','bookcases.id')
-        ->leftJoin('admins','books.admin_id','admins.id');
+        if($this->ids){
+            return Book::query()
+            ->leftJoin('categories','books.category_id','categories.id')
+            ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
+            ->leftJoin('bookcases','books.bookcase_id','bookcases.id')
+            ->leftJoin('admins','books.admin_id','admins.id')
+            ->where('books.collection_book_id','=',$this->ids);
+        } else {
+            return Book::query()
+            ->leftJoin('categories','books.category_id','categories.id')
+            ->leftJoin('collection_books','books.collection_book_id','collection_books.id')
+            ->leftJoin('bookcases','books.bookcase_id','bookcases.id')
+            ->leftJoin('admins','books.admin_id','admins.id');
+        }
     }
 
     public function columns()

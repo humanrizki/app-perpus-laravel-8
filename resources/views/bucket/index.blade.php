@@ -1,74 +1,61 @@
 @extends('layouts.capp')
 @section('content')
-<div class="container my-3">
-    @if (session()->has('destroyRow'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('destroyRow') }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+@if (session()->has('destroyRow'))
+    <div class="xl:container w-4/5 mx-auto mt-3">
+        <div class="grid grid-cols-12">
+            <div class="col-span-12">
+                <div id="alert-5" class="flex p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <div class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {{ session('destroyRow') }}
+                    </div>
+                    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex h-8 w-8 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white" data-collapse-toggle="alert-5" aria-label="Close">
+                      <span class="sr-only">Dismiss</span>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                  </div>
+            </div>
         </div>
+    </div>
     @elseif(session()->has('addToLoan'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('addToLoan') }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    @if ($detail_book->count() != 0)
-    <table class="table">
-        <thead>
-            <tr>
-                <td>No</td>
-                <td>Image</td>
-                <td>Title</td>
-                <td>Admin</td>
-                <td>Action</td>
-            </tr>
-        </thead>
-        <tbody>
-            
-        @foreach ($detail_book as $bucket)
-        <tr>
-            <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-            <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $bucket->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
-            <td style="vertical-align: middle;">{{ $bucket->book->title }}</td>
-            <td style="vertical-align: middle;">{{ $bucket->book->admin->name }}</td>
-            <td style="vertical-align: middle;">
-                @if ($bucket->is_loan == true)
-                <a href="/lists/{{ $bucket->book->slug }}" class="btn btn-primary"><i class="fas fa-bars"></i></a>
-                @else
-                <a href="/bucket/{{ $bucket->slug }}" class="btn btn-primary mb-1"><i class="fas fa-money-bill"></i></a>
-                <form action="/bucket/{{ $bucket->id }}" method="POST">
-                    @method('delete')
-                    @csrf
-                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                </form>
-                @endif
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-        @else
-        <div class="w-4/5 mx-auto">
-            <h3>Data masih kosong sahabat!</h3>
-            <hr>
-            <div class="">
-                <div class="col-md-4">
-                    <img src="/img/clipboard1.png" alt="" style="width: 100%;">
+    <div class="xl:container w-4/5 mx-auto mt-3">
+        <div class="grid grid-cols-12">
+
+            <div class="col-span-12">
+                <div id="alert-1" class="flex p-4 mb-4 bg-blue-100 rounded-lg dark:bg-blue-200" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <div class="ml-3 text-sm font-medium text-blue-700 dark:text-blue-800">
+                        {{ session('addToLoan') }}
+                    </div>
+                    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8 dark:bg-blue-200 dark:text-blue-600 dark:hover:bg-blue-300" data-collapse-toggle="alert-1" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
                 </div>
-                <div class="col-md-8">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <p class="card-text">
-                                Kamu dapat memesan / meminjam buku melalui link lists atau collections. Pastikan setelah pinjam, kamu melakukan transaksi untuk memberi tahu admin agar kamu diberikan kartu peminjaman dari perpus untuk dibawa pulan dalam jangka yang sudah kamu tentukan serta kembalikan buku dalam keadaan seperti awal kamu meminjam dengan membayarkan denda.
-                            </p>
-                            <div class="d-flex align-items-end justify-content-end" style="height: 100px">
-                                <a class="btn btn-primary" href="/lists">Tambah data</a>
-                            </div>
+            </div>
+        </div>
+    </div>
+@endif
+    
+    @if ($detail_book->count() != 0)
+        <livewire:user-bucket-table/>
+    @else 
+        <div class="xl:container w-4/5 mx-auto my-3">
+            <div class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
+                <h5 class="text-2xl font-medium text-gray-900 mb-1">Data masih kosong sahabat!</h5><hr>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12">
+                        <img src="/img/clipboard1.png" alt="">
+                    </div>
+                    <div class="xl:col-span-8 lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12 my-auto">
+                        <div class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md">
+                            <p class="text-base font-medium">Data masih kosong, harap meminjam buku terlebih dahulu dan kembali melakukan aksi untuk peminjaman mulai dari menaruh kedalam bucket, konfirmasi dari bucket dan transaksi kesekolah!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endif
-    </table>
-</div>
+    @endif
+
+    
 @endsection

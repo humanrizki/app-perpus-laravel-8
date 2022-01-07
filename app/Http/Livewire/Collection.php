@@ -5,8 +5,10 @@ namespace App\Http\Livewire;
 use App\Models\CollectionBook;
 use Livewire\Component;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Livewire\WithPagination;
 class Collection extends Component
 {
+    use WithPagination;
     public $collection;
     public $slug;
     public $updateField = false;
@@ -14,13 +16,23 @@ class Collection extends Component
     public $title;
     public $search;
     public $limitPerPage;
+    public $paginate = false;
     protected $queryString = ['search'=>['except'=>'']];
+    protected $paginationTheme = 'tailwind';
     public function render()
     {
-        
+        if($this->limitPerPage == 'all'){
+            $this->paginate = false;
+        } else {
+            $this->paginate = true;
+        }
         $collections = ($this->limitPerPage == 'all') ? CollectionBook::latest()->get() : CollectionBook::latest()->paginate($this->limitPerPage);
         if($this->search != null){
-            $collections = CollectionBook::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            if($this->limitPerPage == 'all'){
+                $collections = CollectionBook::where('name','like','%'.$this->search.'%')->latest()->get();
+            } else {
+                $collections = CollectionBook::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            }
         }
         
         return view('livewire.collection',['collections'=>$collections]);

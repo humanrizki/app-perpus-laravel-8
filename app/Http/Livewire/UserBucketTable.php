@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\CollectionBook;
+use App\Models\Book;
+use App\Models\Bucket;
 use Livewire\Component;
 use Livewire\WithPagination;
-class UserCollectionsTable extends Component
+class UserBucketTable extends Component
 {
     use WithPagination;
     public $search;
@@ -20,17 +21,17 @@ class UserCollectionsTable extends Component
         } else {
             $this->paginate = true;
         }
-        $collections = ($this->limitPerPage == 'all') ? CollectionBook::latest()->get() : CollectionBook::latest()->paginate($this->limitPerPage);
+        $buckets = ($this->limitPerPage == 'all') ? Bucket::latest()->get() : Bucket::latest()->paginate($this->limitPerPage);
         if($this->search != null){
             if($this->limitPerPage == 'all'){
-                $collections = CollectionBook::where('name','like','%'.$this->search.'%')->latest()->get();
+
+                $buckets = Bucket::whereIn('book_id',Book::where('title','like','%'.$this->search.'%')->get()->pluck('id'))->latest()->get();
             } else {
-                $collections = CollectionBook::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+                $buckets = Bucket::whereIn('book_id',Book::where('title','like','%'.$this->search.'%')->get()->pluck('id'))->latest()->paginate($this->limitPerPage);
             }
         }
-        
-        return view('livewire.user-collections-table',[
-            'collections'=>$collections
+        return view('livewire.user-bucket-table',[
+            'buckets'=>$buckets
         ]);
     }
 }

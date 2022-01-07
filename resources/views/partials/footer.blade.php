@@ -27,6 +27,9 @@
             Laravel
         </a>
         <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+            Laravel Permission Spatie
+        </a>
+        <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
             Livewire
         </a>
         <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">

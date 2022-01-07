@@ -1,0 +1,27 @@
+entity book{
+
+}
+entity collection{
+
+}
+entity category{
+
+}
+entity bucket{
+
+}
+entity loan{
+
+}
+entity transaction{
+
+}
+entity user{
+
+}
+entity admin{
+
+}
+admin ||--o{ book
+book }o--|| collection
+book }o--|| category

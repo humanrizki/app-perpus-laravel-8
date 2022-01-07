@@ -6,9 +6,11 @@ use Livewire\Component;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use App\Models\Category as Categories;
+use Livewire\WithPagination;
 
 class Category extends Component
 {
+    use WithPagination;
     public $category;
     public $slug;
     public $updateField = false;
@@ -16,12 +18,23 @@ class Category extends Component
     public $title;
     public $search;
     public $limitPerPage;
+    public $paginate = false;
     protected $queryString = ['search'=>['except'=>'']];
+    protected $paginationTheme = 'tailwind';
     public function render()
     {
+        if($this->limitPerPage == 'all'){
+            $this->paginate = false;
+        } else {
+            $this->paginate = true;
+        }
         $categories = ($this->limitPerPage == 'all') ? Categories::latest()->get() : Categories::latest()->paginate($this->limitPerPage);  
         if($this->search != null){
-            $categories = Categories::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            if($this->limitPerPage == 'all'){
+                $categories = Categories::where('name','like','%'.$this->search.'%')->latest()->get();
+            } else {
+                $categories = Categories::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            }
         }
         return view('livewire.category', ['categories'=>$categories]);
     }

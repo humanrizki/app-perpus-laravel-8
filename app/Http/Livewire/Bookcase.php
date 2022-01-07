@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\Bookcase as ModelsBookcase;
 use Livewire\Component;
-
+use Livewire\WithPagination;
 class Bookcase extends Component
 {
-    
+    use WithPagination;
     public $bookcase;
     public $location_bookcase;
     public $updateField = false;
@@ -15,12 +15,23 @@ class Bookcase extends Component
     public $title;
     public $search;
     public $limitPerPage;
+    public $paginate = false;
     protected $queryString = ['search'=>['except'=>'']];
+    protected $paginationTheme = 'tailwind';
     public function render()
     {
+        if($this->limitPerPage == 'all'){
+            $this->paginate = false;
+        } else {
+            $this->paginate = true;
+        }
         $bookcases = ($this->limitPerPage == 'all') ? ModelsBookcase::latest()->get() : ModelsBookcase::latest()->paginate($this->limitPerPage);  
         if($this->search != null){
-            $bookcases = ModelsBookcase::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            if($this->limitPerPage == 'all'){
+                $bookcases = ModelsBookcase::where('name','like','%'.$this->search.'%')->latest()->get(); 
+            } else {
+                $bookcases = ModelsBookcase::where('name','like','%'.$this->search.'%')->latest()->paginate($this->limitPerPage);
+            }
         }
         return view('livewire.bookcase', ['bookcases'=>$bookcases]);
     }

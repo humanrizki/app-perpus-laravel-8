@@ -11,8 +11,8 @@
         <option value="50" >50</option>
         <option value="all" >all</option>
     </select>
-    <div class="container flex justify-center mx-auto mt-2 shadow-gray-600">
-        <div class="flex flex-col ">
+    <div class="container mx-auto mt-2 shadow-gray-600">
+        <div class="flex flex-col my-2">
             <div class="w-full overflow-auto">
                 <div class="border-b border-gray-200 ">
                     <table class="table-fixed w-full ">
@@ -48,6 +48,9 @@
                 </div>
             </div>
         </div>
+        @if ($paginate)
+        {{ $categories->links() }}
+        @endif
     </div>
     
    

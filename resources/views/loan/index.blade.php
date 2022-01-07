@@ -1,79 +1,43 @@
 @extends('layouts.capp')
 @section('content')
-    <div class="container my-3">
         @if (session()->has('deleteLoan'))
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <h5 class=" m-0"> <i class="bi bi-check-circle-fill"></i>{{ session('deleteLoan') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="w-4/5 mx-auto my-3">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12">
+                    <div id="alert-5" class="flex p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
+                        <svg class="flex-shrink-0 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        <div class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {{ session('deleteLoan') }}
+                        </div>
+                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex h-8 w-8 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white" data-collapse-toggle="alert-5" aria-label="Close">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
         @endif
         @if ($loans->count() == 0)
-        <div class="alert border">
-            <h3>Data masih kosong sahabat!</h3>
-            <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="/img/clipboard1.png" alt="" style="width: 100%;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <p class="card-text">
-                                Kamu dapat memesan / meminjam buku melalui link lists atau collections. Pastikan setelah pinjam, kamu melakukan transaksi untuk memberi tahu admin agar kamu diberikan kartu peminjaman dari perpus untuk dibawa pulan dalam jangka yang sudah kamu tentukan serta kembalikan buku dalam keadaan seperti awal kamu meminjam dengan membayarkan denda.
-                            </p>
-                            <div class="d-flex align-items-end justify-content-end" style="height: 100px">
-                                <a class="btn btn-primary" href="/lists">Tambah data</a>
-                            </div>
+        <div class=" w-4/5 mx-auto my-3">
+            <div class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
+                <h5 class="text-2xl font-medium text-gray-900 mb-1">Data masih kosong sahabat!</h5><hr>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12">
+                        <img src="/img/clipboard1.png" alt="">
+                    </div>
+                    <div class="xl:col-span-8 lg:col-span-8 md:col-span-8 sm:col-span-12 col-span-12 my-auto">
+                        <div class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md">
+                            <p class="text-base font-medium">Data masih kosong, harap meminjam buku terlebih dahulu dan kembali melakukan aksi untuk peminjaman mulai dari menaruh kedalam bucket, konfirmasi dari bucket dan transaksi kesekolah!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         @else 
-        <div class="tabledata" style="overflow-x: auto;">
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>Image</td>
-                    <td>Judul</td>
-                    <td>Durasi Pinjam</td>
-                    <td>Status</td>
-                    <td>Denda</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($loans as $loan)
-                    
-                    <tr>
-                        <td style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                        <td style="vertical-align: middle;" class="w-25"><img src="/storage/{{ $loan->book->image }}" alt="" class="img-responsive img-thumbnail w-100"></td>
-                        <td style="vertical-align: middle;">{{ $loan->book->title }}</td>
-                        <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($loan->return_date)->locale('id_ID')->diffForHumans(\Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'),[
-                            'parts'=>4,
-                            'join'=>true,
-                            'short'=>true,
-                            'syntax'=>\Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW,
-                            'options'=>\Carbon\Carbon::JUST_NOW | \Carbon\Carbon::ONE_DAY_WORDS | \Carbon\Carbon::TWO_DAY_WORDS
-                        ]) }}</td>
-                        <td style="vertical-align: middle;">{{ $loan->status }}</td>
-                        <td style="vertical-align: middle;">Rp.{{ $loan->toKilo($loan->forfeit) }}</td>
-                        <td style="vertical-align: middle;">
-                                <a href="/loan/{{ $loan->slug }}" class="btn btn-primary"><i class='bi bi-eye-fill text-white'></i></a>
-                            </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class=" w-4/5 mx-auto my-3">
+            <livewire:user-loan-report-table/>
         </div>
-
         @endif
 
-    </div>
 @endsection

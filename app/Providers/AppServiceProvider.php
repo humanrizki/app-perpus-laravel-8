@@ -29,10 +29,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         
-        Paginator::defaultView('vendor.pagination.default');
-        Paginator::defaultSimpleView('vendor.pagination.simple-default');
-        Gate::define('add-book',function(Admin $admin){
-            return $admin->can('add-book');
-        });
+        // Paginator::defaultView('vendor.pagination.default');
+        // Paginator::defaultSimpleView('vendor.pagination.simple-default');
+        Paginator::useTailwind();
+        // Gate::define('add-book',function(Admin $admin){
+        //     return $admin->can('add-book');
+        // });
     }
 }
