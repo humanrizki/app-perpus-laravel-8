@@ -54,7 +54,7 @@ class DashboardLoans extends Controller
             'nominal'=>'required|numeric',
             'day_of_payment'=>'required|date_format:Y-m-d',
         ])->validate();
-        if(Carbon::parse($validatedData['day_of_payment']) <= Carbon::parse($loanReport->return_date)){
+        if(Carbon::parse($validatedData['day_of_payment'])->lessThan(Carbon::parse($loanReport->return_date)) && Carbon::parse($validatedData['day_of_payment'])->greaterThan(Carbon::parse($loanReport->loan_date))){
             $loanReport->update([
                 'status'=>'borrow'
             ]);
@@ -67,8 +67,8 @@ class DashboardLoans extends Controller
                 'slug'=>Uuid::uuid()
             ]);
             return redirect("/dashboard/loans")->with('successAddToTransaction','Data berhasil untuk dimasukkan kedalam transaksi untuk buku '. $loanReport->book->title.'!');
-        } elseif(Carbon::parse($validatedData['day_of_payment']) >= Carbon::parse($loanReport->return_date)) {
-            return redirect("/dashboard/loans/{$loanReport->slug}")->with('errorToTransaction','Data gagal untuk dimasukkan kedalam transaksi untuk buku '. $loanReport->book->title.', karena tanggal pembayaran lebih dari tanggal pengembalian!');
+        } else{
+            return redirect("/dashboard/loans/{$loanReport->slug}")->with('errorToTransaction','Data gagal untuk dimasukkan kedalam transaksi untuk buku '. $loanReport->book->title.', karena tanggal pembayaran lebih dari tanggal pengembalian atau tanggal pembayaran kurang dari tanggal peminjaman!');
         }
         
     }

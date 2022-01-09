@@ -64,6 +64,13 @@
                                 @else
                                 <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="nominal" name="nominal">
                                 @endif
+                                @error('nominal')
+                                    <p class="text-sm font-medium text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="return_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tanggal peminjaman!</label>
+                                <input type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly value="{{ $loan->loan_date }}">
                             </div>
                             <div class="form-group">
                                 <label for="return_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tanggal pengembalian!</label>
@@ -76,7 +83,7 @@
                                     </div>
                                     <input datepicker datepicker-autohide datepicker-orientation="bottom right" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" name="day_of_payment" datepicker-format="yyyy-mm-dd">
                                 </div>
-                                <p class="p-0 m-0 text-sm font-medium text-sky-400">Nilai tanggal tidak boleh lebih dari hari pengembalian!</p>
+                                <p class="p-0 m-0 text-sm font-medium text-sky-400">Nilai tanggal tidak boleh lebih dari hari pengembalian atau kurang dari tanggal peminjaman!</p>
                             <div class="form-group mt-3">
                                 <button type="submit" class="p-2 rounded-md text-white bg-emerald-300 hover:shadow hover:bg-emerald-400 w-full">Submit</button>
                             </div>

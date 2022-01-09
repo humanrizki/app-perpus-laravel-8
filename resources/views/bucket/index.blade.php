@@ -1,7 +1,7 @@
 @extends('layouts.capp')
 @section('content')
 @if (session()->has('destroyRow'))
-    <div class="xl:container w-4/5 mx-auto mt-3">
+    <div class="w-4/5 mx-auto mt-3">
         <div class="grid grid-cols-12">
             <div class="col-span-12">
                 <div id="alert-5" class="flex p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
@@ -18,7 +18,7 @@
         </div>
     </div>
     @elseif(session()->has('addToLoan'))
-    <div class="xl:container w-4/5 mx-auto mt-3">
+    <div class="w-4/5 mx-auto mt-3">
         <div class="grid grid-cols-12">
 
             <div class="col-span-12">
@@ -40,7 +40,7 @@
     @if ($detail_book->count() != 0)
         <livewire:user-bucket-table/>
     @else 
-        <div class="xl:container w-4/5 mx-auto my-3">
+        <div class=" w-4/5 mx-auto my-3">
             <div class="block p-3 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
                 <h5 class="text-2xl font-medium text-gray-900 mb-1">Data masih kosong sahabat!</h5><hr>
                 <div class="grid grid-cols-12 gap-4">

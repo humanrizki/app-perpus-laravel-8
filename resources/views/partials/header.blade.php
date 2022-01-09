@@ -103,6 +103,9 @@
         <li>
           <a href="/transaction" class="block py-2 pr-4 pl-3 {{ (request()->is('transaction*')) ? 'bg-blue-700 md:bg-transparent md:text-blue-700 rounded text-white' : 'md:text-gray-700 sm:text-gray-700 sm:border-gray-100 hover:bg-gray-50 md:border-0 md:hover:bg-transparent' }}  md:p-0 dark:text-white" aria-current="page">Transactions</a>
         </li>
+        <li>
+          <a href="/return" class="block py-2 pr-4 pl-3 {{ (request()->is('return*')) ? 'bg-blue-700 md:bg-transparent md:text-blue-700 rounded text-white' : 'md:text-gray-700 sm:text-gray-700 sm:border-gray-100 hover:bg-gray-50 md:border-0 md:hover:bg-transparent' }}  md:p-0 dark:text-white" aria-current="page">Return</a>
+        </li>
         
       </ul>
       

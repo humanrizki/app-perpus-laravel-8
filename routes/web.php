@@ -15,7 +15,9 @@ use App\Http\Controllers\DashboardBooks;
 use App\Http\Controllers\DashboardCategory;
 use App\Http\Controllers\DashboardCollection;
 use App\Http\Controllers\DashboardLoans;
+use App\Http\Controllers\DashboardReturn;
 use App\Http\Controllers\DashboardTransaction;
+use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +59,7 @@ Route::post('/login',[UserLoginController::class,'login']);
 Route::post('/logout',[UserLoginController::class,'logout']);
 Route::get('/register',[UserRegisterController::class,'index'])->name('register');
 Route::post('/register',[UserRegisterController::class,'register']);
+Route::get('/return',[ReturnController::class,'index'])->name('return');
 Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
 Route::post('/admin/login',[AdminLoginController::class,'login']);
 Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
@@ -68,6 +71,7 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/agreements',[DashboardAgreement::class,'index']);
     Route::get('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'show']);
     Route::post('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'store']);
+    Route::get('/dashboard/returns',[DashboardReturn::class,'index']);
 });
 Route::get('/dashboard/books/checkSlug',[DashboardBooks::class,'checkSlug']);
 Route::resource('/dashboard/books',DashboardBooks::class)->middleware('adminguest:admin');

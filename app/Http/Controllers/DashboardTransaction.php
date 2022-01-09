@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoanReport;
 use App\Models\ReturnReport;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -26,7 +27,7 @@ class DashboardTransaction extends Controller
         ]);
     }
     public function store(Request $request, Transaction $transaction){
-        if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now()->hour >= 7){
+        if(Carbon::now('Asia/Jakarta')->hour <= 18 && Carbon::now()->hour >= 7){
             $stock = $transaction->loan_report->book->stock + 1;
             $transaction->loan_report->book->update([
                 'stock'=>$stock
@@ -45,7 +46,9 @@ class DashboardTransaction extends Controller
                 'user_id'=>$transaction->loan_report->user_id,
                 'admin_id'=>$transaction->admin_id,
             ]);
-            dd('berhasil');
+            LoanReport::destroy($transaction->loan_report->id);
+            Transaction::destroy($transaction->id);
+            return redirect('/dashboard/transactions')->with('successToReturn','Sukses menyelesaikan transaksi, dan sudah dimasukkan dalam report return!');
         } else {
             return redirect('/dashboard/transactions/'.$transaction->slug)->with('errorToReturn','Tidak bisa mengatur pengembalian dikarenakan jam operasional habis!');
         }

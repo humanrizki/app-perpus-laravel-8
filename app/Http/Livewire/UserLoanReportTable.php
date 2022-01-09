@@ -40,6 +40,9 @@ class UserLoanReportTable extends LivewireDatatable
             Column::name('status')
             ->label('Status')
             ->searchable(),
+            Column::name('type')
+            ->label('Type')
+            ->searchable(),
             Column::callback('slug',function($slug){
                 return "<a href='/loan/".$slug."' class='m-2 d-inline'><i class='bi bi-eye-fill text-primary'></i></a>";
             })

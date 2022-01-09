@@ -9,7 +9,7 @@
         </div>
     @endif
     
-                <livewire:user-bucket :bucket="$bucket"/>
+    <livewire:user-bucket :bucket="$bucket"/>
             
                 
 @endsection

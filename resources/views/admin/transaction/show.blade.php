@@ -46,7 +46,67 @@
     <div class="col-md-8 offset-md-2 mt-2">
         <div class="card hover:shadow-lg">
             <div class="card-body">
-                
+                <div class="flex  mx-auto flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 w-full mx-auto">
+                        <div class="inline-block py-2 min-w-full  sm:px-6 lg:px-8">
+                            <div class="overflow-hidden shadow-md sm:rounded-lg">
+                                <table class="min-w-full">
+                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                        <tr>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Date of payment
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Cost
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Nominal
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Change
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Type payment
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Loan date
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Return date
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Product 1 -->
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ \Carbon\Carbon::parse($transaction->day_of_payment)->format('d F Y') }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ $transaction->cost }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ $transaction->nominal }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ $transaction->nominal - $transaction->cost }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ $transaction->loan_report->type }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ \Carbon\Carbon::parse($transaction->loan_report->loan_date)->format('d F Y') }}
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-900 font-medium whitespace-nowrap dark:text-gray-400">
+                                                {{ \Carbon\Carbon::parse($transaction->loan_report->return_date)->format('d F Y') }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

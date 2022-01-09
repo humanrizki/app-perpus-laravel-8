@@ -19,6 +19,9 @@ class TransactionController extends Controller
         ]);
     }
     public function show(Transaction $transaction){
-        dd($transaction);
+        return view('transaction.show',[
+            'title'=>'Detail transaction page user',
+            'transaction'=>$transaction
+        ]);
     }
 }
