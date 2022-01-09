@@ -51,8 +51,10 @@ class UserBucket extends Component
                 $details = [
                     'title'=>'Mail from Library CN',
                     'body'=>'Salah satu murid anda bernama '.auth()->user()->name." request untuk meminjam buku dengan metode pembayaran menggunakan uang kas.\n Apakah anda setuju?",
-                    'link'=>route('bucket')
+                    'link'=>''
                 ];
+                $slug = Uuid::uuid();
+                $details['link'] = url('/dashboard/agreements/'.$slug);
                 Mail::to($admin->email)->send(new HomeroomMail($details));
                 $stock = $this->bucket->book->stock -1;
                 $this->bucket->book->update([
@@ -68,12 +70,13 @@ class UserBucket extends Component
                     'slug'=>Uuid::uuid(),
                     'status'=>'pending'
                 ]);
+                
                 HomeroomMessage::create([
                     'loan_report_id'=>$loan->id,
                     'status'=>'pending',
                     'message'=>$details['body'],
                     'admin_id'=>$admin->id,
-                    'slug'=>Uuid::uuid()
+                    'slug'=>$slug
                 ]);
                 Bucket::destroy($this->bucket->id);
                 $this->resetFields();

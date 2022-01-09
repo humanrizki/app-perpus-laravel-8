@@ -20,7 +20,8 @@ class CreateTransactionsTable extends Migration
             $table->timestamp('day_of_payment');
             $table->integer('cost',false,true)->default(0);
             $table->integer('nominal',false,true);
-            $table->enum('status',['paid','return'])->default('paid');
+            $table->enum('status',['paid'])->default('paid');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

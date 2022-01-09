@@ -52,6 +52,7 @@ Route::put('/loan/{loan:slug}',[LoanController::class,'cancel']);
 Route::delete('/loan/{loan:slug}',[LoanController::class,'delete']);
 Route::get('/login',[UserLoginController::class,'index'])->name('login')->middleware('guest');
 Route::get('/transaction',[TransactionController::class,'index'])->name('transaction');
+Route::get('/transaction/{transaction:slug}',[TransactionController::class,'show']);
 Route::post('/login',[UserLoginController::class,'login']);
 Route::post('/logout',[UserLoginController::class,'logout']);
 Route::get('/register',[UserRegisterController::class,'index'])->name('register');
@@ -74,3 +75,5 @@ Route::get('/dashboard/loans',[DashboardLoans::class,'index'])->middleware('admi
 Route::get('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'show'])->middleware('adminguest:admin');
 Route::post('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'store'])->middleware('adminguest:admin');
 Route::get('/dashboard/transactions',[DashboardTransaction::class,'index'])->middleware('adminguest:admin');
+Route::get('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'show'])->middleware('adminguest:admin');
+Route::post('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'store'])->middleware('adminguest:admin');

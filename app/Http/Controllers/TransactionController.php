@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
-        $transaction = Transaction::whereIn('loan_report_id',LoanReport::where('user_id',auth()->user()->id)->pluck('id'))->get();
         return view('transaction.index',[
             'title'=>'Transaction page user',
-            'transactions'=>$transaction
         ]);
+    }
+    public function show(Transaction $transaction){
+        dd($transaction);
     }
 }

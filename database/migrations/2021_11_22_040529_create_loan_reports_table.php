@@ -19,7 +19,7 @@ class CreateLoanReportsTable extends Migration
             $table->date('return_date')->nullable();
             $table->integer('forfeit');
             $table->string('slug');
-            $table->enum('status',['request','cancell','borrow','pending'])->default('request');
+            $table->enum('status',['request','cancell','borrow','pending','done'])->default('request');
             $table->enum('type',['kas','tunai']);
             $table->foreignId('book_id');
             $table->foreignId('user_id');

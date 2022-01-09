@@ -48,7 +48,11 @@ class TransactionsTable extends LivewireDatatable
             ->label('Type'),
             Column::name('status')
             ->label('Status'),
-
+            Column::callback(['slug'],function($slug){
+                return "<div>
+                    <a href='/dashboard/transactions/{$slug}' ><i class='bi bi-eye-fill text-primary'></i></a>
+                </div>";
+            })->label('Action')
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\LoanReport;
 use App\Models\ReplyHomeroomMessage;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -63,7 +64,7 @@ class DashboardLoans extends Controller
                 'cost'=>$validatedData['cost'],
                 'nominal'=>$validatedData['nominal'],
                 'day_of_payment'=>$validatedData['day_of_payment'],
-                'slug_loan_report'=>$loanReport->slug
+                'slug'=>Uuid::uuid()
             ]);
             return redirect("/dashboard/loans")->with('successAddToTransaction','Data berhasil untuk dimasukkan kedalam transaksi untuk buku '. $loanReport->book->title.'!');
         } elseif(Carbon::parse($validatedData['day_of_payment']) >= Carbon::parse($loanReport->return_date)) {

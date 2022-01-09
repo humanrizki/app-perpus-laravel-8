@@ -16,4 +16,5 @@ class Transaction extends Model
     public function loan_report(){
         return $this->belongsTo(LoanReport::class);
     }
+    
 }

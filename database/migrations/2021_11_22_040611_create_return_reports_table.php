@@ -16,6 +16,14 @@ class CreateReturnReportsTable extends Migration
         Schema::create('return_reports', function (Blueprint $table) {
             $table->id();
             $table->timestamp('returned_date')->useCurrent(true);
+            $table->date('loan_date');
+            $table->date('date_of_payment');
+            $table->integer('cost');
+            $table->integer('nominal');
+            $table->integer('change');
+            $table->enum('type_payment',['kas','tunai']);
+            $table->enum('status',['not returned','done']);
+            $table->string('slug')->unique();
             $table->foreignId('book_id');
             $table->foreignId('admin_id');
             $table->foreignId('user_id');
