@@ -48,12 +48,18 @@
                 <i class="bi bi-card-checklist"></i>
                 <span>Transactions</span></a>
         </li>
-    @endif
+    @elseif(auth('admin')->user()->hasRole('homeroom'))
     <li class="nav-item {{ request()->is('dashboard/agreements*') ? 'active' : ''; }}"> 
         <a class="nav-link" href="/dashboard/agreements">
             <i class="fas fa-handshake"></i>
             <span>Agreement</span></a>
     </li>
+    <li class="nav-item {{ request()->is('dashboard/students*') ? 'active' : ''; }}"> 
+        <a class="nav-link" href="/dashboard/students">
+            <i class="fas fa-handshake"></i>
+            <span>Students</span></a>
+    </li>
+    @endif
 
 
     <!-- Divider -->

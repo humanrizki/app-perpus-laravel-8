@@ -44,23 +44,54 @@ class UserBucket extends Component
     }
     public function storeLoan(){
         $this->validate($this->rules());
-        if($this->type == 'kas'){
-            $admin = Admin::where('detail_class_department_id',auth()->user()->detail_class_department_id)->first();
-            if($admin){
+        if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now('Asia/Jakarta')->hour >= 7){
+            if($this->type == 'kas'){
+                $admin = Admin::where('detail_class_department_id',auth()->user()->detail_class_department_id)->first();
+                if($admin){
+                    $title = $this->bucket->book->title;
+                    $details = [
+                        'title'=>'Mail from Library CN',
+                        'body'=>'Salah satu murid anda bernama '.auth()->user()->name." request untuk meminjam buku dengan metode pembayaran menggunakan uang kas.\n Apakah anda setuju?",
+                        'link'=>''
+                    ];
+                    $slug = Uuid::uuid();
+                    $details['link'] = url('/dashboard/agreements');
+                    Mail::to($admin->email)->send(new HomeroomMail($details));
+                    $stock = $this->bucket->book->stock -1;
+                    $this->bucket->book->update([
+                        'stock'=>$stock
+                    ]);
+                    $loan = LoanReport::create([
+                        'loan_date'=>Carbon::parse($this->loan_date)->setTimeZone('Asia/Jakarta'),
+                        'return_date'=>Carbon::parse($this->return_date)->setTimezone('Asia/Jakarta'),
+                        'forfeit'=>$this->cost,
+                        'book_id'=>$this->bucket->book->id,
+                        'user_id'=>auth()->user()->id,
+                        'admin_id'=>$this->bucket->book->admin_id,
+                        'slug'=>Uuid::uuid(),
+                        'status'=>'pending'
+                    ]);
+                    
+                    HomeroomMessage::create([
+                        'loan_report_id'=>$loan->id,
+                        'status'=>'pending',
+                        'message'=>$details['body'],
+                        'admin_id'=>$admin->id,
+                        'slug'=>$slug
+                    ]);
+                    Bucket::destroy($this->bucket->id);
+                    $this->resetFields();
+                    return redirect()->route("bucket")->with('addToLoan','Data bucket berhasil ditambah ke peminjaman untuk buku '.$title.', tetapi anda harus menunggu sampai walas anda setuju dengan metode pembayaran uang kas!');
+                } else {
+                    return redirect("/bucket/{$this->bucket->slug}")->with('errorToLoan','Data dari kelas anda tidak memiliki wali kelas untuk sekarang, jadi anda hanya bisa untuk memakai metode tunai pribadi!');
+                }
+            } else {
                 $title = $this->bucket->book->title;
-                $details = [
-                    'title'=>'Mail from Library CN',
-                    'body'=>'Salah satu murid anda bernama '.auth()->user()->name." request untuk meminjam buku dengan metode pembayaran menggunakan uang kas.\n Apakah anda setuju?",
-                    'link'=>''
-                ];
-                $slug = Uuid::uuid();
-                $details['link'] = url('/dashboard/agreements/'.$slug);
-                Mail::to($admin->email)->send(new HomeroomMail($details));
                 $stock = $this->bucket->book->stock -1;
                 $this->bucket->book->update([
                     'stock'=>$stock
                 ]);
-                $loan = LoanReport::create([
+                LoanReport::create([
                     'loan_date'=>Carbon::parse($this->loan_date)->setTimeZone('Asia/Jakarta'),
                     'return_date'=>Carbon::parse($this->return_date)->setTimezone('Asia/Jakarta'),
                     'forfeit'=>$this->cost,
@@ -68,41 +99,15 @@ class UserBucket extends Component
                     'user_id'=>auth()->user()->id,
                     'admin_id'=>$this->bucket->book->admin_id,
                     'slug'=>Uuid::uuid(),
-                    'status'=>'pending'
-                ]);
-                
-                HomeroomMessage::create([
-                    'loan_report_id'=>$loan->id,
-                    'status'=>'pending',
-                    'message'=>$details['body'],
-                    'admin_id'=>$admin->id,
-                    'slug'=>$slug
+                    'type'=>'tunai'
                 ]);
                 Bucket::destroy($this->bucket->id);
                 $this->resetFields();
-                return redirect()->route("bucket")->with('addToLoan','Data bucket berhasil ditambah ke peminjaman untuk buku '.$title.', tetapi anda harus menunggu sampai walas anda setuju dengan metode pembayaran uang kas!');
-            } else {
-                return redirect("/bucket/{$this->bucket->slug}")->with('errorToLoan','Data dari kelas anda tidak memiliki wali kelas untuk sekarang, jadi anda hanya bisa untuk memakai metode tunai pribadi!');
+                return redirect()->route("bucket")->with('addToLoan','Data bucket berhasil ditambah ke peminjaman untuk buku '.$title.'!');
             }
         } else {
             $title = $this->bucket->book->title;
-            $stock = $this->bucket->book->stock -1;
-            $this->bucket->book->update([
-                'stock'=>$stock
-            ]);
-            LoanReport::create([
-                'loan_date'=>Carbon::parse($this->loan_date)->setTimeZone('Asia/Jakarta'),
-                'return_date'=>Carbon::parse($this->return_date)->setTimezone('Asia/Jakarta'),
-                'forfeit'=>$this->cost,
-                'book_id'=>$this->bucket->book->id,
-                'user_id'=>auth()->user()->id,
-                'admin_id'=>$this->bucket->book->admin_id,
-                'slug'=>Uuid::uuid(),
-                'type'=>'tunai'
-            ]);
-            Bucket::destroy($this->bucket->id);
-            $this->resetFields();
-            return redirect()->route("bucket")->with('addToLoan','Data bucket berhasil ditambah ke peminjaman untuk buku '.$title.'!');
+            return redirect('/bucket/'.$this->bucket->slug)->with('errorToLoan','Data bucket gagal ditambahkan ke peminjaman untuk buku '.$title.' karena jam operasional sudah habis!');
         }
     }
     public function resetFields(){

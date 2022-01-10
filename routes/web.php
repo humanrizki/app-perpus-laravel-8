@@ -16,10 +16,12 @@ use App\Http\Controllers\DashboardCategory;
 use App\Http\Controllers\DashboardCollection;
 use App\Http\Controllers\DashboardLoans;
 use App\Http\Controllers\DashboardReturn;
+use App\Http\Controllers\DashboardStudents;
 use App\Http\Controllers\DashboardTransaction;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,6 @@ Route::post('/profile/{user:username}/edit',[ProfileController::class,'update'])
 Route::get('/bucket',[BucketController::class,'index'])->name('bucket');
 Route::delete('/bucket/{bucket:id}',[BucketController::class,'destroy']);
 Route::get('/bucket/{bucket:slug}',[BucketController::class,'show']);
-Route::post('/bucket/{bucket:slug}',[BucketController::class,'store']);
 Route::get('/loan',[LoanController::class,'index'])->name('loan');
 Route::get('/loan/{loan:slug}',[LoanController::class,'show']);
 Route::put('/loan/{loan:slug}',[LoanController::class,'cancel']);
@@ -72,6 +73,7 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'show']);
     Route::post('/dashboard/agreements/{message:slug}',[DashboardAgreement::class,'store']);
     Route::get('/dashboard/returns',[DashboardReturn::class,'index']);
+    Route::get('/dashboard/students',[DashboardStudents::class,'index']);
 });
 Route::get('/dashboard/books/checkSlug',[DashboardBooks::class,'checkSlug']);
 Route::resource('/dashboard/books',DashboardBooks::class)->middleware('adminguest:admin');
