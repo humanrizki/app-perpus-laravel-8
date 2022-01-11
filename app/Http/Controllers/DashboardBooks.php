@@ -16,14 +16,6 @@ use Illuminate\Support\Facades\Auth;
 class DashboardBooks extends Controller
 {
     /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('adminguest:admin');
-
-    }
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

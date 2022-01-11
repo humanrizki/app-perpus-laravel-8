@@ -33,11 +33,11 @@ class HomeroomTable extends LivewireDatatable
             ->label('Book')
             ->searchable(),
 
-            // Column::callback(['loan_reports.user_id'],function($user_id){
-            //     return User::find($user_id)->name;
-            // })
-            // ->label('Student')
-            // ->searchable(),
+            Column::callback(['loan_reports.user_id'],function($user_id){
+                return User::find($user_id)->name;
+            })
+            ->label('Student')
+            ->searchable(),
 
             Column::name('loan_reports.forfeit')
             ->label('Cost')

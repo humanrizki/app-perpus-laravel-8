@@ -13,7 +13,7 @@ class Admin extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     protected $guarded = ['id'];
     protected $guard_name = 'admin';
-    public function rule_admin(){
-        return $this->belongsTo(RuleAdmin::class);
+    public function detail_class_department(){
+        return $this->belongsTo(DetailClassDepartment::class);
     }
 }

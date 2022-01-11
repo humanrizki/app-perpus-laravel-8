@@ -12,4 +12,8 @@ class HomeroomMessage extends Model
     public function loan_report(){
         return $this->belongsTo(LoanReport::class);
     }
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
+    
 }

@@ -1,6 +1,6 @@
 @extends('layouts.capp')
 @section('content')
-    <div class="xl:container mx-auto my-6" style="width:90%;">
+    <div class="xl:container mx-auto my-6">
         <div class="grid grid-cols-12 gap-4">
             @if (session()->has('addToBucket'))
             <div class="col-span-12">

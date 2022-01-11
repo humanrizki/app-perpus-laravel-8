@@ -114,7 +114,7 @@
             <div class="card hover:shadow-lg mt-2">
                 <div class="card-body">
                     <div class="flex flex-wrap justify-center">
-                        <img src="/img/accept.png" alt="" class="md:w-80 sm:w-full">
+                        <img src="/img/successTransaction.png" alt="" class="md:w-80 sm:w-full">
                         <div class="md:w-64 sm:w-full self-center">
                             <p class="m-0 p-0 text-sm font-medium text-gray-900">Transaksi telah dilakukan, setelah buku dikembalikan kelik untuk menandai telah dikembalikan dan data buku peminjaman lama akan dibuang dan digantikan.</p>
                             <form action="" method="POST" class="mt-1 mb-1">

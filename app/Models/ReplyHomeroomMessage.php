@@ -9,4 +9,7 @@ class ReplyHomeroomMessage extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public function homeroom_message(){
+        return $this->belongsTo(HomeroomMessage::class);
+    }
 }

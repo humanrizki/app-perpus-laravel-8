@@ -108,14 +108,7 @@
                             <div class="flex flex-wrap justify-center">
                                 <img src="/img/accept.png" alt="" class="md:w-80 sm:w-full">
                                 <div class="md:w-64 sm:w-full self-center">
-                                    <p class="m-0 p-0 text-sm font-medium text-gray-900">Transaksi telah dilakukan, setelah buku dikembalikan kelik untuk menandai telah dikembalikan dan data buku peminjaman lama akan dibuang dan digantikan.</p>
-                                    <form action="" method="POST" class="mt-1 mb-1">
-                                        @csrf
-                                        @method('put')
-                                        <button type="submit" class="w-full p-2 rounded text-white bg-green-400 font-medium" >Submit</button>
-                                        <p class="text-sm text-sky-300 mt-2 underline decoration-solid underline-offset-4 font-medium">Tandai transaksi ini telah usai setelah user mengembalikan buku!</p>
-                                    </form>
-                                    
+                                    <p class="m-0 p-0 text-sm font-medium text-gray-900">Transaksi telah dilakukan, nanti jika user sudah mengembalikan buku pindah lah ke page transaction show yang mengambil dari data peminjaman ini!.</p>
                                 </div>
                             </div>
                         @endif

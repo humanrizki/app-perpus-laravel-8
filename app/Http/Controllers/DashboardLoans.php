@@ -55,7 +55,7 @@ class DashboardLoans extends Controller
             'day_of_payment'=>'required|date_format:Y-m-d',
         ])->validate();
         if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now('Asia/Jakarta')->hour >= 7){
-            if(Carbon::parse($validatedData['day_of_payment'])->lessThan(Carbon::parse($loanReport->return_date)) && Carbon::parse($validatedData['day_of_payment'])->greaterThan(Carbon::parse($loanReport->loan_date))){
+            if(Carbon::parse($validatedData['day_of_payment'])->lessThanEqualTo(Carbon::parse($loanReport->return_date)) && Carbon::parse($validatedData['day_of_payment'])->greaterThanEqualTo(Carbon::parse($loanReport->loan_date))){
                 $loanReport->update([
                     'status'=>'borrow'
                 ]);

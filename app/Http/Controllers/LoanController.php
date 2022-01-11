@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeroomMessage;
 use App\Models\LoanReport;
+use App\Models\ReplyHomeroomMessage;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -29,7 +30,7 @@ class LoanController extends Controller
             'loan'=>$loan
         ]);
     }
-    public function cancel(LoanReport $loan){
+    public function cancell(LoanReport $loan){
         $stock = $loan->book->stock + 1;
         $loan->book->update([
             'stock'=>$stock
@@ -42,16 +43,35 @@ class LoanController extends Controller
             ]);
             return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman dan menghapus data untuk dapat persetujuan dari walas!');
         } else {
-            $loan->update([
-                'status'=>'cancell',
-                'forfeit'=>0
-            ]);
-            return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+            $homeroomMessage = HomeroomMessage::where('loan_report_id','=',$loan->id)->first();
+            if($homeroomMessage){
+                ReplyHomeroomMessage::destroy(ReplyHomeroomMessage::where('homeroom_message_id',$homeroomMessage->id)->first()->id);
+                HomeroomMessage::destroy($homeroomMessage->id);
+                $loan->update([
+                    'status'=>'cancell',
+                    'forfeit'=>0
+                ]);
+                return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+            } else {
+                $loan->update([
+                    'status'=>'cancell',
+                    'forfeit'=>0
+                ]);
+                return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+            }
         }
     }
     public function delete(LoanReport $loan){
         $title = $loan->book->title;
-        LoanReport::destroy($loan->id);
-        return redirect("/loan")->with('deleteLoan','Berhasil menghapus permintaan peminjaman untuk buku '.$title.'!');
+        $homeroomMessage = HomeroomMessage::where('loan_report_id','=',$loan->id)->first();
+        if($homeroomMessage){
+            ReplyHomeroomMessage::destroy(ReplyHomeroomMessage::where('homeroom_message_id',$homeroomMessage->id)->first()->id);
+            HomeroomMessage::destroy($homeroomMessage->id);
+            LoanReport::destroy($loan->id);
+            return redirect("/loan")->with('deleteLoan','Berhasil menghapus permintaan peminjaman untuk buku '.$title.'!');
+        } else {
+            LoanReport::destroy($loan->id);
+            return redirect("/loan")->with('deleteLoan','Berhasil menghapus permintaan peminjaman untuk buku '.$title.'!');
+        }
     }
 }
