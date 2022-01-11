@@ -19,6 +19,7 @@ class UserHomeroomMessageTable extends LivewireDatatable
             ->leftJoin('admins','homeroom_messages.admin_id','admins.id')
             ->leftJoin('loan_reports','homeroom_messages.loan_report_id','loan_reports.id')
             ->where([
+                'loan_reports.user_id'=>auth()->user()->id,
                 'admins.detail_class_department_id'=>auth()->user()->detail_class_department_id,
                 'homeroom_messages.status'=>$this->status
             ]);
@@ -26,9 +27,10 @@ class UserHomeroomMessageTable extends LivewireDatatable
             return HomeroomMessage::query()
             ->leftJoin('admins','homeroom_messages.admin_id','admins.id')
             ->leftJoin('loan_reports','homeroom_messages.loan_report_id','loan_reports.id')
-            ->where(
-                'admins.detail_class_department_id',auth()->user()->detail_class_department_id
-            );
+            ->where([
+                'loan_reports.user_id'=>auth()->user()->id,
+                'admins.detail_class_department_id'=>auth()->user()->detail_class_department_id
+            ]);
         }
         
     }
