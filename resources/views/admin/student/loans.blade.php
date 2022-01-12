@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-12 mt-3">
-            <livewire:homeroom-loan-report-table/>
+            <livewire:homeroom-loan-report-table :userId="$user->id"/>
         </div>
     </div>
 </div>

@@ -44,7 +44,7 @@ class UserBucket extends Component
     }
     public function storeLoan(){
         $this->validate($this->rules());
-        if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now('Asia/Jakarta')->hour >= 7){
+        if(Carbon::now('Asia/Jakarta')->hour <= 24 && Carbon::now('Asia/Jakarta')->hour >= 7){
             if($this->type == 'kas'){
                 $admin = Admin::where('detail_class_department_id',auth()->user()->detail_class_department_id)->first();
                 if($admin){

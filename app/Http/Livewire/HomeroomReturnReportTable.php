@@ -11,6 +11,7 @@ use Mediconesystems\LivewireDatatables\NumberColumn;
 class HomeroomReturnReportTable extends LivewireDatatable
 {
     public $model = ReturnReport::class;
+    public $userId;
     public function builder()
     {
         //
@@ -18,7 +19,7 @@ class HomeroomReturnReportTable extends LivewireDatatable
         ->leftJoin('books','books.id','return_reports.book_id')
         ->leftJoin('users','users.id','return_reports.user_id')
         ->leftJoin('admins','admins.id','return_reports.admin_id')
-        ->where('users.detail_class_department_id',auth('admin')->user()->detail_class_department_id);
+        ->where('users.id',$this->userId);
     }
 
     public function columns()

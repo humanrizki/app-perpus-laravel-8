@@ -44,7 +44,7 @@ class ListsController extends Controller
         ]);
     }
     public function store(Request $request, Book $list){
-        if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now('Asia/Jakarta')->hour >= 7){
+        if(Carbon::now('Asia/Jakarta')->hour <= 24 && Carbon::now('Asia/Jakarta')->hour >= 7){
             $bucket = Bucket::create([
                 'book_id'=>$list->id,
                 'user_id'=>auth()->user()->id

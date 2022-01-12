@@ -11,6 +11,7 @@ use Mediconesystems\LivewireDatatables\NumberColumn;
 class HomeroomLoanReportTable extends LivewireDatatable
 {
     public $model = LoanReport::class;
+    public $userId;
     public function builder()
     {
         //
@@ -18,7 +19,7 @@ class HomeroomLoanReportTable extends LivewireDatatable
         ->leftJoin('books','books.id','loan_reports.book_id')
         ->leftJoin('users','users.id','loan_reports.user_id')
         ->leftJoin('admins','admins.id','loan_reports.admin_id')
-        ->where('users.detail_class_department_id',auth('admin')->user()->detail_class_department_id);
+        ->where('users.id',$this->userId);
     }
 
     public function columns()

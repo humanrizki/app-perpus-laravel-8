@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomeroomMessage;
 use App\Models\LoanReport;
+use App\Models\ReplyHomeroomMessage;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -22,6 +25,18 @@ class TransactionController extends Controller
         return view('transaction.show',[
             'title'=>'Detail transaction page user',
             'transaction'=>$transaction
+        ]);
+    }
+    public function coba(){
+        $transactions = Transaction::query()
+            ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
+            ->where('loan_reports.return_date','<',Carbon::now())->where([
+                'loan_reports.type'=>'tunai',
+                'loan_reports.status'=>'borrow'
+            ])->get();
+        
+        return view('transaction.coba',[
+            'transaction'=>$transactions,
         ]);
     }
 }
