@@ -30,11 +30,12 @@ class ListsController extends Controller
     }
     public function show(Book $list){
         $bucket = Bucket::where([
-            ['book_id','=',$list->id],
-            ['user_id','=',auth()->user()->id]
+            'book_id'=>$list->id,
+            'user_id'=>auth()->user()->id
         ])->first();
         $loan = LoanReport::where([
-            ['book_id','=',$list->id],
+            'book_id'=>$list->id,
+            'user_id'=>auth()->user()->id
         ])->first(); 
         return view('list.show',[
             'title'=>'list of book',

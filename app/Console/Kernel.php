@@ -35,21 +35,53 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             // permintaan transaksi metode uang tunai
-            LoanReport::where([
+            $loans = LoanReport::where([
                 'status'=>'request',
                 'type'=>'tunai'
-            ])->whereRaw('return_date < now()')->delete();
-            // permintaan transaksi metode uang kas
-            // $message = HomeroomMessage::query()
-            // ->leftJoin('loan_reports','loan_reports.id','homeroom_messages.loan_report_id')
-            // ->where('homeroom_messages.status','pending')->get();
-            // if($message->count() == 0){
-            //     LoanReport::where('status','=','request')->whereRaw('return_date < now()')->delete();
-            // } else {
-            //     LoanReport::where('status','=','pending')->whereRaw('return_date < now()')->delete();
-            //     HomeroomMessage::whereIn('id',$message->pluck('id'))->get()->delete();
-            //     ReplyHomeroomMessage::whereIn('homeroom_message_id',$message->pluck('homeroom_message_id'))->get()->delete();
-            // }
+            ])->whereRaw('return_date < now()')->get();
+            foreach($loans as $loan){
+                $stock = $loan->book->stock + 1;
+                $loan->book->update([
+                    'stock'=>$stock
+                ]);
+            }
+            LoanReport::whereIn('id',$loans->pluck('id'))->delete();
+            // permintaan transaksi dengan status pending dan metode uang kas
+            
+            $messages = HomeroomMessage::query()
+            ->leftJoin('loan_reports','loan_reports.id','homeroom_messages.loan_report_id')
+            ->where([
+                'homeroom_messages.status'=>'pending',
+                'loan_reports.status'=>'pending',
+                'loan_reports.type'=>'kas'
+            ])
+            ->whereRaw('loan_reports.return_date < now()')->get();
+            if($messages->count() != 0){
+                $loan_id = [];
+                foreach($messages as $message){
+                    $loan_id[] = $message->loan_report_id;
+                }
+                LoanReport::whereIn('id',$loan_id)->delete();
+                HomeroomMessage::whereIn('loan_report_id',$loan_id)->delete();
+            } 
+            // permintaan transaksi dengan status request dan metode uang kas
+            $messages = HomeroomMessage::query()
+            ->leftJoin('loan_reports','loan_reports.id','homeroom_messages.loan_report_id')
+            ->where([
+                'homeroom_messages.status'=>'agree',
+                'loan_reports.status'=>'request',
+                'loan_reports.type'=>'kas'
+            ])->whereRaw('loan_reports.return_date < now()')->get();
+            if($messages->count() != 0){
+                $loan_id = [];
+                foreach($messages as $message){
+                    $loan_id[] = $message->loan_report_id;
+                }
+                LoanReport::whereIn('id',$loan_id)->delete();
+                $HomeroomMessage = HomeroomMessage::whereIn('loan_report_id',$loan_id)->get();
+                ReplyHomeroomMessage::whereIn('homeroom_message_id',$HomeroomMessage->pluck('id'))->delete();
+                HomeroomMessage::whereIn('loan_report_id',$loan_id)->delete();
+            } 
             // transaksi dengan metode uang tunai
             $transactions = Transaction::query()
             ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
@@ -79,37 +111,42 @@ class Kernel extends ConsoleKernel
                 Transaction::whereIn('loan_report_id',$loan_id)->delete();
                 LoanReport::whereIn('id',$loan_id)->delete();
             }
-            // $transactions = Transaction::query()
-            // ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
-            // ->where('loan_reports.return_date','<',Carbon::now())->where([
-            //     'type'=>'kas',
-            //     'status'=>'borrow'
-            // ]);
-            // if($transactions->count() != 0){
-            //     foreach($transactions as $transaction){
-            //         ReturnReport::create([
-            //             'return_dated'=>Carbon::parse(Carbon::now('Asia/Jakarta')),
-            //             'date_of_payment'=>Carbon::parse($transaction->day_of_payment)->format('Y-m-d'),
-            //             'loan_date'=>Carbon::parse($transaction->loan_report->loan_date)->format('Y-m-d'),
-            //             'cost'=>$transaction->cost,
-            //             'nominal'=>$transaction->nominal,
-            //             'change'=>$transaction->nominal-$transaction->cost,
-            //             'type_payment'=>$transaction->loan_report->type,
-            //             'slug'=>Uuid::uuid(),
-            //             'status'=>'done',
-            //             'book_id'=>$transaction->loan_report->book_id,
-            //             'user_id'=>$transaction->loan_report->user_id,
-            //             'admin_id'=>$transaction->admin_id,
-            //         ]);
-            //     }
-            //     $message = HomeroomMessage::query()
-            //     ->leftJoin('loan_reports','loan_reports.id','homeroom_messages.loan_report_id')
-            //     ->where('homeroom_messages.status','agree')->get();
-            //     HomeroomMessage::whereIn('id',$message->pluck('id'))->delete();
-            //     ReplyHomeroomMessage::whereIn('homeroom_message_id',$message->pluck('homeroom_message_id'))->delete();
-            //     LoanReport::whereIn('id',$transactions->pluck('loan_report_id'))->delete();
-            //     Transaction::whereIn('id',$transactions->pluck('id'))->delete();
-            // }
+            // transaksi untuk metode uang kas
+            $transactions = Transaction::query()
+            ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
+            ->where('loan_reports.return_date','<',Carbon::now('Asia/Jakarta'))->where([
+                'loan_reports.type'=>'kas',
+                'loan_reports.status'=>'borrow'
+            ])->get();
+            if($transactions->count() != 0){
+                $loan_id = [];
+                foreach($transactions as $transaction){
+                    ReturnReport::create([
+                        'return_dated'=>Carbon::parse(Carbon::now('Asia/Jakarta')),
+                        'date_of_payment'=>Carbon::parse($transaction->day_of_payment)->format('Y-m-d'),
+                        'loan_date'=>Carbon::parse($transaction->loan_report->loan_date)->format('Y-m-d'),
+                        'cost'=>$transaction->cost,
+                        'nominal'=>$transaction->nominal,
+                        'change'=>$transaction->nominal-$transaction->cost,
+                        'type_payment'=>$transaction->loan_report->type,
+                        'slug'=>Uuid::uuid(),
+                        'status'=>'done',
+                        'book_id'=>$transaction->loan_report->book_id,
+                        'user_id'=>$transaction->loan_report->user_id,
+                        'admin_id'=>$transaction->admin_id,
+                    ]);
+                    $stock = $transaction->loan_report->book->stock + 1;
+                    $transaction->loan_report->book->update([
+                        'stock'=>$stock
+                    ]);
+                    $loan_id[] = $transaction->loan_report_id;
+                }
+                $HomeroomMessage = HomeroomMessage::whereIn('loan_report_id',$loan_id)->get();
+                ReplyHomeroomMessage::whereIn('homeroom_message_id',$HomeroomMessage->pluck('id'))->delete();
+                HomeroomMessage::whereIn('loan_report_id',$loan_id)->delete();
+                LoanReport::whereIn('id',$loan_id)->delete();
+                Transaction::whereIn('loan_report_id',$loan_id)->delete();
+            }
         })->everyMinute()->timezone('Asia/Jakarta');
     }
 
