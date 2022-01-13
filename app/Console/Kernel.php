@@ -38,14 +38,8 @@ class Kernel extends ConsoleKernel
             $loans = LoanReport::where([
                 'status'=>'request',
                 'type'=>'tunai'
-            ])->whereRaw('return_date < now()')->get();
-            foreach($loans as $loan){
-                $stock = $loan->book->stock + 1;
-                $loan->book->update([
-                    'stock'=>$stock
-                ]);
-            }
-            LoanReport::whereIn('id',$loans->pluck('id'))->delete();
+            ])->whereRaw('return_date < now()')->delete();
+            
             // permintaan transaksi dengan status pending dan metode uang kas
             
             $messages = HomeroomMessage::query()
@@ -107,6 +101,10 @@ class Kernel extends ConsoleKernel
                         'admin_id'=>$transaction->admin_id,
                     ]);
                     $loan_id[] = $transaction->loan_report->id;
+                    $stock = $transaction->loan_report->book->stock + 1;
+                    $transaction->loan_report->book->update([
+                        'stock'=>$stock
+                    ]);
                 }
                 Transaction::whereIn('loan_report_id',$loan_id)->delete();
                 LoanReport::whereIn('id',$loan_id)->delete();
