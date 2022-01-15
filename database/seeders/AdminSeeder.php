@@ -18,12 +18,22 @@ class AdminSeeder extends Seeder
     {
         //
 
+        $superAdmin = Admin::create([
+            'name'=>'admin super ganteng',
+            'username'=>'superadmin',
+            'email'=>'humanrizki123@gmail.com',
+            'password'=>Hash::make('admin'),
+            'position_id'=>1,
+            'gender'=>'male',
+            'phone'=>'085691009232',
+            'address'=>'Jl. belom diaspal'
+        ]);
         $admin = Admin::create([
             'name'=>'admin ganteng',
             'username'=>'admin',
             'email'=>'humanrizki999@gmail.com',
             'password'=>Hash::make('admin'),
-            'position'=>'staff',
+            'position_id'=>1,
             'gender'=>'male',
             'phone'=>'085691009232',
             'address'=>'Jl. belom diaspal'
@@ -33,7 +43,7 @@ class AdminSeeder extends Seeder
             'username'=>'deku',
             'email'=>'deku@gmail.com',
             'password'=>Hash::make('admin2'),
-            'position'=>'teacher',
+            'position_id'=>2,
             'gender'=>'male',
             'phone'=>'085691009232',
             'address'=>'Jl. belom diaspal'
@@ -43,11 +53,12 @@ class AdminSeeder extends Seeder
             'username'=>'junaedi',
             'email'=>'junaedi@gmail.com',
             'password'=>Hash::make('admin3'),
-            'position'=>'staff',
+            'position_id'=>1,
             'gender'=>'male',
             'phone'=>'085691009232',
             'address'=>'Jl. belom diaspal'
         ]);
+        $superAdmin->assignRole('superadmin');
         $admin->assignRole('admin');
         $homeRoom->assignRole('homeroom');
         $headTeacher->assignRole('headteacher');

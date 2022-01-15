@@ -27,7 +27,7 @@ class TeacherSeeder extends Seeder
                 'username'=>strtolower($faker->firstName),
                 'email'=>strtolower($faker->firstName).'@gmail.com',
                 'password'=>Hash::make('password'),
-                'position'=>'teacher',
+                'position_id'=>2,
                 'gender'=>$gender,
                 'phone'=>$faker->phoneNumber,
                 'detail_class_department_id'=>$i,

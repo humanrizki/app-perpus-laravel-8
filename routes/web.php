@@ -92,4 +92,7 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/transactions',[DashboardTransaction::class,'index']);
     Route::get('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'show']);
     Route::post('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'store']);
+    Route::get('/dashboard/admin/profile',[AdminDashboardController::class,'profile']);
+    Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
+    Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
 });

@@ -16,13 +16,16 @@ class RuleAdminSeeder extends Seeder
     {
         //
         RuleAdmin::create([
-            'rule'=>'admin'
+            'rule'=>'superadmin',
         ]);
         RuleAdmin::create([
-            'rule'=>'homeroom'
+            'rule'=>'admin',
         ]);
         RuleAdmin::create([
-            'rule'=>'head teacher'
+            'rule'=>'homeroom',
+        ]);
+        RuleAdmin::create([
+            'rule'=>'head teacher',
         ]);
     }
 }
