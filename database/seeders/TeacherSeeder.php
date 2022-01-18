@@ -19,13 +19,13 @@ class TeacherSeeder extends Seeder
     {
         //
         $totalClassDepartment = count(DetailClassDepartment::all());
-        $faker = Factory::create('id_ID');
         for($i = 1; $i <= $totalClassDepartment; $i++){
+            $faker = Factory::create('id_ID');
             $gender = $faker->randomElement(['Male','Female']);
             $admin = Admin::create([
                 'name'=>$faker->name,
                 'username'=>strtolower($faker->firstName),
-                'email'=>strtolower($faker->firstName).'@gmail.com',
+                'email'=>strtolower($faker->userName()).'@gmail.com',
                 'password'=>Hash::make('password'),
                 'position_id'=>2,
                 'gender'=>$gender,

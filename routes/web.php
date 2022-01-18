@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\DashboardAgreement;
@@ -23,7 +24,6 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserAgreementsController;
 use App\Http\Controllers\UserTeacherController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,4 +95,5 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/admin/profile',[AdminDashboardController::class,'profile']);
     Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
     Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
+    Route::get('/dashboard/register/homeroom',[AdminRegisterController::class,'register']);
 });

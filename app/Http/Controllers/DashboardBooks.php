@@ -8,10 +8,8 @@ use App\Models\Bookcase;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\CollectionBook;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardBooks extends Controller
 {
@@ -125,23 +123,23 @@ class DashboardBooks extends Controller
     {
         //
         $rules = [
-            'title'=>'required|string|min:4|max:100',
-            'creator'=>'required|string|max:100',
-            'illustrator'=>'required|string|max:100',
-            'local_publisher'=>'required|string|max:100',
-            'original_publisher'=>'required|string|max:100',
+            'title'=>'required|min:4|max:100',
+            'creator'=>'required|max:100',
+            'illustrator'=>'required|max:100',
+            'local_publisher'=>'required|max:100',
+            'original_publisher'=>'required|max:100',
             'pages'=>'required|integer',
             'stock'=>'required|integer',
             'edition'=>'required|date_format:Y-m-d',
             'image'=>'image|file|max:5120',
             'category_id'=>'required',
             'collection_book_id'=>'required',
-            'bookcase_id'=>'required'
+            'bookcase_id'=>'required',
         ];
-        if($request['slug'] != $book->slug){
-            $rules['slug'] = ['slug'=>'required|string|min:4|max:100|unique:books'];
+        if($request->slug != $book->slug){
+            $rules['slug'] = 'required|min:4|max:100|unique:books';
         }
-        $validatedData = Validator::make($request->all(),$rules)->validate();
+        $validatedData = $request->validate($rules);
         if($request->file('image')){
             $validatedData['image'] = request()->file('image')->store('book-image');
         }else {

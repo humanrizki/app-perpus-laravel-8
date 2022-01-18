@@ -41,8 +41,8 @@
             </div>
             <div class="form-group">
                 <label for="publisher_local">Local Publisher</label>
-                <input type="text" name="local_publisher" id="publisher_local" class="form-control @error('publisher_local') is-invalid @enderror" placeholder="Type here for publisher_local book" value="{{ old('publisher_local') }}">
-                @error('publisher_local')
+                <input type="text" name="local_publisher" id="publisher_local" class="form-control @error('local_publisher') is-invalid @enderror" placeholder="Type here for publisher_local book" value="{{ old('local_publisher') }}">
+                @error('local_publisher')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -50,8 +50,8 @@
             </div>
             <div class="form-group">
                 <label for="publisher_original">Original Publisher</label>
-                <input type="text" name="original_publisher" id="publisher_original" class="form-control @error('publisher_original') is-invalid @enderror" placeholder="Type here for publisher_original book" value="{{ old('publisher_original') }}">
-                @error('publisher_original')
+                <input type="text" name="original_publisher" id="publisher_original" class="form-control @error('original_publisher') is-invalid @enderror" placeholder="Type here for publisher_original book" value="{{ old('original_publisher') }}">
+                @error('original_publisher')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -59,8 +59,8 @@
             </div>
             <div class="form-group">
                 <label for="page">Page</label>
-                <input type="number" name="pages" id="page" class="form-control @error('page') is-invalid @enderror" placeholder="Type here for page book" value="{{ old('page') }}">
-                @error('page')
+                <input type="number" name="pages" id="page" class="form-control @error('pages') is-invalid @enderror" placeholder="Type here for page book" value="{{ old('page') }}">
+                @error('pages')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
