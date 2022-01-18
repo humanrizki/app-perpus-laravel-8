@@ -9,24 +9,20 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/43727f9558.js" crossorigin="anonymous"></script>
-    {{-- <style>
-      *,body{
-        margin: 0px;
-        padding: 0px;
-      }
-    </style> --}}
     @if (request()->is('/'))
         <link rel="stylesheet" href="css/home.css">
     @endif
     {{-- <link rel="stylesheet" href="css/ul.css"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <livewire:styles/>
-    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
-    @yield('head')
+    {{-- <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}" type="text/css">
+    {{-- <script src="{{ asset('css/app.css') }}" ></script> --}}
   </head>
   <body>
     @include('partials.header')
     @yield('content')
+    <h3 class="text-3xl text-blue-500">Ini bisa</h3>
     @include('partials.footer')
     <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>

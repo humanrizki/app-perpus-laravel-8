@@ -3,7 +3,7 @@
     
 @endsection
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mb-3">
     <form action="/dashboard/books/{{ $book->slug }}" method="POST" class="bg-white p-3 shadow rounded" enctype="multipart/form-data">
         @csrf
         @method('put')
@@ -137,7 +137,7 @@
             </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Book</button>
+            <button type="submit" class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium">Create Book</button>
         </div>
     </form>
 </div>

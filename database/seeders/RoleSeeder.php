@@ -34,11 +34,5 @@ class RoleSeeder extends Seeder
             'name'=>'headteacher',
             'guard_name'=>'admin'
         ]);
-    
-        $add = Permission::create(['name'=>'add-book','guard_name'=>'admin']);
-        $edit = Permission::create(['name'=>'edit-book','guard_name'=>'admin']);
-        $role = Role::findByName('admin','admin');
-        $role->givePermissionTo($add);
-        $role->givePermissionTo($edit);
     }
 }

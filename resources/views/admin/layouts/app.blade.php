@@ -26,7 +26,8 @@
     <livewire:styles />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    @yield('head')
+    {{-- @yield('head') --}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body id="page-top">

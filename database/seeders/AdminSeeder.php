@@ -18,16 +18,7 @@ class AdminSeeder extends Seeder
     {
         //
 
-        $superAdmin = Admin::create([
-            'name'=>'admin super ganteng',
-            'username'=>'superadmin',
-            'email'=>'humanrizki123@gmail.com',
-            'password'=>Hash::make('admin'),
-            'position_id'=>1,
-            'gender'=>'male',
-            'phone'=>'085691009232',
-            'address'=>'Jl. belom diaspal'
-        ]);
+        
         $admin = Admin::create([
             'name'=>'admin ganteng',
             'username'=>'admin',
@@ -58,7 +49,6 @@ class AdminSeeder extends Seeder
             'phone'=>'085691009232',
             'address'=>'Jl. belom diaspal'
         ]);
-        $superAdmin->assignRole('superadmin');
         $admin->assignRole('admin');
         $homeRoom->assignRole('homeroom');
         $headTeacher->assignRole('headteacher');
