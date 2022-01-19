@@ -22,6 +22,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-md-12">
+                                
                                 @if (session()->has('loginError'))
                                     <div class="alert alert-danger alert-dismissible fade show m-2" role="alert">
                                         <i class="bi bi-exclamation-triangle-fill"></i>
@@ -29,7 +30,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif
-
+                                @if (session()->has('successRegister'))
+                                    <div class="alert alert-primary alert-dismissible fade show m-2" role="alert">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                        <strong>{{ session('successRegister') }}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                
                             </div>
                             <div class="col-lg-6 d-none d-lg-block">
                                 <img src="/img/loginadmin.png" alt="" class="w-100">

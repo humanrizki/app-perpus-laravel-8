@@ -95,5 +95,8 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/admin/profile',[AdminDashboardController::class,'profile']);
     Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
     Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
-    Route::get('/dashboard/register/homeroom',[AdminRegisterController::class,'register']);
+});
+Route::group(['middleware'=>'adminauth'],function(){
+    Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
+    Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
 });
