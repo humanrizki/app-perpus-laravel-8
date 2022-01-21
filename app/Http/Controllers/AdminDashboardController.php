@@ -30,7 +30,6 @@ class AdminDashboardController extends Controller
         ]);
     }
 
-
     public function edit(){
         $genders = ['Male','Female'];
         return view('admin.profile.edit',[
@@ -52,9 +51,6 @@ class AdminDashboardController extends Controller
             'address'=>['required','max:150','string'],
             'password'=>['required','string', Password::min(8)->numbers()->mixedCase()->symbols() ]
         ])->validate();
-        if(isset($validator['class']) && isset($validator['department'])){
-            dd('mantap');
-        } else {
             auth('admin')->user()->update([
                 'name'=>$validator['name'],
                 'username'=>$validator['username'],
@@ -66,6 +62,11 @@ class AdminDashboardController extends Controller
                 'password'=>Hash::make($validator['password'])
             ]);
             return redirect('/dashboard/admin/profile')->with('successUpdate','Data anda berhasil diperbaharui!');
-        }
     }
+    public function homeroom(){
+        return view('admin.homeroom.index',[
+            'title'=>'lists homeroom'
+        ]);
+    }
+
 }

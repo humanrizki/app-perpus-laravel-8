@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class HomeroomMail extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
     public $details;
@@ -29,7 +29,6 @@ class HomeroomMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('LIBRARY CN')
-                    ->markdown('mails');
+        return $this->subject('LIBRARY CN')->markdown('forgot-password');
     }
 }

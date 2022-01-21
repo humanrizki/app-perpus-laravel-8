@@ -17,7 +17,14 @@
                     <i class="bi bi-exclamation-triangle-fill"></i>
                     <strong>{{ session('loginError') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+                </div>
+                @endif
+                @if (session()->has('successResetPassword'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>{{ session('successResetPassword') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 @endif
                 <h4 class="text-center">Login</h4><hr>
                 <form action="/login" method="POST">
@@ -44,6 +51,7 @@
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                     </div>
                     <a href="/register" class="text-center">Belom daftar?</a>
+                    <a href="/forgot-password">Lupa password?</a>
                 </form>
             </div>
         </div>

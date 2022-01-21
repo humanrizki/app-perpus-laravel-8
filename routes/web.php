@@ -22,22 +22,9 @@ use App\Http\Controllers\DashboardTransaction;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserAgreementsController;
+use App\Http\Controllers\UserForgotPassword;
 use App\Http\Controllers\UserTeacherController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/agreements',[UserAgreementsController::class,'index'])->name('agreements');
@@ -95,8 +82,11 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/admin/profile',[AdminDashboardController::class,'profile']);
     Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
     Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
+    Route::get('/dashboard/lists/homeroom',[AdminDashboardController::class,'homeroom']);
 });
-Route::group(['middleware'=>'adminauth'],function(){
-    Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
-    Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
-});
+Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
+Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
+Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
+Route::post('/forgot-password',[UserForgotPassword::class, 'verification']);
+Route::get('/reset-password/{forgot:token}',[UserForgotPassword::class, 'edit']);
+Route::post('/reset-password/{forgot:token}',[UserForgotPassword::class, 'update']);

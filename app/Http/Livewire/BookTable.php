@@ -62,13 +62,5 @@ class BookTable extends LivewireDatatable
 
         ];
     }
-    public function getCategoriesProperty(){
-        return Category::all();
-    }
-    public function getCollectionBooksProperty(){
-        return CollectionBook::all();
-    }
-    public function getBookcasesProperty(){
-        return Bookcase::all();
-    }
+    
 }

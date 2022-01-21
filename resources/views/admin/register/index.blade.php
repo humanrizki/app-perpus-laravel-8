@@ -63,8 +63,13 @@
                         Email
                     </label>
                     <input name="email" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('email') border-red-500 border-2 @else border-gray-300 @enderror" id="email" type="email" value="{{ old('email') }}">
-                    @error('email')
+                    @error('phone')
                         <p class="text-red-500 text-xs font-medium">{{$message}}</p>
+                    @else
+                        <p class="text-gray-500 text-xs font-medium">
+                            Note : harus dengan email berdomain asli! <br>
+                            contoh : abcdefgh@gmail.com/yahoo.co.id atau yang lain
+                        </p>
                     @enderror
                 </div>
                 <div class="w-full md:w-2/4 px-3 mb-3 md:mb-0">
@@ -138,6 +143,9 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="w-full px-3 mb-3 md:mb-0">
+                <p class="block w-full md:w-1/2  font-medium">note: Data class dan department tidak dapat diubah dalam satu kali registrasi, mohon bijak dalam registrasi!</p>
             </div>
             <div class="flex flex-wrap block my-3">
                 <button class="p-2 bg-green-500 hover:shadow-lg hover:bg-green-600 rounded text-white font-medium w-60 md:w-full" type="submit">Klik</button>
