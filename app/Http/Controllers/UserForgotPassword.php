@@ -30,7 +30,6 @@ class UserForgotPassword extends Controller
             'email'=>['required','email:dns']
         ])->validate();
         $user = User::where('email',$request->email)->first();
-        // dd($user);
         $forgotPassword = ForgotPassword::where('email',$request->email)->first();
         if($forgotPassword){
             return redirect('/forgot-password')->with('alreadyAvailable','Kami sudah mengirimi anda email di box emailmu! Check dan rubah passwordmu!');
@@ -54,9 +53,12 @@ class UserForgotPassword extends Controller
         }
     }
     public function edit(ForgotPassword $forgot){
-        return view('auth.reset-password',[
-            'title'=>'reset password user'
-        ]);
+        if($forgot->table == 'users'){
+            return view('auth.reset-password',[
+                'title'=>'forgot password user'
+            ]);
+        }
+        abort(403,'THIS ACTION NOT ALLOWED');
     }
     public function update(Request $request ,ForgotPassword $forgot){
         $validatedData = Validator::make($request->all(),[
@@ -66,7 +68,7 @@ class UserForgotPassword extends Controller
         User::where('email',$forgot->email)->first()->update([
             'password'=>Hash::make($validatedData['password'])
         ]);
-        ForgotPassword::where('email',$forgot->email)->delete();
+        ForgotPassword::where(['email',$forgot->email])->delete();
         return redirect('/login')->with('successResetPassword','Telah sukses mengubah kembali password!');
     }
 }

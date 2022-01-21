@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminForgotPassword;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\BucketController;
@@ -90,3 +91,7 @@ Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
 Route::post('/forgot-password',[UserForgotPassword::class, 'verification']);
 Route::get('/reset-password/{forgot:token}',[UserForgotPassword::class, 'edit']);
 Route::post('/reset-password/{forgot:token}',[UserForgotPassword::class, 'update']);
+Route::get('admin/forgot-password',[AdminForgotPassword::class, 'index']);
+Route::post('admin/forgot-password',[AdminForgotPassword::class, 'verification']);
+Route::get('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'edit']);
+Route::post('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'update']);

@@ -16,6 +16,7 @@ class CreateForgotPasswordsTable extends Migration
         Schema::create('forgot_passwords', function (Blueprint $table) {
             $table->id();
             $table->string('email')->index();
+            $table->enum('table',['users','admins'])->default('users');
             $table->string('token')->unique();
             $table->timestamps();
         });
