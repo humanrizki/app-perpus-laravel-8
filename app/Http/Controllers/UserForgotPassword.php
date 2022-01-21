@@ -66,6 +66,7 @@ class UserForgotPassword extends Controller
         User::where('email',$forgot->email)->first()->update([
             'password'=>Hash::make($validatedData['password'])
         ]);
+        ForgotPassword::where('email',$forgot->email)->delete();
         return redirect('/login')->with('successResetPassword','Telah sukses mengubah kembali password!');
     }
 }
