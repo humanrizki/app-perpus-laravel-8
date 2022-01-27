@@ -29,6 +29,6 @@ class ForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->subject('LIBRARY CN')->markdown('forgot-password');
+        return $this->subject('LIBRARY CN')->markdown('mails.forgot-password');
     }
 }

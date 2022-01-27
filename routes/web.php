@@ -1,33 +1,35 @@
 <?php
 
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminForgotPassword;
-use App\Http\Controllers\AdminLoginController;
-use App\Http\Controllers\AdminRegisterController;
-use App\Http\Controllers\BucketController;
-use App\Http\Controllers\CollectionController;
-use App\Http\Controllers\DashboardAgreement;
-use App\Http\Controllers\DashboardBookcase;
-use App\Http\Controllers\ListsController;
-use App\Http\Controllers\LoanController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserLoginController;
-use App\Http\Controllers\UserRegisterController;
-use App\Http\Controllers\DashboardBooks;
-use App\Http\Controllers\DashboardCategory;
-use App\Http\Controllers\DashboardCollection;
-use App\Http\Controllers\DashboardLoans;
-use App\Http\Controllers\DashboardReturn;
-use App\Http\Controllers\DashboardStudents;
-use App\Http\Controllers\DashboardTransaction;
-use App\Http\Controllers\ReturnController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserAgreementsController;
-use App\Http\Controllers\UserForgotPassword;
-use App\Http\Controllers\UserTeacherController;
+// use App\Http\Controllers\User\Auth\UserLoginController;
+
+use App\Http\Controllers\User\Auth\UserLoginController;
+use App\Http\Controllers\User\Auth\UserRegisterController;
+use App\Http\Controllers\User\Auth\UserForgotPassword;
+use App\Http\Controllers\User\Others\ListsController;
+use App\Http\Controllers\User\Others\LoanController;
+use App\Http\Controllers\User\Others\ProfileController;
+use App\Http\Controllers\User\Others\BucketController;
+use App\Http\Controllers\User\Others\CollectionController;
+use App\Http\Controllers\User\Others\ReturnController;
+use App\Http\Controllers\User\Others\TransactionController;
+use App\Http\Controllers\User\Others\UserAgreementsController;
+use App\Http\Controllers\User\Others\UserTeacherController;
+use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Admin\Auth\AdminForgotPassword;
+use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\Auth\AdminRegisterController;
+use App\Http\Controllers\Admin\Dashboard\DashboardAgreement;
+use App\Http\Controllers\Admin\Dashboard\DashboardBookcase;
+use App\Http\Controllers\Admin\Dashboard\DashboardBooks;
+use App\Http\Controllers\Admin\Dashboard\DashboardCategory;
+use App\Http\Controllers\Admin\Dashboard\DashboardCollection;
+use App\Http\Controllers\Admin\Dashboard\DashboardLoans;
+use App\Http\Controllers\Admin\Dashboard\DashboardReturn;
+use App\Http\Controllers\Admin\Dashboard\DashboardStudents;
+use App\Http\Controllers\Admin\Dashboard\DashboardTransaction;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
 Route::get('/agreements',[UserAgreementsController::class,'index'])->name('agreements');
 Route::get('/agreements/{homeroom_message:slug}',[UserAgreementsController::class,'show'])->name('agreements');
 Route::get('/collections',[CollectionController::class,'index'])->name('collections');
@@ -95,3 +97,6 @@ Route::get('admin/forgot-password',[AdminForgotPassword::class, 'index']);
 Route::post('admin/forgot-password',[AdminForgotPassword::class, 'verification']);
 Route::get('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'edit']);
 Route::post('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'update']);
+Route::get('/chart',function(){
+    return view('chartjs');
+});

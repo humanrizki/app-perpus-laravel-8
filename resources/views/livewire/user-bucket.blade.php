@@ -26,45 +26,45 @@
                         <div class="grid grid-cols-12 gap-x-4">
                             <div class="col-span-6">
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Name</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->name }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->name }}" disabled>
                             </div>
                             <div class="col-span-6">
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Username</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->username }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->username }}" disabled>
                             </div>
                         </div>
                         <div class="grid grid-cols-12 gap-x-4">
                             <div class="col-span-6">
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Phone</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ substr(auth()->user()->phone,0,4) }}*******" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ substr(auth()->user()->phone,0,4) }}*******" disabled>
                             </div>
                             <div class="col-span-6">
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Class & Department</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" disabled value="{{ auth()->user()->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->department) }}"> 
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" disabled value="{{ auth()->user()->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->department) }}"> 
                             </div>
                         </div>
                         <h5 class="mt-3 text-2xl font-medium text-gray-900">Detail Book!</h5>
                         <hr>
                         <div class="grid grid-cols-12 mt-2 gap-x-4">
                             <div class="col-span-12 mb-2">
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->title }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->title }}" disabled>
                             </div>
                             <div class="col-span-6">
                                 <img src="/storage/{{ $bucket->book->image }}" alt="" class="rounded shadow border" style="width: 100%;">
                             </div>
                             <div class="col-span-6">
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Creator</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->creator }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->creator }}" disabled>
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Penerbit Lokal</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->local_publisher }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->local_publisher }}" disabled>
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Penerbit</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->original_publisher }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->original_publisher }}" disabled>
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Kode rak</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->bookcase->name }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->bookcase->name }}" disabled>
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Nomor Rak</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->bookcase->location_bookcase }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->bookcase->location_bookcase }}" disabled>
                                 <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Stok</label>
-                                <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->stock }}" disabled>
+                                <input type="text" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $bucket->book->stock }}" disabled>
                             </div>
                         </div>
                 </div>
@@ -79,12 +79,12 @@
                                 <div class="grid grid-cols-12 gap-x-4">
                                     <div class="col-span-6">
                                         <label for="loan-date" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Dari</label>
-                                        <input type="date"  id="loan-date" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly wire:model="loan_date">
+                                        <input type="date"  id="loan-date" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly wire:model="loan_date">
                                     </div>
                                     <div class="col-span-6">
                                         <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Sampai</label>
                                         {{-- <input type="date" class="form-control" wire:model="return_date"> --}}
-                                        <input type="date" wire:model="return_date" name="return_date" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                        <input type="date" wire:model="return_date" name="return_date" class=" p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                                     </div>
                                     @error('return_date')
                                         <div class="col-span-12">

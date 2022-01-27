@@ -11,7 +11,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="name">
                 Name
             </label>
-            <input name="name" class="bg-gray-50   text-gray-900 text-sm rounded-lg focus:ring-blue-500  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') border  border-2 border-red-500 focus:border-blue-500 @else border border-gray-300 focus:border-blue-500 @enderror" id="name" type="text" value="{{ old('name')}}" >
+            <input name="name" class="bg-gray-50   text-gray-900 text-sm rounded-lg focus:ring-blue-500  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') border  border-2 border-red-500 focus:border-blue-500 @else border border-gray-300 focus:border-blue-500 @enderror" id="name" type="text" value="{{ old('name', auth('admin')->user()->name)}}" >
             @error('name')
             <p class="text-red-500 text-xs font-medium">{{$message}}</p>
             @enderror
@@ -20,7 +20,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="username">
                 Username
             </label>
-            <input name="username" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('username') border-red-500 border-2 @else border-gray-300 @enderror" id="username" type="text" value="{{ old('username')}}">
+            <input name="username" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('username') border-red-500 border-2 @else border-gray-300 @enderror" id="username" type="text" value="{{ old('username', auth('admin')->user()->username)}}">
             @error('username')
             <p class="text-red-500 text-xs font-medium">{{$message}}</p>
             @enderror
@@ -29,7 +29,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="phone">
                 Phone
             </label>
-            <input name="phone" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('phone') border-red-500 border-2 @else border-gray-300 @enderror" id="phone" type="text" value="{{ old('phone')}}">
+            <input name="phone" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('phone') border-red-500 border-2 @else border-gray-300 @enderror" id="phone" type="text" value="{{ old('phone', auth('admin')->user()->phone)}}">
             @error('phone')
                 <p class="text-red-500 text-xs font-medium">{{$message}}</p>
             @else
@@ -44,7 +44,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="email">
                 Email
             </label>
-            <input name="email" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('email') border-red-500 border-2 @else border-gray-300 @enderror" id="email" type="email" value="{{ old('email') }}">
+            <input name="email" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('email') border-red-500 border-2 @else border-gray-300 @enderror" id="email" type="email" value="{{ old('email', auth('admin')->user()->email) }}">
             @error('email')
                 <p class="text-red-500 text-xs font-medium">{{$message}}</p>
             @enderror
@@ -73,7 +73,11 @@
             </label>
                 <select name="position" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " id="position">
                     @foreach ($positions as $position)
+                        @if($position->id == auth('admin')->user()->position_id)
+                            <option value="{{ $position->id }}" selected>{{ $position->name }}</option>
+                        @else
                             <option value="{{ $position->id }}">{{ $position->name }}</option>
+                        @endif
                     @endforeach
                 </select>
                 
@@ -84,7 +88,11 @@
             </label>
                 <select name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="gender">
                     @foreach ($genders as $gender)
+                        @if($gender == auth('admin')->user()->gender)
+                            <option value="{{ $gender }}" selected>{{ $gender }}</option>
+                        @else
                             <option value="{{ $gender }}">{{ $gender }}</option>
+                        @endif
                     @endforeach
                 </select>
                 
@@ -93,7 +101,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="address">
             Address
             </label>
-            <input name="address" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('address') border-red-500 border-2 @else border-gray-300 @enderror" id="address" type="text" value="{{ old('address') }}">
+            <input name="address" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('address') border-red-500 border-2 @else border-gray-300 @enderror" id="address" type="text" value="{{ old('address', auth('admin')->user()->address) }}">
             @error('address')
                 <p class="text-red-500 text-xs font-medium">{{$message}}</p>
             @enderror

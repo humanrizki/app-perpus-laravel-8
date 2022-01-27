@@ -30,6 +30,6 @@ class HomeroomMail extends Mailable
     public function build()
     {
         return $this->subject('LIBRARY CN')
-                    ->markdown('mails');
+                    ->markdown('mails.mails');
     }
 }
