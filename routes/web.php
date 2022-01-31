@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardAgreement;
 use App\Http\Controllers\Admin\Dashboard\DashboardBookcase;
 use App\Http\Controllers\Admin\Dashboard\DashboardBooks;
 use App\Http\Controllers\Admin\Dashboard\DashboardCategory;
+use App\Http\Controllers\Admin\Dashboard\DashboardChart;
 use App\Http\Controllers\Admin\Dashboard\DashboardCollection;
 use App\Http\Controllers\Admin\Dashboard\DashboardLoans;
 use App\Http\Controllers\Admin\Dashboard\DashboardReturn;
@@ -86,7 +87,10 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
     Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
     Route::get('/dashboard/lists/homeroom',[AdminDashboardController::class,'homeroom']);
+    
 });
+Route::get('/dashboard/chart',[DashboardChart::class,'index']);
+Route::get('/dashboard/chartjs',[DashboardChart::class,'chartPie']);
 Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
 Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
 Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
@@ -97,6 +101,3 @@ Route::get('admin/forgot-password',[AdminForgotPassword::class, 'index']);
 Route::post('admin/forgot-password',[AdminForgotPassword::class, 'verification']);
 Route::get('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'edit']);
 Route::post('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'update']);
-Route::get('/chart',function(){
-    return view('chartjs');
-});
