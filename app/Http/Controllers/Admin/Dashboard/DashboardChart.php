@@ -12,16 +12,10 @@ use Illuminate\Http\Request;
 class DashboardChart extends Controller
 {
     //
-    public function index(){
-        $user = LoanReport::query()
-        ->leftJoin('users','users.id','loan_reports.user_id')
-        ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
-        ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
-        ->leftJoin('departments','detail_class_departments.department_id','departments.id')->get();
-        $departmentValues = $user->pluck('department')->toArray();
-        $departmentNames = array_values($user->pluck('department')->unique()->toArray());
+    public function students(){
+        
         // dd($departmentNames);
-        return view('admin.chart.chartjs',[
+        return view('admin.chart.students',[
             'title'=>'Page chart'
         ]);
     }

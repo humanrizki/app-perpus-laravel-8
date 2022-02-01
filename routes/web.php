@@ -28,6 +28,8 @@ use App\Http\Controllers\Admin\Dashboard\DashboardLoans;
 use App\Http\Controllers\Admin\Dashboard\DashboardReturn;
 use App\Http\Controllers\Admin\Dashboard\DashboardStudents;
 use App\Http\Controllers\Admin\Dashboard\DashboardTransaction;
+use App\Models\DetailClassDepartment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
@@ -89,8 +91,19 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/lists/homeroom',[AdminDashboardController::class,'homeroom']);
     
 });
-Route::get('/dashboard/chart',[DashboardChart::class,'index']);
+Route::get('/dashboard/charts/students',[DashboardChart::class,'students']);
 Route::get('/dashboard/chartjs',[DashboardChart::class,'chartPie']);
+Route::get('/chart',function(){
+    return view('chars');
+});
+Route::get('/data-chart',function(){
+    $user = DB::table('users')->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
+        ->leftJoin('departments','detail_class_departments.department_id','departments.id')
+        ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
+        ->select('name','class','department')->get();
+        $department = $user->pluck('department');
+    dd($user, $department,DetailClassDepartment::all(), array_count_values($user->where('department','Teknik Komputer & Jaringan 2')->pluck('department')->toArray())['Teknik Komputer & Jaringan 2']);
+});
 Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
 Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
 Route::get('/forgot-password',[UserForgotPassword::class, 'index']);

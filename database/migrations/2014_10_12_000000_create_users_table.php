@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('nisn',false,true)->nullable()->default(null);
             $table->string('email')->unique();
             $table->enum('gender',['male','female'])->nullable();
-            $table->char('phone',15)->nullable();
+            $table->char('phone',25)->nullable();
             $table->foreignId('detail_class_department_id')
             ->nullable()
             ->cascadeOnUpdate()

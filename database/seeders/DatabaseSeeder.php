@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CollectionSeeder::class);
         $this->call(BookCaseSeeder::class);
         $this->call(BookSeeder::class);
+        // $this->call(StudentSeeder::class);
+        \App\Models\Expense::factory(10)->create();
     }
 }
