@@ -4,10 +4,14 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
+use Illuminate\Support\Facades\DB;
+
 class DashboardChart extends Component
 {
     public $types = ['food', 'shopping', 'entertainment', 'travel', 'other'];
-
+    public $contentTitle = 'Data User yang sudah registrasi ke aplikasi Library CN';
+    public $user;
+    public $temps;
     public $colors = [
         'food' => '#f6ad55',
         'shopping' => '#fc8181',
@@ -15,6 +19,7 @@ class DashboardChart extends Component
         'travel' => '#66DA26',
         'other' => '#cbd5e0',
     ];
+    public $column;
 
     public $firstRun = true;
 
@@ -38,20 +43,24 @@ class DashboardChart extends Component
 
     public function handleOnColumnClick($column)
     {
-        dd($column);
+        // dd($column);
+        $this->column = $column;
+        $this->temps = DB::table('users')
+        ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
+        ->leftJoin('departments','detail_class_departments.department_id','departments.id')
+        ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
+        ->where('department',$this->column['title'])->get();
     }
     public function render()
     {
-        $user = \App\Models\User::leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
+        $this->user = \App\Models\User::leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->get();
-        $i = 1;
-        $columnChartModel = $user->groupBy('department')
-            ->reduce(function ($columnChartModel, $data) use ($user, $i) {
+        $columnChartModel = $this->user->groupBy('department')
+            ->reduce(function ($columnChartModel, $data){
                 $type = $data->first()->department;
-                    $value = array_count_values($user->pluck('department')->toArray())[$type];
+                    $value = array_count_values($this->user->pluck('department')->toArray())[$type];
                 $backgroundColor = $data->first()->backgroundColor;
-                $i++;
                 return $columnChartModel->addColumn($type, $value, $backgroundColor);
             }, LivewireCharts::columnChartModel()
                 ->setTitle('Data User')

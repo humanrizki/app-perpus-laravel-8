@@ -54,12 +54,12 @@
             <i class="fas fa-handshake"></i>
             <span>Agreement</span></a>
     </li>
+    @endif
     <li class="nav-item {{ request()->is('dashboard/students*') ? 'active' : ''; }}"> 
         <a class="nav-link" href="/dashboard/students">
             <i class="fas fa-handshake"></i>
             <span>Students</span></a>
     </li>
-    @endif
 
 
     <!-- Divider -->

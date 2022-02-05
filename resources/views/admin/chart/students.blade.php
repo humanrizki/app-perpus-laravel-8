@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ __("makan") }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
     <livewire:styles/>
 </head>
 <body>
