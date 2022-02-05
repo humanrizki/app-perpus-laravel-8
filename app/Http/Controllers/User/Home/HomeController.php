@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User\Home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class HomeController extends Controller
 {
     /**
@@ -27,5 +27,9 @@ class HomeController extends Controller
         return view('user.home.HomeTemplate',[
             'title'=>'home page'
         ]);
+    }
+    public function print(){
+        $pdf = PDF::loadView('user.home.HomeTemplate',['title'=>'print login']);
+        return $pdf->download('mantap.pdf');
     }
 }

@@ -1,8 +1,5 @@
 <div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    {{-- @if (!is_null($temps))
-        @dd($temps)
-    @endif --}}
+    {{-- The Master doesn't talk, he acts. --}}
     <div class="space-y-4 sticky top-0 bg-white p-4 shadow z-50">
 
         <div>

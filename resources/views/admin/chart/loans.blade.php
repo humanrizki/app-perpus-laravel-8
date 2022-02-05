@@ -6,12 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
     <livewire:styles/>
 </head>
 <body>
-
-    <livewire:dashboard-chart/>
+    <livewire:dashboard-chart-loans/>
     <livewire:scripts />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     @livewireChartsScripts

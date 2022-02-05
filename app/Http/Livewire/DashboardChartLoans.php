@@ -2,15 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Expense;
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Illuminate\Support\Facades\DB;
-
-class DashboardChart extends Component
+class DashboardChartLoans extends Component
 {
-    public $types = ['food', 'shopping', 'entertainment', 'travel', 'other'];
-    public $contentTitle = 'Data User yang sudah registrasi ke aplikasi Library CN';
+    public $contentTitle = 'Data User yang sedang, atau batal melakukan peminjaman di aplikasi Library CN';
     public $user;
     public $temps;
     public $colors = [
@@ -27,34 +24,23 @@ class DashboardChart extends Component
     public $showDataLabels = false;
 
     protected $listeners = [
-        'onPointClick' => 'handleOnPointClick',
-        'onSliceClick' => 'handleOnSliceClick',
         'onColumnClick' => 'handleOnColumnClick',
     ];
-
-    public function handleOnPointClick($point)
-    {
-        dd($point);
-    }
-
-    public function handleOnSliceClick($slice)
-    {
-        dd($slice);
-    }
 
     public function handleOnColumnClick($column)
     {
         // dd($column);
         $this->column = $column;
-        $this->temps = DB::table('users')
+        $this->temps = DB::table('loan_reports')
+        ->leftJoin('users','loan_reports.user_id','users.id')
         ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
-        ->where('department',$this->column['title'])->get();
+        ->where('department',$this->column['title'])->select('*')->groupBy('department')->get();
     }
     public function render()
     {
-        $this->user = \App\Models\User::leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
+        $this->user = \App\Models\LoanReport::leftJoin('users','loan_reports.user_id','users.id')->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->get();
         $columnChartModel = $this->user->groupBy('department')
@@ -74,14 +60,8 @@ class DashboardChart extends Component
                 ->setColumnWidth(90)
                 ->withGrid()
             );
-        $this->firstRun = false;
-        return view('livewire.dashboard-chart', [
-            'columnChartModel' => $columnChartModel,
-                // 'pieChartModel' => $pieChartModel,
-                // 'lineChartModel' => $lineChartModel,
-                // 'areaChartModel' => $areaChartModel,
-                // 'multiLineChartModel' => $multiLineChartModel,
-                // 'multiColumnChartModel' => $multiColumnChartModel,
+        return view('livewire.dashboard-chart-loans',[
+            'columnChartModel'=>$columnChartModel
         ]);
     }
 }

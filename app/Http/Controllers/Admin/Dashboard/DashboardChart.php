@@ -12,10 +12,25 @@ use Illuminate\Http\Request;
 class DashboardChart extends Controller
 {
     //
+    public function index(){
+        return view('admin.chart.index',[
+            'title'=>'Page chart'
+        ]);
+    }
     public function students(){
         
         // dd($departmentNames);
         return view('admin.chart.students',[
+            'title'=>'Page chart'
+        ]);
+    }
+    public function loans(){
+        return view('admin.chart.loans',[
+            'title'=>'Page chart'
+        ]);
+    }
+    public function transactions(){
+        return view('admin.chart.transactions',[
             'title'=>'Page chart'
         ]);
     }
