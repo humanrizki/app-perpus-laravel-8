@@ -10,6 +10,7 @@ class DashboardChartLoans extends Component
     public $contentTitle = 'Data User yang sedang, atau batal melakukan peminjaman di aplikasi Library CN';
     public $user;
     public $temps;
+    public $totals;
     public $colors = [
         'food' => '#f6ad55',
         'shopping' => '#fc8181',
@@ -36,7 +37,14 @@ class DashboardChartLoans extends Component
         ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
-        ->where('department',$this->column['title'])->select('*')->groupBy('department')->get();
+        ->where('department',$this->column['title'])->select('*')->groupBy('user_id')->get();
+        $userTemp = DB::table('loan_reports')
+        ->leftJoin('users','loan_reports.user_id','users.id')
+        ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
+        ->leftJoin('departments','detail_class_departments.department_id','departments.id')
+        ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
+        ->where('department',$this->column['title'])->get();
+        $this->totals = array_count_values($userTemp->pluck('user_id')->toArray());
     }
     public function render()
     {

@@ -8,44 +8,44 @@
                     <div class="grid grid-cols-12 gap-x-4">
                         <div class="col-span-6">
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Name</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->name }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->name }}" disabled>
                         </div>
                         <div class="col-span-6">
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Username</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->username }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ auth()->user()->username }}" disabled>
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-x-4">
                         <div class="col-span-6">
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Phone</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ substr(auth()->user()->phone,0,4) }}*******" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ substr(auth()->user()->phone,0,4) }}*******" disabled>
                         </div>
                         <div class="col-span-6">
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Class & Department</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" disabled value="{{ auth()->user()->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->department) }}"> 
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" disabled value="{{ auth()->user()->detail_class_department->class_user->class.' '.auth()->user()->detail_class_department->department->abbreviate(auth()->user()->detail_class_department->department->department) }}"> 
                         </div>
                     </div>
                     <h5 class="mt-3 text-2xl font-medium text-gray-900">Detail Book!</h5><hr class="border border-5">
                     <div class="grid grid-cols-12 mt-2 gap-x-4">
                         <div class="col-span-12 mb-2">
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->title }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->title }}" disabled>
                         </div>
                         <div class="col-span-6">
                             <img src="/storage/{{ $transaction->loan_report->book->image }}" alt="" class="rounded shadow border" style="width: 100%;">
                         </div>
                         <div class="col-span-6">
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Creator</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->creator }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->creator }}" disabled>
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Penerbit Lokal</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->local_publisher }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->local_publisher }}" disabled>
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Penerbit</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->original_publisher }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->original_publisher }}" disabled>
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Kode rak</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->bookcase->name }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->bookcase->name }}" disabled>
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Nomor Rak</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->bookcase->location_bookcase }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->bookcase->location_bookcase }}" disabled>
                             <label for="" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Stok</label>
-                            <input type="text" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->stock }}" disabled>
+                            <input type="text" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" value="{{ $transaction->loan_report->book->stock }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -57,40 +57,45 @@
                         <div class="grid grid-cols-12 gap-x-4">
                             <div class="col-span-6">
                                 <label for="totalDenda" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Total forfeit</label>
-                                <input type="text" id="totalDenda" disabled value="{{ $transaction->loan_report->forfeit }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="totalDenda" disabled value="{{ $transaction->loan_report->forfeit }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="nominal" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Nominal</label>
-                                <input type="text" id="nominal" disabled value="{{ $transaction->nominal }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="nominal" disabled value="{{ $transaction->nominal }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="status" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Status Loan</label>
-                                <input type="text" id="status" disabled value="{{ $transaction->loan_report->status }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="status" disabled value="{{ $transaction->loan_report->status }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="status-t" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Status Transaction</label>
-                                <input type="text" id="status-t" disabled value="{{ $transaction->status }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="status-t" disabled value="{{ $transaction->status }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="type" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Type payment</label>
-                                <input type="text" id="type" disabled value="{{ $transaction->loan_report->type }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="type" disabled value="{{ $transaction->loan_report->type }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="admin" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Admin</label>
-                                <input type="text" id="admin" disabled value="{{ $transaction->loan_report->book->admin->name }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="admin" disabled value="{{ $transaction->loan_report->book->admin->name }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="date" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Date of Payment</label>
-                                <input type="text" id="date" disabled value="{{ \Carbon\Carbon::parse($transaction->day_of_payment)->format('d F Y') }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="date" disabled value="{{ \Carbon\Carbon::parse($transaction->day_of_payment)->format('d F Y') }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                             <div class="col-span-6">
                                 <label for="change" class="p-0 m-0 block text-sm xl:text-lg md:text-base font-medium text-gray-900 dark:text-gray-300">Change</label>
-                                <input type="text" id="change" disabled value="{{ $transaction->nominal-$transaction->cost }}" class="block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
+                                <input type="text" id="change" disabled value="{{ $transaction->nominal-$transaction->cost }}" class="p-2 bg-white border border-2 block rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full">
                             </div>
                         </div>
                         <div class="col-span-12">
                             <div class="block rounded mt-3 text-sm font-medium text-gray-900 dark:text-gray-300 w-full border border-black bg-white p-2">
                                 Jika kamu sudah mencapai h-1, persiapkan untuk mengembalikan buku tersebut ke perpustakaan kembali dan konfirmasilah ke admin!
+                            </div>
+                        </div>
+                        <div class="col-span-12">
+                            <div class="block mt-3">
+                                    <a href="/transaction/{{ $transaction->slug }}/pdf" class="p-2 font-medium text-white bg-blue-500 rounded shadow">Klik untuk menjadikan pdf</a>
                             </div>
                         </div>
                 </div>

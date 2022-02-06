@@ -54,6 +54,8 @@ Route::delete('/loan/{loan:slug}',[LoanController::class,'delete']);
 Route::get('/login',[UserLoginController::class,'index'])->name('login')->middleware('guest');
 Route::get('/transaction',[TransactionController::class,'index'])->name('transaction');
 Route::get('/transaction/{transaction:slug}',[TransactionController::class,'show']);
+Route::get('/transaction/{transaction:slug}/pdf',[TransactionController::class,'pdf']);
+Route::get('/transaction/{transaction:slug}/coba',[TransactionController::class,'coba']);
 Route::get('/mantap',[TransactionController::class,'coba']);
 Route::get('/teacher',[UserTeacherController::class,'index'])->name('teacher');
 Route::get('/teacher/agreement/{user:username}',[UserTeacherController::class,'show'])->name('teacher');

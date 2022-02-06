@@ -1,5 +1,8 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
+    {{-- @if (!is_null($totals))
+    @dd($totals)
+    @endif --}}
     <div class="space-y-4 sticky top-0 bg-white p-4 shadow z-50">
 
         <div>
@@ -44,7 +47,7 @@
                     <div class="p-6 space-y-6">
                         @if (!is_null($temps))
                             <div class="outside-user p-2 h-[300px] overflow-y-auto">
-                                @foreach ($temps as $item)
+                                @foreach ($temps as $key => $item)
                                 <div class="user p-3 font-medium flex gap-x-2 bg-white my-6 first:mt-0 last:mb-0 border rounded shadow h-max">
                                     <div class="contentImageUser">
                                         <img src="/img/user.png" alt="" class="h-10">
@@ -55,6 +58,7 @@
                                             <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
                                         </svg></a>
                                         <p>{{ $item->class.' '.$item->department }}</p>
+                                        <p>total : {{ $totals[$item->user_id] }}</p>
                                     </div>
                                 </div>
                                 @endforeach

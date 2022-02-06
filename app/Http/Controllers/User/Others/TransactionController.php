@@ -3,13 +3,9 @@
 namespace App\Http\Controllers\User\Others;
 
 use App\Http\Controllers\Controller;
-use App\Models\HomeroomMessage;
-use App\Models\LoanReport;
-use App\Models\ReplyHomeroomMessage;
 use App\Models\Transaction;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class TransactionController extends Controller
 {
     //
@@ -28,16 +24,18 @@ class TransactionController extends Controller
             'transaction'=>$transaction
         ]);
     }
-    public function coba(){
-        $transactions = Transaction::query()
-            ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
-            ->where('loan_reports.return_date','<',Carbon::now())->where([
-                'loan_reports.type'=>'tunai',
-                'loan_reports.status'=>'borrow'
-            ])->get();
+    public function coba(Transaction $transaction){
         
         return view('user.transaction.coba',[
-            'transaction'=>$transactions,
+            'title'=>'Page print pdf',
+            'transaction'=>$transaction,
         ]);
+    }
+    public function pdf(Transaction $transaction){
+        $pdf = PDF::loadView('user.transaction.coba',[
+            'title'=>'Detail transaction page user',
+            'transaction'=>$transaction
+        ]);
+        return $pdf->download('transaction.pdf');
     }
 }
