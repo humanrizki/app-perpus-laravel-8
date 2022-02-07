@@ -10,14 +10,6 @@ use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
-    //
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index(){
         return view('user.loan.index',[
             'title'=>'Loan page',
@@ -42,7 +34,7 @@ class LoanController extends Controller
                 'status'=>'cancell',
                 'forfeit'=>0
             ]);
-            return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman dan menghapus data untuk dapat persetujuan dari walas!');
+            return redirect()->back()->with('cancellLoan','Berhasil membatalkan permintaan peminjaman dan menghapus data untuk dapat persetujuan dari walas!');
         } else {
             $homeroomMessage = HomeroomMessage::where('loan_report_id','=',$loan->id)->first();
             if($homeroomMessage){
@@ -52,13 +44,13 @@ class LoanController extends Controller
                     'status'=>'cancell',
                     'forfeit'=>0
                 ]);
-                return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+                return redirect()->back()->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
             } else {
                 $loan->update([
                     'status'=>'cancell',
                     'forfeit'=>0
                 ]);
-                return redirect("/loan/$loan->slug")->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
+                return redirect()->back()->with('cancellLoan','Berhasil membatalkan permintaan peminjaman!');
             }
         }
     }

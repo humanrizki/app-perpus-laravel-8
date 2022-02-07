@@ -12,13 +12,6 @@ use Illuminate\Http\Request;
 
 class ListsController extends Controller
 {
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index(){
         $books = Book::all();
         return view('user.list.index',[
@@ -52,10 +45,9 @@ class ListsController extends Controller
                 'slug' => Uuid::uuid()
             ]);
             $bucket->save();
-            return redirect("/lists/$list->slug")->with('addToBucket','Buku sudah berhasil dimasukkan kedalam keranjang!');
+            return redirect()->back()->with('addToBucket','Buku sudah berhasil dimasukkan kedalam keranjang!');
         } else {
-            return redirect("/lists/$list->slug")->with('errorToBucket','Buku gagal dimasukkan kedalam keranjang karena jam operasional sudah habis!');
+            return redirect()->back()->with('errorToBucket','Buku gagal dimasukkan kedalam keranjang karena jam operasional sudah habis!');
         }
-
     }
 }

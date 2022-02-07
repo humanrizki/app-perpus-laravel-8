@@ -14,16 +14,13 @@ class ReturnReportTable extends LivewireDatatable
     public $exportable = true;
     public function builder()
     {
-        //
         return ReturnReport::query()
         ->leftJoin('books','return_reports.book_id','books.id')
         ->leftJoin('users','return_reports.user_id','users.id')
         ->where('return_reports.admin_id',auth('admin')->user()->id);
     }
-
     public function columns()
     {
-        //
         return [
             Column::name('books.title')
             ->label('Book')
@@ -60,7 +57,6 @@ class ReturnReportTable extends LivewireDatatable
             Column::name('status')
             ->label('Status')
             ->searchable()
-            
         ];
     }
 }

@@ -27,7 +27,6 @@ class LoanReportTable extends LivewireDatatable
                 ->defaultSort('asc')
                 ->sortBy('id')
                 ->searchable(),
-
             Column::name('books.title')
             ->label('Book')
             ->searchable(),

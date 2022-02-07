@@ -11,13 +11,27 @@
                     <div id="alert-2" class="flex p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
                         <svg class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                         <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
-                          {{ session('errorToTransaction') }}
+                            {{ session('errorToTransaction') }}
                         </div>
                         <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300" data-collapse-toggle="alert-2" aria-label="Close">
-                          <span class="sr-only">Close</span>
-                          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">Close</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
-                      </div>
+                    </div>
+                </div>
+            @endif
+            @if (session()->has('cancellLoan'))
+                <div class="col-md-8 offset-md-2">
+                    <div id="alert-2" class="flex p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
+                        <svg class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
+                            {{ session('cancellLoan') }}
+                        </div>
+                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300" data-collapse-toggle="alert-2" aria-label="Close">
+                            <span class="sr-only">Close</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
                 </div>
             @endif
             <div class="col-md-8 offset-md-2">
@@ -48,7 +62,6 @@
                 <div class="card mt-4 hover:shadow-lg">
                     <div class="card-body">
                         @if ($loan->status == 'request')
-                            
                         <form action="" method="POST">
                             @csrf
                             <input type="hidden" name="loan_report_id" value="{{ $loan->id }}">
@@ -84,17 +97,20 @@
                                     <input datepicker datepicker-autohide datepicker-orientation="bottom right" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" name="day_of_payment" datepicker-format="yyyy-mm-dd">
                                 </div>
                                 <p class="p-0 m-0 text-sm font-medium text-sky-400">Nilai tanggal tidak boleh lebih dari hari pengembalian atau kurang dari tanggal peminjaman!</p>
-                            <div class="form-group mt-3">
+                            <div class="form-group mt-3 mb-0">
                                 <button type="submit" class="p-2 rounded-md text-white bg-emerald-300 hover:shadow hover:bg-emerald-400 w-full">Submit</button>
                             </div>
+                        </form>
+                        <p class="text-center font-medium p-0 my-2 ">Atau batalkan</p>
+                        <form action="/dashboard/loans/{{$loan->slug}}/cancell" method="post">
+                            @csrf
+                            <button class="p-2 rounded-md text-white bg-red-300 hover:shadow hover:bg-red-400 w-full" type="submit">Batalkan</button>
                         </form>
                         @elseif($loan->status == 'pending')
                             <div class="flex flex-wrap justify-center">
                                 <img src="/img/pending.png" alt="" class="md:w-80 sm:w-full">
                                 <div class="md:w-64 sm:w-full self-center">
                                     <p class="mb-3 font-medium text-sm text-gray-900">Data peminjaman masih menunggu persetujuan dari walas untuk dapat melakukan transaksi!</p>
-                                    
-                                    
                                 </div>
                             </div>
                         @elseif($loan->status == 'cancell')

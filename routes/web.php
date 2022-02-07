@@ -1,6 +1,5 @@
 <?php
 
-// use App\Http\Controllers\User\Auth\UserLoginController;
 
 use App\Http\Controllers\User\Auth\UserLoginController;
 use App\Http\Controllers\User\Auth\UserRegisterController;
@@ -28,46 +27,48 @@ use App\Http\Controllers\Admin\Dashboard\DashboardLoans;
 use App\Http\Controllers\Admin\Dashboard\DashboardReturn;
 use App\Http\Controllers\Admin\Dashboard\DashboardStudents;
 use App\Http\Controllers\Admin\Dashboard\DashboardTransaction;
-use App\Http\Controllers\User\Home\HomeController;
-use App\Models\DetailClassDepartment;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
-Route::get('/agreements',[UserAgreementsController::class,'index'])->name('agreements');
-Route::get('/agreements/{homeroom_message:slug}',[UserAgreementsController::class,'show'])->name('agreements');
-Route::get('/collections',[CollectionController::class,'index'])->name('collections');
-Route::get('/collections/{collection:slug}',[CollectionController::class,'show']);
-Route::get('/lists',[ListsController::class,'index'])->name('lists');
-Route::get('/lists/{list:slug}',[ListsController::class,'show']);
-Route::post('/lists/{list:slug}',[ListsController::class,'store']);
-Route::get('/profile',[ProfileController::class,'index'])->name('profile');
-Route::get('/profile/{user:username}/edit',[ProfileController::class,'show']);
-Route::post('/profile/{user:username}/edit',[ProfileController::class,'update']);
-Route::get('/bucket',[BucketController::class,'index'])->name('bucket');
-Route::delete('/bucket/{bucket:id}',[BucketController::class,'destroy']);
-Route::get('/bucket/{bucket:slug}',[BucketController::class,'show']);
-Route::get('/loan',[LoanController::class,'index'])->name('loan');
-Route::get('/loan/{loan:slug}',[LoanController::class,'show']);
-Route::put('/loan/{loan:slug}',[LoanController::class,'cancell']);
-Route::delete('/loan/{loan:slug}',[LoanController::class,'delete']);
-Route::get('/login',[UserLoginController::class,'index'])->name('login')->middleware('guest');
-Route::get('/transaction',[TransactionController::class,'index'])->name('transaction');
-Route::get('/transaction/{transaction:slug}',[TransactionController::class,'show']);
-Route::get('/transaction/{transaction:slug}/pdf',[TransactionController::class,'pdf']);
-Route::get('/transaction/{transaction:slug}/coba',[TransactionController::class,'coba']);
-Route::get('/mantap',[TransactionController::class,'coba']);
-Route::get('/teacher',[UserTeacherController::class,'index'])->name('teacher');
-Route::get('/teacher/agreement/{user:username}',[UserTeacherController::class,'show'])->name('teacher');
-Route::post('/login',[UserLoginController::class,'login']);
-Route::post('/logout',[UserLoginController::class,'logout']);
-Route::get('/register',[UserRegisterController::class,'index'])->name('register');
-Route::post('/register',[UserRegisterController::class,'register']);
-Route::get('/return',[ReturnController::class,'index'])->name('return');
-Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
-Route::post('/admin/login',[AdminLoginController::class,'login']);
-Route::post('/admin/logout',[AdminLoginController::class,'logout'])->name('logout.admin');
+
+
 Route::get('/dashboard/books/checkSlug',[DashboardBooks::class,'checkSlug']);
+Route::group(['middleware'=> 'guest'], function(){
+    Route::get('/register',[UserRegisterController::class,'index'])->name('register');
+    Route::post('/register',[UserRegisterController::class,'register']);
+    Route::get('/login',[UserLoginController::class,'index'])->name('login');
+    Route::post('/login',[UserLoginController::class,'login']);
+    Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
+    Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
+    Route::post('/forgot-password',[UserForgotPassword::class, 'verification']);
+    Route::get('/reset-password/{forgot:token}',[UserForgotPassword::class, 'edit']);
+    Route::post('/reset-password/{forgot:token}',[UserForgotPassword::class, 'update']);
+});
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/agreements',[UserAgreementsController::class,'index'])->name('agreements');
+    Route::get('/agreements/{homeroom_message:slug}',[UserAgreementsController::class,'show'])->name('agreements');
+    Route::get('/collections',[CollectionController::class,'index'])->name('collections');
+    Route::get('/collections/{collection:slug}',[CollectionController::class,'show']);
+    Route::get('/lists',[ListsController::class,'index'])->name('lists');
+    Route::get('/lists/{list:slug}',[ListsController::class,'show']);
+    Route::post('/lists/{list:slug}',[ListsController::class,'store']);
+    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::get('/profile/{user:username}/edit',[ProfileController::class,'show']);
+    Route::post('/profile/{user:username}/edit',[ProfileController::class,'update']);
+    Route::get('/bucket',[BucketController::class,'index'])->name('bucket');
+    Route::delete('/bucket/{bucket:id}',[BucketController::class,'destroy']);
+    Route::get('/bucket/{bucket:slug}',[BucketController::class,'show']);
+    Route::get('/loan',[LoanController::class,'index'])->name('loan');
+    Route::get('/loan/{loan:slug}',[LoanController::class,'show']);
+    Route::put('/loan/{loan:slug}',[LoanController::class,'cancell']);
+    Route::delete('/loan/{loan:slug}',[LoanController::class,'delete']);
+    Route::get('/transaction',[TransactionController::class,'index'])->name('transaction');
+    Route::get('/transaction/{transaction:slug}',[TransactionController::class,'show']);
+    Route::get('/transaction/{transaction:slug}/print',[TransactionController::class,'print']);
+    Route::get('/teacher',[UserTeacherController::class,'index'])->name('teacher');
+    Route::get('/teacher/agreement/{user:username}',[UserTeacherController::class,'show'])->name('teacher');
+    Route::get('/return',[ReturnController::class,'index'])->name('return');
+});
+Route::post('/logout',[UserLoginController::class,'logout']);
 Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
     Route::get('/dashboard/categories', [DashboardCategory::class, 'index']);
@@ -85,6 +86,8 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/loans',[DashboardLoans::class,'index']);
     Route::get('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'show']);
     Route::post('/dashboard/loans/{loanReport:slug}',[DashboardLoans::class,'store']);
+    Route::post('/dashboard/loans/{loanReport:slug}/cancell',[DashboardLoans::class,'cancell']);
+    Route::post('/dashboard/loans/{loanReport:slug}/destroy',[DashboardLoans::class,'destroy']);
     Route::get('/dashboard/transactions',[DashboardTransaction::class,'index']);
     Route::get('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'show']);
     Route::post('/dashboard/transactions/{transaction:slug}',[DashboardTransaction::class,'store']);
@@ -92,24 +95,19 @@ Route::group(['middleware'=>'adminguest:admin'],function(){
     Route::get('/dashboard/admin/profile/edit',[AdminDashboardController::class,'edit']);
     Route::post('/dashboard/admin/profile/edit',[AdminDashboardController::class,'update']);
     Route::get('/dashboard/lists/homeroom',[AdminDashboardController::class,'homeroom']);
-    
+    Route::get('/dashboard/charts',[DashboardChart::class,'index']);
+    Route::get('/dashboard/charts/students',[DashboardChart::class,'students']);
+    Route::get('/dashboard/charts/students/loans',[DashboardChart::class,'loans']);
+    Route::get('/dashboard/charts/students/transactions',[DashboardChart::class,'transactions']);
 });
-Route::get('/dashboard/charts',[DashboardChart::class,'index']);
-Route::get('/dashboard/charts/students',[DashboardChart::class,'students']);
-Route::get('/dashboard/charts/students/loans',[DashboardChart::class,'loans']);
-Route::get('/dashboard/charts/students/transactions',[DashboardChart::class,'transactions']);
-Route::get('/dashboard/chartjs',[DashboardChart::class,'chartPie']);
-Route::get('/chart',function(){
-    return view('chars');
+Route::group(['middleware'=>'adminauth:admin'],function(){
+    Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
+    Route::post('/admin/login',[AdminLoginController::class,'login']);
+    Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
+    Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
+    Route::get('admin/forgot-password',[AdminForgotPassword::class, 'index']);
+    Route::post('admin/forgot-password',[AdminForgotPassword::class, 'verification']);
+    Route::get('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'edit']);
+    Route::post('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'update']);
 });
-Route::get('/print',[HomeController::class,'print']);
-Route::get('/admin/register/homeroom',[AdminRegisterController::class,'create']);
-Route::post('/admin/register/homeroom',[AdminRegisterController::class,'register']);
-Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
-Route::post('/forgot-password',[UserForgotPassword::class, 'verification']);
-Route::get('/reset-password/{forgot:token}',[UserForgotPassword::class, 'edit']);
-Route::post('/reset-password/{forgot:token}',[UserForgotPassword::class, 'update']);
-Route::get('admin/forgot-password',[AdminForgotPassword::class, 'index']);
-Route::post('admin/forgot-password',[AdminForgotPassword::class, 'verification']);
-Route::get('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'edit']);
-Route::post('admin/reset-password/{forgot:token}',[AdminForgotPassword::class, 'update']);
+Route::post('/admin/logout',[AdminLoginController::class,'logout'])->name('logout.admin');

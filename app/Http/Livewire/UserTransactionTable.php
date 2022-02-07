@@ -45,9 +45,9 @@ class UserTransactionTable extends LivewireDatatable
             Column::name('status')
             ->label('Status'),
             Column::callback(['slug'],function($slug){
-                return "<div class='flex'>
-                    <a href='/transaction/{$slug}' class='p-2 hover:bg-blue-600 hover:text-white text-gray-600'><i class='bi bi-eye-fill text-primary'></i></a>
-                </div>";
+                return "
+                    <a href='/transaction/{$slug}' class='p-2 text-gray-600'><i class='bi bi-eye-fill text-primary'></i></a>
+                ";
             })
             ->label('Action')
         ];

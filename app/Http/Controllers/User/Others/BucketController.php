@@ -8,17 +8,8 @@ use App\Models\User;
 
 class BucketController extends Controller
 {
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    //
     public function index(){
         $detail_book = Bucket::where('user_id',auth()->user()->id)->latest()->get();
-        
         return view('user.bucket.index',[
             'title'=>'Bucket page',
             'detail_book'=>$detail_book,

@@ -83,7 +83,7 @@ class UserBucket extends Component
                     $this->resetFields();
                     return redirect()->route("bucket")->with('addToLoan','Data bucket berhasil ditambah ke peminjaman untuk buku '.$title.', tetapi anda harus menunggu sampai walas anda setuju dengan metode pembayaran uang kas!');
                 } else {
-                    return redirect("/bucket/{$this->bucket->slug}")->with('errorToLoan','Data dari kelas anda tidak memiliki wali kelas untuk sekarang, jadi anda hanya bisa untuk memakai metode tunai pribadi!');
+                    return redirect()->back()->with('errorToLoan','Data dari kelas anda tidak memiliki wali kelas untuk sekarang, jadi anda hanya bisa untuk memakai metode tunai pribadi!');
                 }
             } else {
                 $title = $this->bucket->book->title;
@@ -107,7 +107,7 @@ class UserBucket extends Component
             }
         } else {
             $title = $this->bucket->book->title;
-            return redirect('/bucket/'.$this->bucket->slug)->with('errorToLoan','Data bucket gagal ditambahkan ke peminjaman untuk buku '.$title.' karena jam operasional sudah habis!');
+            return redirect()->back()->with('errorToLoan','Data bucket gagal ditambahkan ke peminjaman untuk buku '.$title.' karena jam operasional sudah habis!');
         }
     }
     public function resetFields(){

@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class UserRegisterController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
     public function index(){
         return view('user.auth.register',[
             'title'=>'page of register',

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword as MailForgotPassword;
 use App\Models\Admin;
 use App\Models\ForgotPassword;
@@ -14,7 +15,6 @@ use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class AdminForgotPassword extends Controller
 {
-    //
     public function index(){
         return view('admin.auth.forgot-password',[
             'title'=>'forgot password admin'

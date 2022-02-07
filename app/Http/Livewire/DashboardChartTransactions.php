@@ -18,34 +18,27 @@ class DashboardChartTransactions extends Component
         'travel' => '#66DA26',
         'other' => '#cbd5e0',
     ];
-    public $column;
-
     public $firstRun = true;
-
     public $showDataLabels = false;
-
     protected $listeners = [
         'onColumnClick' => 'handleOnColumnClick',
     ];
-
     public function handleOnColumnClick($column)
     {
-        // dd($column);
-        $this->column = $column;
         $this->temps = DB::table('transactions')
         ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
         ->leftJoin('users','loan_reports.user_id','users.id')
         ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
-        ->where('department',$this->column['title'])->select('*')->groupBy('user_id')->get();
+        ->where('department',$column['title'])->select('*')->groupBy('user_id')->get();
         $userTemp = DB::table('transactions')
         ->leftJoin('loan_reports','transactions.loan_report_id','loan_reports.id')
         ->leftJoin('users','loan_reports.user_id','users.id')
         ->leftJoin('detail_class_departments','users.detail_class_department_id','detail_class_departments.id')
         ->leftJoin('departments','detail_class_departments.department_id','departments.id')
         ->leftJoin('class_users','detail_class_departments.class_user_id','class_users.id')
-        ->where('department',$this->column['title'])->get();
+        ->where('department',$column['title'])->get();
         $this->totals = array_count_values($userTemp->pluck('user_id')->toArray());
     }
     public function render()
@@ -66,8 +59,6 @@ class DashboardChartTransactions extends Component
                 ->withOnColumnClickEventName('onColumnClick')
                 ->setLegendVisibility(false)
                 ->setDataLabelsEnabled($this->showDataLabels)
-                //->setOpacity(0.25)
-                ->setColors($this->colors)
                 ->setColumnWidth(90)
                 ->withGrid()
             );

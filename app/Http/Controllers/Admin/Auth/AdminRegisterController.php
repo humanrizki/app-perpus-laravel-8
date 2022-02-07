@@ -14,7 +14,6 @@ use Illuminate\Validation\Rules\Password;
 
 class AdminRegisterController extends Controller
 {
-    //
     public function create(){
             return view('admin.register.index',[
                 'title'=>'register homeroom',

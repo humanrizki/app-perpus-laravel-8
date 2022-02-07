@@ -7,11 +7,6 @@ use App\Models\ReplyHomeroomMessage;
 
 class UserAgreementsController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index(){
         return view('user.agreement.index',[
             'title'=>'Show all Agreement'

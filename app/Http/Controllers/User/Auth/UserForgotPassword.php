@@ -16,11 +16,6 @@ use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class UserForgotPassword extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
     public function index(){
         return view('user.auth.forgot-password',[
             'title'=>'Forgot password user'

@@ -19,34 +19,28 @@ class HomeroomTable extends LivewireDatatable
     }
     public function columns()
     {
-        //
         return [
             Column::name('id')
             ->label('ID')
             ->defaultSort('asc')
             ->sortBy('id')
             ->searchable(),
-
             Column::callback(['loan_reports.book_id'], function($book_id){
                 return Book::find($book_id)->title;
             })
             ->label('Book')
             ->searchable(),
-
             Column::callback(['loan_reports.user_id'],function($user_id){
                 return User::find($user_id)->name;
             })
             ->label('Student')
             ->searchable(),
-
             Column::name('loan_reports.forfeit')
             ->label('Cost')
             ->searchable(),
-
             Column::name('status')
             ->label('Status')
             ->searchable(),
-
             Column::callback(['slug'],function($slug){
                 return "
                 <a href='/dashboard/agreements/".$slug."' class='m-2 d-inline'><i class='bi bi-eye-fill text-primary'></i></a>

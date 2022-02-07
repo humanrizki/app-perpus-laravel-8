@@ -12,13 +12,10 @@ class ListHomeroomTable extends LivewireDatatable
     public $model = Admin::class;
     public function builder()
     {
-        //
         return Admin::query()->role('homeroom');
     }
-
     public function columns()
     {
-        //
         return [
             Column::name('name')
             ->label('Name')

@@ -14,17 +14,14 @@ class HomeroomLoanReportTable extends LivewireDatatable
     public $userId;
     public function builder()
     {
-        //
         return LoanReport::query()
         ->leftJoin('books','books.id','loan_reports.book_id')
         ->leftJoin('users','users.id','loan_reports.user_id')
         ->leftJoin('admins','admins.id','loan_reports.admin_id')
         ->where('users.id',$this->userId);
     }
-
     public function columns()
     {
-        //
         return [
             Column::name('books.title')
             ->label('Title')

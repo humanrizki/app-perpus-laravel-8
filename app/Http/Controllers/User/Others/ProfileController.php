@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index(){
         return view('user.profile.index',[
             'title'=>'profie',
@@ -36,7 +31,6 @@ class ProfileController extends Controller
             return redirect()->route('profile');
         }
     }
-    
     public function update(User $user,Request $request){
         if(is_null($user->nisn)){
             $data_validated = $request->validate([

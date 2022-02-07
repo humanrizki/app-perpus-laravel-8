@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class UserLoginController extends Controller
 {
-    //
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth.user' ,['except'=>'logout']);
-    }
     public function index(){
         return view('user.auth.login',[
             'title'=>'page of login'

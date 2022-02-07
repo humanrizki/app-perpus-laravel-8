@@ -94,13 +94,10 @@
                             </div>
                         </div>
                         <div class="col-span-12">
-                            <div class="block mt-3">
-                                    <a href="/transaction/{{ $transaction->slug }}/pdf" class="p-2 font-medium text-white bg-blue-500 rounded shadow">Klik untuk menjadikan pdf</a>
-                            </div>
+                                    <a href="/transaction/{{ $transaction->slug }}/print" class="block p-2 font-medium mt-3 text-white bg-blue-500 mb-1 w-max ml-auto rounded shadow">Klik untuk menjadikan pdf / cetak</a>
                         </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
