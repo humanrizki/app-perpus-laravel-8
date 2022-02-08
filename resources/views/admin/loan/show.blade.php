@@ -118,6 +118,7 @@
                             <img src="/img/cancell.png" alt="" class="md:w-80 sm:w-full">
                             <div class="md:w-64 sm:w-full self-center">
                                 <p class="m-0 p-0 text-gray-900 font-medium text-sm">Persetujuan bernilai "Tidak setuju", transaksi tidak bisa dilanjutkan!</p>
+                                <form action=""></form>
                             </div>
                         </div>
                         @else
