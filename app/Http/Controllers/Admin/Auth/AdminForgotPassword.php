@@ -26,7 +26,7 @@ class AdminForgotPassword extends Controller
         ])->validate();
         $admin = Admin::where('email',$request->email)->first();
         $forgotPassword = ForgotPassword::where([
-            'email'=>$request->email,
+            'email'=>$admin->email,
             'table'=>'admins'
         ])->first();
         if($forgotPassword){

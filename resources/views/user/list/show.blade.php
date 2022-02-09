@@ -140,7 +140,9 @@
                         @if (!is_null(auth()->user()->nisn))
                             @if(!is_null($loan))
                                 @if ($loan->status == 'pending' or $loan->status == 'request')
-                                    <p class="xl:text-base lg:text-base md:text-sm text-sm text-blue-300 font-medium my-2">Buku yang dipinjam berada dalam status request atau pending</p>
+                                    <p class="xl:text-base lg:text-base md:text-sm text-sm text-blue-300 font-medium my-2">Buku yang ingin dipinjam berada dalam status request atau pending</p>
+                                @elseif($loan->status == 'borrow')
+                                    <p class="xl:text-base lg:text-base md:text-sm text-sm text-green-500 font-medium my-2">Buku yang dipinjam berada dalam status borrow</p>
                                 @else 
                                     <p class="xl:text-base lg:text-base md:text-sm text-sm text-red-500 font-medium my-2">Buku yang dipinjam berada dalam status cancell, hapus data yang dibatalkan dan kembali meminjam!</p>
                                 @endif

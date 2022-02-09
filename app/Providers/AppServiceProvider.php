@@ -30,15 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        
-        // Paginator::defaultView('vendor.pagination.default');
-        // Paginator::defaultSimpleView('vendor.pagination.simple-default');
         Paginator::useTailwind();
         LivewireDatatablesServiceProvider::publishableProviders();
         LivewireDatatablesServiceProvider::publishableGroups();
-        // Gate::define('add-book',function(Admin $admin){
-        //     return $admin->can('add-book');
-        // });
     }
 }

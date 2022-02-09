@@ -37,12 +37,12 @@ Route::group(['middleware'=> 'guest'], function(){
     Route::post('/register',[UserRegisterController::class,'register']);
     Route::get('/login',[UserLoginController::class,'index'])->name('login');
     Route::post('/login',[UserLoginController::class,'login']);
-    Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
     Route::get('/forgot-password',[UserForgotPassword::class, 'index']);
     Route::post('/forgot-password',[UserForgotPassword::class, 'verification']);
     Route::get('/reset-password/{forgot:token}',[UserForgotPassword::class, 'edit']);
     Route::post('/reset-password/{forgot:token}',[UserForgotPassword::class, 'update']);
 });
+Route::get('/', [App\Http\Controllers\User\Home\HomeController::class, 'index'])->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/agreements',[UserAgreementsController::class,'index'])->name('agreements');
     Route::get('/agreements/{homeroom_message:slug}',[UserAgreementsController::class,'show'])->name('agreements');
@@ -54,6 +54,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
     Route::get('/profile/{user:username}/edit',[ProfileController::class,'show']);
     Route::post('/profile/{user:username}/edit',[ProfileController::class,'update']);
+    Route::delete('/profile/{user:username}/destroy',[ProfileController::class,'destroy']);
     Route::get('/bucket',[BucketController::class,'index'])->name('bucket');
     Route::delete('/bucket/{bucket:id}',[BucketController::class,'destroy']);
     Route::get('/bucket/{bucket:slug}',[BucketController::class,'show']);

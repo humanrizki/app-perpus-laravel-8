@@ -17,10 +17,20 @@ class AdminDashboardController extends Controller
 {
     
     public function index(){
+        $user = auth('admin')->user()->hasRole('homeroom') ? User::where('detail_class_department_id',auth('admin')->user()->detail_class_department_id)->get()->count() : User::all()->count();
+        $loan = auth('admin')->user()->hasRole('homeroom') 
+        ? LoanReport::query()->leftJoin('users','loan_reports.user_id','users.id')
+        ->where('users.detail_class_department_id',auth('admin')->user()->detail_class_department_id)->get()->count()
+        : LoanReport::all()->count();
+        $pendingLoan = auth('admin')->user()->hasRole('homeroom') 
+        ? LoanReport::query()->leftJoin('users','loan_reports.user_id','users.id')
+        ->where('users.detail_class_department_id',auth('admin')->user()->detail_class_department_id)->where('status','pending')->get()->count()
+        : LoanReport::where('status','pending')->count();
         return view('admin.dashboard.dashboard',[
             'title'=>'dashboard admin',
-            'users'=>User::all()->count(),
-            'loan'=>LoanReport::all()->count()
+            'users'=>$user,
+            'loan'=>$loan,
+            'pending_loan'=>$pendingLoan
         ]);
     }
     public function profile(){

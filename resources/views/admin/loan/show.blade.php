@@ -21,17 +21,15 @@
                 </div>
             @endif
             @if (session()->has('cancellLoan'))
-                <div class="col-md-8 offset-md-2">
-                    <div id="alert-2" class="flex p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
-                        <svg class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                        <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
-                            {{ session('cancellLoan') }}
-                        </div>
-                        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300" data-collapse-toggle="alert-2" aria-label="Close">
-                            <span class="sr-only">Close</span>
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
+                <div id="alert-1" class="flex p-4 mb-4 bg-blue-100 rounded-lg dark:bg-blue-200" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <div class="ml-3 text-sm font-medium text-blue-700 dark:text-blue-800">
+                        {{ session('cancellLoan') }}
                     </div>
+                    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8 dark:bg-blue-200 dark:text-blue-600 dark:hover:bg-blue-300" data-collapse-toggle="alert-1" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
                 </div>
             @endif
             <div class="col-md-8 offset-md-2">
@@ -101,11 +99,13 @@
                                 <button type="submit" class="p-2 rounded-md text-white bg-emerald-300 hover:shadow hover:bg-emerald-400 w-full">Submit</button>
                             </div>
                         </form>
+                        @if (is_null($message))
                         <p class="text-center font-medium p-0 my-2 ">Atau batalkan</p>
                         <form action="/dashboard/loans/{{$loan->slug}}/cancell" method="post">
                             @csrf
                             <button class="p-2 rounded-md text-white bg-red-300 hover:shadow hover:bg-red-400 w-full" type="submit">Batalkan</button>
                         </form>
+                        @endif
                         @elseif($loan->status == 'pending')
                             <div class="flex flex-wrap justify-center">
                                 <img src="/img/pending.png" alt="" class="md:w-80 sm:w-full">
@@ -114,13 +114,29 @@
                                 </div>
                             </div>
                         @elseif($loan->status == 'cancell')
-                        <div class="flex flex-wrap justify-center">
-                            <img src="/img/cancell.png" alt="" class="md:w-80 sm:w-full">
-                            <div class="md:w-64 sm:w-full self-center">
-                                <p class="m-0 p-0 text-gray-900 font-medium text-sm">Persetujuan bernilai "Tidak setuju", transaksi tidak bisa dilanjutkan!</p>
-                                <form action=""></form>
-                            </div>
-                        </div>
+                            @if (!is_null($message))
+                                <div class="flex flex-wrap justify-center">
+                                    <img src="/img/cancell.png" alt="" class="md:w-80 sm:w-full">
+                                    <div class="md:w-64 sm:w-full self-center">
+                                        <p class="m-0 p-0 text-gray-900 font-medium text-sm">Persetujuan bernilai "Tidak setuju", transaksi tidak bisa dilanjutkan!</p>
+                                        <form action="/dashboard/loans/{{ $loan->slug }}/destroy" method="post">
+                                                @csrf
+                                                <button type="submit" class="mt-2 p-2 bg-red-300 hover:bg-red-400 rounded text-white w-full font-medium">Hapus data</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="flex flex-wrap justify-center">
+                                    <img src="/img/cancell.png" alt="" class="md:w-80 sm:w-full">
+                                    <div class="md:w-64 sm:w-full self-center">
+                                        <p class="m-0 p-0 text-gray-900 font-medium text-sm">Data peminjaman ini dalam status cancell, transaksi tidak bisa dilanjutkan!</p>
+                                        <form action="/dashboard/loans/{{ $loan->slug }}/destroy" method="post">
+                                            @csrf
+                                            <button type="submit" class="mt-2 p-2 bg-red-300 hover:bg-red-400 rounded text-white w-full font-medium">Hapus data</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
                         @else
                             <div class="flex flex-wrap justify-center">
                                 <img src="/img/accept.png" alt="" class="md:w-80 sm:w-full">

@@ -96,7 +96,7 @@
                         </div>
                         <div class="grid grid-cols-12 mt-2">
                             <div class="col-span-12">
-                                <textarea name="" id=""  class="block h-28 rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly>{{ $message->homeroom_message->message }}</textarea>
+                                <textarea name="" id=""  class="block p-2 border border-2 h-28 rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly>{{ $message->homeroom_message->message }}</textarea>
                             </div>
                             <div class="col-span-2 inline-flex justify-center items-center">
                                 <p class="m-0 p-0 text-2xl font-black">
@@ -104,7 +104,7 @@
                                 </p>
                             </div>
                             <div class="col-span-10">
-                                <textarea name="" id=""  class="block h-28 rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly>{{ $message->reply_message }}</textarea>
+                                <textarea name="" id=""  class="block p-2 border border-2 h-28 rounded mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 w-full" readonly>{{ $message->reply_message }}</textarea>
                             </div>
                         </div>
                 </div>
