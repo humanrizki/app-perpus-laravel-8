@@ -42,7 +42,6 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-md-12">
-                                
                                 @if (session()->has('loginError'))
                                     <div class="alert alert-danger alert-dismissible fade show m-2" role="alert">
                                         <i class="bi bi-exclamation-triangle-fill"></i>

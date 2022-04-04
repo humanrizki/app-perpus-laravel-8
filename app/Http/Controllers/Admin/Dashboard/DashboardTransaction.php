@@ -27,7 +27,7 @@ class DashboardTransaction extends Controller
         ]);
     }
     public function store(Request $request, Transaction $transaction){
-        if(Carbon::now('Asia/Jakarta')->hour <= 15 && Carbon::now()->hour >= 7){
+        if(Carbon::now('Asia/Jakarta')->hour <= 24 && Carbon::now()->hour >= 7){
             $stock = $transaction->loan_report->book->stock + 1;
             $transaction->loan_report->book->update([
                 'stock'=>$stock

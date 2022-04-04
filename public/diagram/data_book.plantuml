@@ -1,0 +1,24 @@
+entity books{
+    id : int
+    --
+    admin_id : int
+    collection_id : int
+    category_id : int
+    bookcase_id : int
+}
+entity collections{
+    id : int
+}
+entity categories{
+    id : int
+}
+entity bookcases {
+    id : int
+}
+entity admins{
+    id : int
+}
+admins ||--o{ books
+books }o--|| collections
+books }o--|| categories
+books }o--|| bookcases

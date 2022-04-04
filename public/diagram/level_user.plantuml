@@ -1,0 +1,20 @@
+entity users {
+    id : int
+    detail_class_department_id : int
+}
+entity departments {
+    id : int
+    department : varchar
+}
+entity class_users{
+    id : int
+    class : int
+}
+entity detail_class_departments{
+    id : int
+    class_user_id : int
+    department_id : int
+}
+detail_class_departments }|--o| class_users
+detail_class_departments }|--o| departments
+users }|--|| detail_class_departments

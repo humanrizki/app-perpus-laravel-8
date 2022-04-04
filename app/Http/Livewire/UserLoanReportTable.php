@@ -35,7 +35,7 @@ class UserLoanReportTable extends LivewireDatatable
             ->searchable(),
             DateColumn::name('return_date')
             ->format('d F Y')
-            ->label('Loan')
+            ->label('Return')
             ->searchable(),
             Column::name('status')
             ->label('Status')

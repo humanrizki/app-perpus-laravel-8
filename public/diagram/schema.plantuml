@@ -1,27 +1,61 @@
-entity book{
-
+entity books{
+    id : int
 }
-entity collection{
-
+entity buckets {
+    id : int
+    --
+    slug : varchar
+    book_id : int
+    user_id : int
 }
-entity category{
-
+entity loan_reports{
+    id : int
+    --
+    loan_date : datetime 
+    return_date : datetime
+    slug : varchar
+    forfeit : int
+    status : enum
+    type : enum
+    admin_id : int
+    book_id : int
+    user_id : int
 }
-entity bucket{
-
+entity transactions{
+    id : int
+    --
+    day_of_payment : timestamp
+    cost : int
+    nominal : int
+    status : enum
+    slug : varchar
+    loan_report_id : int
+    admin_id : int
+    book_id : int
+    user_id : int
 }
-entity loan{
-
+entity users{
+    id : int
 }
-entity transaction{
-
+entity homeroom_messages {
+    id : int
+    -- 
+    message : varchar
+    slug : varchar
+    status : enum
+    admin_id : int
 }
-entity user{
-
+entity reply_homeroom_messages{
+    id : int
+    --
+    homeroom_message_id : int
+    reply_message : varchar
+    total_kas : int
 }
-entity admin{
-
-}
-admin ||--o{ book
-book }o--|| collection
-book }o--|| category
+buckets |o--|| users
+buckets ||--o| books
+' buckets ||--|| loan_reports
+transactions ||--|| users
+transactions ||--|| loan_reports
+homeroom_messages ||--|| loan_reports
+homeroom_messages ||--|| reply_homeroom_messages

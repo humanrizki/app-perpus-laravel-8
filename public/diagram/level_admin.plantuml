@@ -1,0 +1,16 @@
+entity roles {
+    id : int
+    --
+    guard_name : varchar
+    name : varchar
+}
+entity model_has_roles{
+    role_id : int
+    model_type : varchar
+    model_id : int
+}
+entity admin{
+    id : int
+}
+model_has_roles }|--|| admin
+model_has_roles }|--o| roles
