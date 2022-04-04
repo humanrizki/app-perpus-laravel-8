@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('head')
-    
+
 @endsection
 @section('content')
 <div class="container-fluid mb-3">
@@ -137,7 +137,7 @@
             </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium">Create Book</button>
+            <button type="submit" class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white font-medium">Edit Book</button>
         </div>
     </form>
 </div>

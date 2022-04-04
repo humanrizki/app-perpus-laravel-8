@@ -42,9 +42,9 @@ class DashboardBooks extends Controller
                 'collections'=>CollectionBook::all(),
                 'bookcases'=>Bookcase::all()
             ]);
-        } 
+        }
         abort(403, 'THIS ACTION IS UNATHORIZED');
-        
+
     }
 
     /**
@@ -141,7 +141,7 @@ class DashboardBooks extends Controller
             $rules['slug'] = 'required|min:4|max:100|unique:books';
         }
         $validatedData = $request->validate($rules);
-        if($request->file('image')){
+        if($request->hasFile('image')){
             $validatedData['image'] = request()->file('image')->store('book-image');
         }else {
             $validatedData['image'] = $book->image;
